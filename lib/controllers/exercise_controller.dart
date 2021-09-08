@@ -1,32 +1,69 @@
 import 'package:riverpod/riverpod.dart';
 import 'package:stronk/controllers/auth_controller.dart';
 
+import 'package:stronk/models/muscle/muscle.dart';
 import 'package:stronk/models/exercise/exercise.dart';
+import 'package:stronk/models/exercise/exercise_tag.dart';
 import 'package:stronk/repositories/exercise_repository.dart';
 import 'package:stronk/repositories/exception.dart';
 
 enum ExerciseFilter { all, onlyUser, onlyPreset }
 
-final exerciseFilterProvider = StateProvider<ExerciseFilter>((_) => ExerciseFilter.all);
+final exerciseSourceFilterProvider = StateProvider<ExerciseFilter>((_) => ExerciseFilter.all);
+
+final exerciseMuscleFilterProvider = StateProvider<List<Muscle>?>((_) => null);
+final exerciseMuscleRegionFilterProvider = StateProvider<MuscleRegion?>((_) => null);
+final exerciseTagFilterProvider = StateProvider<List<ExerciseTag>?>((_) => null);
 
 final exerciseListExceptionProvider = StateProvider<DataTransferException?>((_) => null);
 
 final filteredExerciseListProvider = Provider<List<Exercise>>((ref) {
-  final exerciseFilterState = ref.watch(exerciseFilterProvider).state;
+  final exerciseSourceFilterState = ref.watch(exerciseSourceFilterProvider).state;
+  final exerciseMuscleFilterState = ref.watch(exerciseMuscleFilterProvider).state;
+  final exerciseMuscleRegionFilterState = ref.watch(exerciseMuscleRegionFilterProvider).state;
+  final exerciseTagFilterState = ref.watch(exerciseTagFilterProvider).state;
+
   final exerciseListState = ref.watch(exerciseListControllerProvider);
 
   return exerciseListState.maybeWhen(
       data: (exercises) {
-        switch (exerciseFilterState) {
-          case ExerciseFilter.onlyPreset:
-            return exercises.where((exercise) => exercise.creator == null).toList();
-          case ExerciseFilter.onlyUser:
-            return exercises.where((exercise) => exercise.creator != null).toList();
-          default:
-            return exercises;
-        }
+        return exercises.where((exercise) {
+          // Exercise creator is null for presets
+          if (exerciseSourceFilterState == ExerciseFilter.onlyPreset && exercise.creator != null) {
+            return false;
+          } else if (exerciseSourceFilterState == ExerciseFilter.onlyUser &&
+              exercise.creator == null) {
+            return false;
+          }
+
+          if (exerciseMuscleFilterState != null) {
+            // Update the match if the muscle is in the filter for muscles or region
+            var matchesMuscle = false;
+            exercise.muscles.forEach((muscle) {
+              final _matchesMuscle = exerciseMuscleFilterState.contains(muscle);
+              final _matchesRegion = exerciseMuscleRegionFilterState == muscle.region;
+              matchesMuscle = matchesMuscle || _matchesRegion || _matchesMuscle;
+            });
+            if (!matchesMuscle) {
+              return false;
+            }
+          }
+
+          if (exerciseTagFilterState != null) {
+            // Update the match if on of the tag is in the filter tags
+            var matchesTags = false;
+            exercise.tags.forEach((tag) {
+              matchesTags = matchesTags || exerciseTagFilterState.contains(tag);
+            });
+            if (!matchesTags) {
+              return false;
+            }
+          }
+
+          return true;
+        }).toList();
       },
-      orElse: () => []);
+      orElse: () => <Exercise>[]);
 });
 
 final exerciseListControllerProvider =

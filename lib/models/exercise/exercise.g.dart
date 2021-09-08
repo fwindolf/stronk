@@ -10,6 +10,7 @@ _$_Exercise _$$_ExerciseFromJson(Map<String, dynamic> json) => _$_Exercise(
       id: json['id'] as String?,
       name: json['name'] as String,
       description: json['description'] as String,
+      creator: json['creator'] as String?,
       type: _$enumDecode(_$ExerciseTypeEnumMap, json['type']),
       tags: (json['tags'] as List<dynamic>)
           .map((e) => ExerciseTag.fromJson(e as Map<String, dynamic>))
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$_ExerciseToJson(_$_Exercise instance) =>
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'creator': instance.creator,
       'type': _$ExerciseTypeEnumMap[instance.type],
       'tags': instance.tags,
       'muscles': instance.muscles,

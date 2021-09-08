@@ -25,6 +25,7 @@ class _$ExerciseTearOff {
       {String? id,
       required String name,
       required String description,
+      required String? creator,
       required ExerciseType type,
       required List<ExerciseTag> tags,
       required List<Muscle> muscles,
@@ -34,6 +35,7 @@ class _$ExerciseTearOff {
       id: id,
       name: name,
       description: description,
+      creator: creator,
       type: type,
       tags: tags,
       muscles: muscles,
@@ -55,6 +57,7 @@ mixin _$Exercise {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String? get creator => throw _privateConstructorUsedError;
   ExerciseType get type => throw _privateConstructorUsedError;
   List<ExerciseTag> get tags => throw _privateConstructorUsedError;
   List<Muscle> get muscles => throw _privateConstructorUsedError;
@@ -75,6 +78,7 @@ abstract class $ExerciseCopyWith<$Res> {
       {String? id,
       String name,
       String description,
+      String? creator,
       ExerciseType type,
       List<ExerciseTag> tags,
       List<Muscle> muscles,
@@ -95,6 +99,7 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? creator = freezed,
     Object? type = freezed,
     Object? tags = freezed,
     Object? muscles = freezed,
@@ -114,6 +119,10 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      creator: creator == freezed
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as String?,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -147,6 +156,7 @@ abstract class _$ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
       {String? id,
       String name,
       String description,
+      String? creator,
       ExerciseType type,
       List<ExerciseTag> tags,
       List<Muscle> muscles,
@@ -168,6 +178,7 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? creator = freezed,
     Object? type = freezed,
     Object? tags = freezed,
     Object? muscles = freezed,
@@ -187,6 +198,10 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      creator: creator == freezed
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as String?,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -218,6 +233,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
       {this.id,
       required this.name,
       required this.description,
+      required this.creator,
       required this.type,
       required this.tags,
       required this.muscles,
@@ -235,6 +251,8 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
   @override
   final String description;
   @override
+  final String? creator;
+  @override
   final ExerciseType type;
   @override
   final List<ExerciseTag> tags;
@@ -248,7 +266,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Exercise(id: $id, name: $name, description: $description, type: $type, tags: $tags, muscles: $muscles, instructions: $instructions, isFavourite: $isFavourite)';
+    return 'Exercise(id: $id, name: $name, description: $description, creator: $creator, type: $type, tags: $tags, muscles: $muscles, instructions: $instructions, isFavourite: $isFavourite)';
   }
 
   @override
@@ -259,6 +277,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('creator', creator))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('muscles', muscles))
@@ -277,6 +296,9 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
+            (identical(other.creator, creator) ||
+                const DeepCollectionEquality()
+                    .equals(other.creator, creator)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)) &&
             (identical(other.tags, tags) ||
@@ -298,6 +320,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(creator) ^
       const DeepCollectionEquality().hash(type) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(muscles) ^
@@ -320,6 +343,7 @@ abstract class _Exercise extends Exercise {
       {String? id,
       required String name,
       required String description,
+      required String? creator,
       required ExerciseType type,
       required List<ExerciseTag> tags,
       required List<Muscle> muscles,
@@ -335,6 +359,8 @@ abstract class _Exercise extends Exercise {
   String get name => throw _privateConstructorUsedError;
   @override
   String get description => throw _privateConstructorUsedError;
+  @override
+  String? get creator => throw _privateConstructorUsedError;
   @override
   ExerciseType get type => throw _privateConstructorUsedError;
   @override

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:stronk/models/exercise/exercise_tag.dart';
@@ -24,6 +25,7 @@ class Exercise with _$Exercise {
     String? id,
     required String name,
     required String description,
+    required String? creator,
     required ExerciseType type,
     required List<ExerciseTag> tags,
     required List<Muscle> muscles,
@@ -34,6 +36,7 @@ class Exercise with _$Exercise {
   factory Exercise.empty() => const Exercise(
         name: '',
         description: '',
+        creator: null,
         type: ExerciseType.SetRepetition,
         tags: <ExerciseTag>[],
         muscles: <Muscle>[],
@@ -41,6 +44,11 @@ class Exercise with _$Exercise {
       );
 
   factory Exercise.fromJson(Map<String, dynamic> json) => _$ExerciseFromJson(json);
+
+  factory Exercise.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data()! as Map<String, dynamic>;
+    return Exercise.fromJson(data).copyWith(id: doc.id);
+  }
 
   Map<String, dynamic> toDocument() => toJson()..remove('id');
 }

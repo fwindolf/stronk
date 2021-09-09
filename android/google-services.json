@@ -1,0 +1,39 @@
+{
+    "project_info": {
+      "project_number": "784611545392",
+      "project_id": "stronk-app",
+      "storage_bucket": "stronk-app.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:784611545392:android:d7d166086a7b07186578f5",
+          "android_client_info": {
+            "package_name": "com.windolff.stronk"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "784611545392-03egees2ha75vmsk99ve1ipparsjaqhi.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyBJmNwBGXjaSMWfoHqYNjsHxX-MhXM6Q-0"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "784611545392-03egees2ha75vmsk99ve1ipparsjaqhi.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

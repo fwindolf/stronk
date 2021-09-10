@@ -32,6 +32,16 @@ class AuthController extends StateNotifier<User?> {
     }
   }
 
+  // void createWithEmailAndPassword({required String email, required String password}) async {
+  //   final user = _read(authRepositoryProvider).getCurrentUser();
+  //   if (user == null) {
+  //     await _read(authRepositoryProvider).createWithEmailAndPassword(email, password);
+  //   } else if (user.isAnonymous) {
+  //     await _read(authRepositoryProvider).createWithEmailAndPassword(email, password);
+  //     // TODO: Promote
+  //   }
+  // }
+
   void signOut() async {
     await _read(authRepositoryProvider).signOut();
   }

@@ -6,6 +6,8 @@ import 'package:stronk/repositories/exception.dart';
 abstract class BaseAuthRepository {
   Stream<User?> get authStateChanges;
   Future<void> signInAnonymously();
+  Future<void> signInWithEmailAndPassword(String email, String password);
+  Future<void> createWithEmailAndPassword(String email, String password);
   User? getCurrentUser();
   Future<void> signOut();
 }
@@ -25,7 +27,34 @@ class AuthRepository implements BaseAuthRepository {
     try {
       await _read(firebaseAuthProvider).signInAnonymously();
     } on FirebaseAuthException catch (e) {
-      throw AuthenticationException(message: "Failed to sing in: ${e.message}");
+      throw AuthenticationException(message: "Failed to sign in: ${e.message}");
+    }
+  }
+
+  @override
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
+    try {
+      await _read(firebaseAuthProvider).signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      throw AuthenticationException(message: "Failed to sign in: ${e.message}");
+    }
+  }
+
+  @override
+  Future<void> createWithEmailAndPassword(String email, String password) async {
+    try {
+      await _read(firebaseAuthProvider).createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "email-already-in-use") {
+        return signInWithEmailAndPassword(email, password);
+      }
+      throw AuthenticationException(message: "Failed to sign in: ${e.message}");
     }
   }
 
@@ -45,7 +74,7 @@ class AuthRepository implements BaseAuthRepository {
       await signInAnonymously();
     } on FirebaseAuthException catch (e) {
       throw AuthenticationException(
-        message: "Failed to sing out user: ${e.message}",
+        message: "Failed to sign out user: ${e.message}",
         userId: _read(firebaseAuthProvider).currentUser?.uid,
       );
     }

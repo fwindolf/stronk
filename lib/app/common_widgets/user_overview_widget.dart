@@ -4,29 +4,36 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/controllers/auth_controller.dart';
 
 class UserOverviewWidget extends ConsumerWidget {
+  final showStats;
+  const UserOverviewWidget([this.showStats = false]);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.read(authControllerProvider);
 
-    return Container(
-      padding: const EdgeInsets.only(top: 25.0),
-      height: 100,
-      width: double.infinity,
-      child: Card(
-        elevation: 5,
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 15.0,
-                right: 15.0,
+    var name = user?.displayName;
+    if (name == null || name.isEmpty) name = "Anonymous User";
+
+    return Card(
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15.0),
+        child: ListTile(
+          leading: CircleAvatar(
+            child: Icon(Icons.person),
+          ),
+          title: Text(name),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "X workouts",
               ),
-              child: CircleAvatar(
-                child: Icon(Icons.person),
+              Text(
+                "X challenges with x longest streak",
               ),
-            ),
-            Text(user?.displayName == null ? "Anonymous user" : user!.displayName!),
-          ],
+            ],
+          ),
         ),
       ),
     );

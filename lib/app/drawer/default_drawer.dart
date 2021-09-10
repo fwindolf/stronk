@@ -13,14 +13,14 @@ class DefaultDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.home_filled),
-            title: const Text("Shop"),
+            title: const Text("Home"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(AppRoutes.home);
             },
           ),
           ListTile(
             leading: const ImageIcon(AssetImage('assets/icons/dumbbell.png')),
-            title: const Text("Orders"),
+            title: const Text("Workouts"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(AppRoutes.workouts);
             },

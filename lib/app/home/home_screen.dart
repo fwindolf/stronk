@@ -29,10 +29,16 @@ class HomeScreen extends HookConsumerWidget {
     return WillPopScope(
       onWillPop: () async => dialState.value = false,
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Stronk"),
+        ),
         drawer: DefaultDrawer(),
         body: Column(
           children: <Widget>[
-            UserOverviewWidget(),
+            InkWell(
+              child: UserOverviewWidget(),
+              onTap: () => Navigator.of(context).pushNamed(AppRoutes.profile),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: WorkoutOverviewWidget(),

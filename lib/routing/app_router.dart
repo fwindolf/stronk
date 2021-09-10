@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:stronk/app/home/home_screen.dart';
+import 'package:stronk/app/profile/profile_screen.dart';
 
 class AppRoutes {
   static const home = "/";
@@ -29,6 +31,12 @@ class AppRouter {
       case AppRoutes.home:
         return MaterialPageRoute<dynamic>(
           builder: (_) => HomeScreen(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      case AppRoutes.profile:
+        return MaterialPageRoute(
+          builder: (_) => ProfileScreen(),
           settings: settings,
           fullscreenDialog: true,
         );

@@ -5,16 +5,14 @@ class WorkoutOverviewWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 300,
+      height: 200,
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.only(
-          topLeft: const Radius.circular(15.0),
-          topRight: const Radius.circular(15.0),
+      child: Card(
+        elevation: 3,
+        child: const Center(
+          child: Text("Workouts"),
         ),
       ),
-      child: const Center(child: Text("Workouts")),
     );
   }
 }

@@ -24,7 +24,6 @@ class HomeScreen extends HookConsumerWidget {
   /// challenges being completed.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authControllerState = ref.watch(authControllerProvider);
     final dialState = useState(false);
 
     return WillPopScope(
@@ -34,8 +33,14 @@ class HomeScreen extends HookConsumerWidget {
         body: Column(
           children: <Widget>[
             UserOverviewWidget(),
-            WorkoutOverviewWidget(),
-            ChallengeOverviewWidget(),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: WorkoutOverviewWidget(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 2.0),
+              child: ChallengeOverviewWidget(),
+            ),
           ],
         ),
         floatingActionButton: SpeedDial(
@@ -46,8 +51,6 @@ class HomeScreen extends HookConsumerWidget {
           openCloseDial: dialState,
           childPadding: EdgeInsets.all(5),
           spaceBetweenChildren: 4,
-          label: Text("Open"),
-          activeLabel: Text("Close"),
           direction: SpeedDialDirection.Up,
           children: [
             SpeedDialChild(

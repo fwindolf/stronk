@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:stronk/controllers/auth_controller.dart';
 import 'package:stronk/controllers/exercise_controller.dart';
 import 'package:stronk/models/exercise/exercise.dart';
+import 'package:stronk/models/muscle/muscle.dart';
 
 import 'package:stronk/routing/app_router.dart';
 
@@ -33,8 +35,25 @@ class ExerciseSourceFilterWidget extends HookConsumerWidget {
 class ExercisesList extends ConsumerWidget {
   const ExercisesList();
 
-  void _buildContent(List<Exercise> exercises, WidgetRef ref) {
-    return ListView.builder(itemBuilder: (ctx, index))
+  Widget _buildContent(List<Exercise> exercises, WidgetRef ref) {
+    final exercisesByRegion = <MuscleRegion, List<Exercise>>{};
+    exercises.forEach((exercise) {
+      exercise.muscles.forEach((muscle) {
+        if (muscle.region == null) return;
+
+        if (exercisesByRegion.containsKey(muscle.region)) {
+          exercisesByRegion[muscle.region!]!.add(exercise);
+        } else {
+          exercisesByRegion[muscle.region!] = [exercise];
+        }
+      });
+    });
+    return ListView.builder(
+      itemBuilder: (ctx, index) {
+        // TODO
+      },
+      itemCount: exercisesByRegion.length,
+    );
   }
 
   @override

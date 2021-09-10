@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -51,4 +52,9 @@ class Exercise with _$Exercise {
   }
 
   Map<String, dynamic> toDocument() => toJson()..remove('id');
+
+  bool belongsTo(User? user) {
+    if (creator == null || user == null) return false;
+    return creator == user.uid;
+  }
 }

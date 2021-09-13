@@ -88,7 +88,7 @@ class ExerciseListController extends StateNotifier<AsyncValue<List<Exercise>>> {
     }
 
     try {
-      final exercises = await _read(exerciseRepositoryProvider).retrieveExercise(userId: _userId!);
+      final exercises = await _read(exerciseRepositoryProvider).retrieveExercises(userId: _userId!);
       if (mounted) {
         state = AsyncValue.data(exercises);
       }

@@ -6,14 +6,15 @@ import 'package:stronk/controllers/auth_controller.dart';
 
 import 'package:stronk/routing/app_router.dart';
 
-class ExerciseItemWidget extends ConsumerWidget {
-  final Exercise exercise;
+final exerciseItemProvider = Provider<Exercise>((_) => throw UnimplementedError());
 
-  const ExerciseItemWidget(this.exercise);
+class ExerciseItem extends ConsumerWidget {
+  const ExerciseItem();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.read(authControllerProvider);
+    final exercise = ref.watch(exerciseItemProvider);
 
     return ListTile(
       title: Text(

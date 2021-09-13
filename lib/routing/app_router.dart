@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:stronk/models/exercise/exercise.dart';
+
 import 'package:stronk/app/home/home_screen.dart';
 import 'package:stronk/app/profile/profile_screen.dart';
+import 'package:stronk/app/exercises/exercises_screen.dart';
+import 'package:stronk/app/exercises/exercises_edit_screen.dart';
 
 class AppRoutes {
   static const home = "/";
@@ -37,6 +41,21 @@ class AppRouter {
       case AppRoutes.profile:
         return MaterialPageRoute(
           builder: (_) => ProfileScreen(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      case AppRoutes.exercises:
+        return MaterialPageRoute(
+          builder: (_) => ExerciseScreen(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      case AppRoutes.exerciseEdit:
+        final exercise = args as Exercise?;
+        return MaterialPageRoute(
+          builder: (_) => ExerciseEditScreen(
+            editedExercise: exercise,
+          ),
           settings: settings,
           fullscreenDialog: true,
         );

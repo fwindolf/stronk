@@ -9,6 +9,14 @@ extension FirebaseFirestoreX on FirebaseFirestore {
     return collection('preset_exercises');
   }
 
+  CollectionReference exerciseTagRef(String userId) {
+    return collection('exercise_tags').doc(userId).collection("tags");
+  }
+
+  CollectionReference muscleRef() {
+    return collection('muscles');
+  }
+
   CollectionReference workoutRef(String userId) {
     return collection('workouts').doc(userId).collection("user_workouts");
   }

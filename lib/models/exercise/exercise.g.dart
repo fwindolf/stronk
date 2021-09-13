@@ -65,7 +65,7 @@ K _$enumDecode<K, V>(
 
 const _$ExerciseTypeEnumMap = {
   ExerciseType.SetRepetition: 'SetRepetition',
-  ExerciseType.ThreeToSeve: 'ThreeToSeve',
+  ExerciseType.ThreeToSeven: 'ThreeToSeven',
   ExerciseType.DoPause: 'DoPause',
   ExerciseType.Hold: 'Hold',
   ExerciseType.Flow: 'Flow',

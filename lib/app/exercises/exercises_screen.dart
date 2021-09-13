@@ -31,7 +31,7 @@ class ExerciseSourceFilterWidget extends HookConsumerWidget {
 class ExercisesList extends ConsumerWidget {
   const ExercisesList();
 
-  Widget _buildContent(List<Exercise> exercises) {
+  Widget _buildContent(List<Exercise> exercises, WidgetRef ref) {
     final exercisesByRegion = <MuscleRegion, List<Exercise>>{};
     exercises.forEach((exercise) {
       exercise.muscles.forEach((muscle) {
@@ -44,15 +44,19 @@ class ExercisesList extends ConsumerWidget {
         }
       });
     });
-    return ListView.builder(
-      itemBuilder: (ctx, index) {
-        return ProviderScope(
-          child: const ExerciseItem(),
-          overrides: [],
-        );
-      },
-      itemCount: exercisesByRegion.length,
-    );
+    if (exercisesByRegion.isNotEmpty) {
+      return ListView.builder(
+        itemBuilder: (ctx, index) {
+          return ProviderScope(
+            child: const ExerciseItem(),
+            overrides: [],
+          );
+        },
+        itemCount: exercisesByRegion.length,
+      );
+    } else {
+      return _buildEmpty(ref);
+    }
   }
 
   Widget _buildEmpty(WidgetRef ref) {
@@ -83,7 +87,7 @@ class ExercisesList extends ConsumerWidget {
     final exercises = ref.watch(exerciseListControllerProvider);
 
     return exercises.when(
-      data: (exercises) => _buildContent(exercises),
+      data: (exercises) => _buildContent(exercises, ref),
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, _) => _buildEmpty(ref),
     );

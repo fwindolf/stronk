@@ -29,7 +29,7 @@ class TagWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(5.0),
         border: Border.all(color: color),
       ),
-      child: GestureDetector(
+      child: InkWell(
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -41,7 +41,10 @@ class TagWidget extends StatelessWidget {
             IconButton(padding: EdgeInsets.zero, icon: icon, color: color, onPressed: onAction),
           ],
         ),
-        onLongPress: () => onHold,
+        onLongPress: () {
+          print("Long press");
+          onHold!();
+        },
       ),
     );
   }
@@ -60,7 +63,9 @@ class _EditableTagWidgetState extends State<EditableTagWidget> {
   final _controller = TextEditingController();
 
   void submit(BuildContext context) {
-    if (_controller.text.isEmpty || _controller.text.length < 4 || _controller.text.length > 20) {
+    print("Submit ${_controller.text}");
+    if (_controller.text.isEmpty) return;
+    if (_controller.text.length < 4 || _controller.text.length > 20) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         behavior: SnackBarBehavior.floating,
@@ -95,7 +100,7 @@ class _EditableTagWidgetState extends State<EditableTagWidget> {
                 autocorrect: false,
                 onSubmitted: (_) => submit(context),
                 onEditingComplete: () => submit(context),
-                inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9_]'))],
+                inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[a-z0-9_]'))],
                 textInputAction: TextInputAction.done,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),

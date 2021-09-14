@@ -9,7 +9,6 @@ import 'package:stronk/repositories/exception.dart';
 import 'package:stronk/repositories/extensions.dart';
 
 abstract class ExerciseTagRepositoryBase {
-  @override
   Future<List<ExerciseTag>> retrieve({required String userId});
   Future<String> create({required String userId, required ExerciseTag tag});
   Future<void> update({required String userId, required ExerciseTag tag});

@@ -31,8 +31,6 @@ class ExerciseValidationItems {
     type,
     instructions,
   }) {
-    print(
-        "State Updated: name: ${this.name.value}, description: ${this.description.value}, tags: ${this.tags.value}");
     return ExerciseValidationItems(
       name: name ?? this.name,
       description: description ?? this.description,
@@ -133,6 +131,8 @@ class ExerciseValidationNotifier extends StateNotifier<ExerciseValidationItems> 
   }
 
   void updateTags(List<ExerciseTag>? value) {
+    print("Updating tags ${value?.map((el) => el.name).toList()}");
+
     if (tagValidator.isValid(value)) {
       state = state.copyWith(tags: ValidationItem<List<ExerciseTag>>(value, null));
     } else {

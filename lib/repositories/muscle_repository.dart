@@ -12,7 +12,7 @@ abstract class MuscleRepositoryBase {
   Future<List<Muscle>> retrieve({required String userId});
   Future<String> create({required String userId, required Muscle muscle});
   Future<void> update({required String userId, required Muscle muscle});
-  Future<void> delete({required String userId, required String tagId});
+  Future<void> delete({required String userId, required String muscleId});
 }
 
 final muscleRepositoryProvider = Provider<MuscleRepository>((ref) {
@@ -56,9 +56,9 @@ class MuscleRepository implements MuscleRepositoryBase {
   }
 
   @override
-  Future<void> delete({required String userId, required String tagId}) async {
+  Future<void> delete({required String userId, required String muscleId}) async {
     try {
-      await _read(firebaseFirestoreProvider).muscleRef().doc(tagId).delete();
+      await _read(firebaseFirestoreProvider).muscleRef().doc(muscleId).delete();
     } on FirebaseException catch (e) {
       throw DataTransferException(message: "Failed to delete ExcerciseTag: ${e.message}");
     }

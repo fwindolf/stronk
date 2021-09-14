@@ -15,69 +15,58 @@ class ExercisesTagField extends ConsumerWidget {
   final ValidationItem<List<ExerciseTag>> state;
   final Function(List<ExerciseTag>?) updateState;
 
-  var created = <ExerciseTag>[];
-  var active = <ExerciseTag>[];
-  var inactive = <ExerciseTag>[];
-  var deleted = <ExerciseTag>[];
-
   ExercisesTagField({required this.state, required this.updateState});
 
   bool _contains(List<ExerciseTag> tags, ExerciseTag tag) {
     return tags.where((el) => tag.name == el.name).isNotEmpty;
   }
 
-  void _initTags(List<ExerciseTag> available, List<ExerciseTag> tags) {
-    active.clear();
-    active.addAll(tags);
-
-    inactive.clear();
-    inactive.addAll(available);
-  }
-
   void _createTag(ExerciseTag tag, WidgetRef ref) {
+    print("Create tag ${tag.name}");
     // Create if not exists, add to created
     final user = ref.read(authControllerProvider);
-    if (user != null && !_contains(created + active + inactive, tag)) {
-      created.add(tag);
+    if (user != null) {
+      print("Creating tag on repo ${tag.name}");
       ref.read(exerciseTagRepositoryProvider).create(userId: user.uid, tag: tag);
-    } else if (_contains(deleted, tag)) {
-      deleted.remove(tag);
+      _activateTag(tag);
+      ref.read(exerciseTagListControllerProvider.notifier).retrieveItems();
     }
-
-    // Add to state
-    if (!_contains(active, tag)) active.add(tag);
-    if (_contains(inactive, tag)) inactive.remove(tag);
-    updateState(active);
   }
 
   void _activateTag(ExerciseTag tag) {
-    if (!_contains(active, tag)) active.add(tag);
-    if (_contains(inactive, tag)) inactive.remove(tag);
-    updateState(active);
+    print("Activate tag ${tag.name}");
+    // Add to active it it was
+    if (!(state.value?.contains(tag) ?? false)) {
+      updateState(List<ExerciseTag>.from(state.value ?? [])..add(tag));
+    }
   }
 
   void _deactivateTag(ExerciseTag tag) {
-    if (_contains(active, tag)) active.remove(tag);
-    if (!_contains(inactive, tag)) inactive.add(tag);
-    updateState(active);
+    print("Deactivate tag ${tag.name}");
+    // Remove from active it it was
+    if (state.value?.contains(tag) ?? false) {
+      updateState(List<ExerciseTag>.from(state.value ?? [])..remove(tag));
+    }
   }
 
   void _deleteTag(ExerciseTag tag, WidgetRef ref) {
-    if (_contains(created, tag)) created.remove(tag);
-    if (_contains(active, tag)) active.remove(tag);
-    if (_contains(inactive, tag)) inactive.remove(tag);
+    print("Delete tag ${tag.name}");
+    _deactivateTag(tag);
 
     // Delete if exists, add to deleted
     final user = ref.read(authControllerProvider);
-    if (user != null && _contains(created + active + inactive, tag)) {
+    if (user != null) {
+      print("Deleting tag on repo ${tag.name}");
       ref.read(exerciseTagRepositoryProvider).delete(userId: user.uid, tagId: tag.id!);
+      ref.read(exerciseTagListControllerProvider.notifier).retrieveItems();
     }
-
-    updateState(active);
   }
 
   Widget _buildContent(BuildContext context, WidgetRef ref, [List<ExerciseTag>? tags]) {
-    _initTags(tags ?? [], state.value ?? []);
+    // We save our active selection in the state, and our available we get from the database
+    final active = state.value ?? [];
+    final available = tags ?? [];
+    final inactive = available.whereNot((el) => active.map((el) => el.name).contains(el.name));
 
     final activeWidgets = active.map(
       (tag) => TagWidget(
@@ -107,13 +96,11 @@ class ExercisesTagField extends ConsumerWidget {
       ..addAll(inactiveWidgets)
       ..add(EditableTagWidget((String name) => _createTag(ExerciseTag(name: name), ref)));
 
-    return Container(
-      child: Wrap(
-        children: widgets,
-        spacing: 5.0,
-        runSpacing: 5.0,
-        runAlignment: WrapAlignment.start,
-      ),
+    return Wrap(
+      children: widgets,
+      spacing: 5.0,
+      runSpacing: 5.0,
+      runAlignment: WrapAlignment.start,
     );
   }
 
@@ -121,10 +108,15 @@ class ExercisesTagField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final availableTags = ref.watch(exerciseTagListControllerProvider);
 
-    return availableTags.when(
-      data: (tags) => _buildContent(context, ref, tags),
-      loading: () => _buildContent(context, ref),
-      error: (error, _) => _buildContent(context, ref),
-    );
+    return availableTags.when(data: (tags) {
+      print("New data ${tags.map((el) => el.name).toList()}");
+      return _buildContent(context, ref, tags);
+    }, loading: () {
+      print("Loading");
+      return _buildContent(context, ref);
+    }, error: (error, _) {
+      print("Error");
+      return _buildContent(context, ref);
+    });
   }
 }

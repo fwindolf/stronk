@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/common_widgets/enum_dropdown_field.dart';
 
 import 'package:stronk/app/exercises/exercises_tag_field_widget.dart';
+import 'package:stronk/app/exercises/instruction_field.dart';
+import 'package:stronk/app/exercises/muscle_field_widget.dart';
 
 import 'package:stronk/controllers/auth_controller.dart';
 import 'package:stronk/controllers/exercise_tag_controller.dart';
@@ -32,13 +34,16 @@ class ExerciseNameFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        labelText: "Name",
-        errorText: state.error,
+    return Container(
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: "Name",
+          errorText: state.error,
+          border: OutlineInputBorder(),
+        ),
+        textInputAction: TextInputAction.next,
+        onChanged: (value) => updateState(value),
       ),
-      textInputAction: TextInputAction.next,
-      onChanged: (value) => updateState(value),
     );
   }
 }
@@ -120,30 +125,70 @@ class ExerciseEditScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: <Widget>[
-                ExerciseNameFormField(
-                  state: ref.watch(exerciseValidationProvider).name,
-                  updateState: ref.read(exerciseValidationProvider.notifier).updateName,
-                ),
-                ExercisesTagField(
-                  state: ref.watch(exerciseValidationProvider).tags,
-                  updateState: ref.read(exerciseValidationProvider.notifier).updateTags,
-                ),
-                // TagField<Muscle>(
-                //   name: "Muscle",
-                //   createTag: null,
-                //   repository: ref.read(muscleRepositoryProvider),
-                //   state: ref.watch(exerciseValidationProvider).muscles,
-                //   updateState: ref.read(exerciseValidationProvider.notifier).updateMuscles,
-                // ),
-                EnumDropdownField<ExerciseType>(
-                  name: "Exercise Type",
-                  choices: Map<ExerciseType, String>.fromIterable(
-                    ExerciseType.values,
-                    key: (e) => e,
-                    value: (e) => (e as ExerciseType).description,
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 5, right: 5),
+                  child: ExerciseNameFormField(
+                    state: ref.watch(exerciseValidationProvider).name,
+                    updateState: ref.read(exerciseValidationProvider.notifier).updateName,
                   ),
-                  state: ref.watch(exerciseValidationProvider).type,
-                  updateState: ref.read(exerciseValidationProvider.notifier).updateType,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0, left: 5, right: 5),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.grey.shade500, // set border color
+                          width: 1.0), // set border width
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(5.0)), // set rounded corner radius
+                    ),
+                    constraints: BoxConstraints(minHeight: 40),
+                    padding: const EdgeInsets.only(top: 5, bottom: 5.0, left: 7, right: 7),
+                    child: ExercisesTagField(
+                      state: ref.watch(exerciseValidationProvider).tags,
+                      updateState: ref.read(exerciseValidationProvider.notifier).updateTags,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0, left: 5, right: 5),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.grey.shade500, // set border color
+                          width: 1.0), // set border width
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(5.0)), // set rounded corner radius
+                    ),
+                    constraints: BoxConstraints(minHeight: 40),
+                    padding: const EdgeInsets.only(top: 5, bottom: 5.0, left: 7, right: 7),
+                    child: MuscleField(
+                      state: ref.watch(exerciseValidationProvider).muscles,
+                      updateState: ref.read(exerciseValidationProvider.notifier).updateMuscles,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
+                  child: EnumDropdownField<ExerciseType>(
+                    name: "Exercise Type",
+                    choices: Map<ExerciseType, String>.fromIterable(
+                      ExerciseType.values,
+                      key: (e) => e,
+                      value: (e) => (e as ExerciseType).description,
+                    ),
+                    state: ref.watch(exerciseValidationProvider).type,
+                    updateState: ref.read(exerciseValidationProvider.notifier).updateType,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
+                  child: InstructionField(
+                    state: ref.watch(exerciseValidationProvider).instructions,
+                    updateState: ref.read(exerciseValidationProvider.notifier).updateInstructions,
+                  ),
                 ),
                 // NumberedListField(
                 //   name: "Instruction",

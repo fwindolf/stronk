@@ -18,14 +18,16 @@ class EnumDropdownField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      height: 50,
       child: DropdownButtonFormField<T>(
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
-              const Radius.circular(10.0),
+              const Radius.circular(5.0),
             ),
           ),
+          isDense: true,
         ),
         value: state.value,
         hint: Text(name),

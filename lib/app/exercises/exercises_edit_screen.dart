@@ -124,7 +124,10 @@ class ExerciseEditScreen extends ConsumerWidget {
                   state: ref.watch(exerciseValidationProvider).name,
                   updateState: ref.read(exerciseValidationProvider.notifier).updateName,
                 ),
-                ExercisesTagField(exerciseValidationProvider),
+                ExercisesTagField(
+                  tags: await ref.read(exerciseTagRepositoryProvider).retrieve(userId: userId),
+                ),
+
                 // TagField<Muscle>(
                 //   name: "Muscle",
                 //   createTag: null,

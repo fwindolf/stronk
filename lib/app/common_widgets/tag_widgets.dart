@@ -41,7 +41,7 @@ class TagWidget extends StatelessWidget {
             IconButton(padding: EdgeInsets.zero, icon: icon, color: color, onPressed: onAction),
           ],
         ),
-        onLongPressEnd: (_) => onHold,
+        onLongPress: () => onHold,
       ),
     );
   }

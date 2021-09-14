@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/common_widgets/enum_dropdown_field.dart';
 
-import 'package:stronk/app/common_widgets/tag_field.dart';
 import 'package:stronk/app/exercises/exercises_tag_field_widget.dart';
 
 import 'package:stronk/controllers/auth_controller.dart';

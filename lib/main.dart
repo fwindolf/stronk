@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:stronk/app/app_theme.dart';
 
 import 'package:stronk/routing/app_router.dart';
 
@@ -16,6 +17,9 @@ class Stronk extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Stronk',
+      themeMode: ThemeMode.system,
+      theme: lightTheme,
+      darkTheme: darkTheme,
       initialRoute: AppRoutes.home,
       onGenerateRoute: (settings) => AppRouter.onGenerateRoute(settings),
     );

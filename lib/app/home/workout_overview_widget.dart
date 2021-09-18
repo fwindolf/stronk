@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:stronk/app/charts/workout_count_chart.dart';
 
 class WorkoutOverviewWidget extends HookConsumerWidget {
   @override
@@ -9,9 +10,7 @@ class WorkoutOverviewWidget extends HookConsumerWidget {
       width: double.infinity,
       child: Card(
         elevation: 3,
-        child: const Center(
-          child: Text("Workouts"),
-        ),
+        child: const WorkoutCountChart(),
       ),
     );
   }

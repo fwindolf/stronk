@@ -9,6 +9,7 @@ import 'package:stronk/app/exercises/muscle_field_widget.dart';
 
 import 'package:stronk/controllers/auth_controller.dart';
 import 'package:stronk/controllers/exercise_tag_controller.dart';
+import 'package:stronk/models/exercise/exercise_types.dart';
 import 'package:stronk/repositories/exercise_tag_repository.dart';
 import 'package:stronk/repositories/muscle_repository.dart';
 
@@ -106,7 +107,7 @@ class ExerciseEditScreen extends ConsumerWidget {
       validator.updateDescription(editedExercise!.description);
       validator.updateTags(editedExercise!.tags);
       validator.updateMuscles(editedExercise!.muscles);
-      validator.updateType(editedExercise!.type);
+      validator.updateType(editedExercise!.configuration);
       validator.updateInstructions(editedExercise!.instructions);
     }
 
@@ -170,19 +171,19 @@ class ExerciseEditScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
-                  child: EnumDropdownField<ExerciseType>(
-                    name: "Exercise Type",
-                    choices: Map<ExerciseType, String>.fromIterable(
-                      ExerciseType.values,
-                      key: (e) => e,
-                      value: (e) => (e as ExerciseType).description,
-                    ),
-                    state: ref.watch(exerciseValidationProvider).type,
-                    updateState: ref.read(exerciseValidationProvider.notifier).updateType,
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
+                //   child: EnumDropdownField<ExerciseType>(
+                //     name: "Exercise Type",
+                //     choices: Map<ExerciseType, String>.fromIterable(
+                //       ExerciseType.values,
+                //       key: (e) => e,
+                //       value: (e) => (e as ExerciseType).description,
+                //     ),
+                //     state: ref.watch(exerciseValidationProvider).type,
+                //     updateState: ref.read(exerciseValidationProvider.notifier).updateType,
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
                   child: InstructionField(

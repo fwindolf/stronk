@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stronk/models/exercise/exercise_configuration.dart';
+import 'package:stronk/models/exercise/exercise_types.dart';
 import 'package:stronk/util/validation.dart';
 
-import 'package:stronk/models/exercise/exercise.dart';
 import 'package:stronk/models/exercise/exercise_tag.dart';
 import 'package:stronk/models/exercise/instruction.dart';
 import 'package:stronk/models/muscle/muscle.dart';
@@ -75,7 +76,7 @@ class Validator {
   );
   final tagValidator = ListValidator<ExerciseTag>(maxItems: 4, maxError: "Can't add more tags");
   final musclesValidator = ListValidator<Muscle>(minItems: 1, minError: "Need at least one muscle");
-  final typeValidator = AlwaysValidValidator<ExerciseType>();
+  final typeValidator = AlwaysValidValidator<BaseExerciseTypeConfiguration>();
   final instructionsValidator = InstructionsValidator();
 }
 
@@ -150,12 +151,12 @@ class ExerciseValidationNotifier extends StateNotifier<ExerciseValidationItems> 
     }
   }
 
-  void updateType(ExerciseType? value) {
+  void updateType(BaseExerciseTypeConfiguration? value) {
     if (typeValidator.isValid(value)) {
-      state = state.copyWith(type: ValidationItem<ExerciseType>(value, null));
+      state = state.copyWith(type: ValidationItem<BaseExerciseTypeConfiguration>(value, null));
     } else {
       final error = typeValidator.errorText(value);
-      state = state.copyWith(type: ValidationItem<ExerciseType>(null, error));
+      state = state.copyWith(type: ValidationItem<BaseExerciseTypeConfiguration>(null, error));
     }
   }
 

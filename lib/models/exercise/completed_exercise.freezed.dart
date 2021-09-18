@@ -26,7 +26,7 @@ class _$CompletedExerciseTearOff {
       required String creator,
       required Exercise source,
       required String name,
-      required ExerciseTypeConfiguration configuration,
+      required BaseExerciseTypeConfiguration configuration,
       required DateTime timestamp}) {
     return _CompletedExercise(
       id: id,
@@ -52,7 +52,7 @@ mixin _$CompletedExercise {
   String get creator => throw _privateConstructorUsedError;
   Exercise get source => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  ExerciseTypeConfiguration get configuration =>
+  BaseExerciseTypeConfiguration get configuration =>
       throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
 
@@ -72,7 +72,7 @@ abstract class $CompletedExerciseCopyWith<$Res> {
       String creator,
       Exercise source,
       String name,
-      ExerciseTypeConfiguration configuration,
+      BaseExerciseTypeConfiguration configuration,
       DateTime timestamp});
 
   $ExerciseCopyWith<$Res> get source;
@@ -116,7 +116,7 @@ class _$CompletedExerciseCopyWithImpl<$Res>
       configuration: configuration == freezed
           ? _value.configuration
           : configuration // ignore: cast_nullable_to_non_nullable
-              as ExerciseTypeConfiguration,
+              as BaseExerciseTypeConfiguration,
       timestamp: timestamp == freezed
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -144,7 +144,7 @@ abstract class _$CompletedExerciseCopyWith<$Res>
       String creator,
       Exercise source,
       String name,
-      ExerciseTypeConfiguration configuration,
+      BaseExerciseTypeConfiguration configuration,
       DateTime timestamp});
 
   @override
@@ -191,7 +191,7 @@ class __$CompletedExerciseCopyWithImpl<$Res>
       configuration: configuration == freezed
           ? _value.configuration
           : configuration // ignore: cast_nullable_to_non_nullable
-              as ExerciseTypeConfiguration,
+              as BaseExerciseTypeConfiguration,
       timestamp: timestamp == freezed
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -224,7 +224,7 @@ class _$_CompletedExercise extends _CompletedExercise {
   @override
   final String name;
   @override
-  final ExerciseTypeConfiguration configuration;
+  final BaseExerciseTypeConfiguration configuration;
   @override
   final DateTime timestamp;
 
@@ -281,7 +281,7 @@ abstract class _CompletedExercise extends CompletedExercise {
       required String creator,
       required Exercise source,
       required String name,
-      required ExerciseTypeConfiguration configuration,
+      required BaseExerciseTypeConfiguration configuration,
       required DateTime timestamp}) = _$_CompletedExercise;
   const _CompletedExercise._() : super._();
 
@@ -297,7 +297,7 @@ abstract class _CompletedExercise extends CompletedExercise {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  ExerciseTypeConfiguration get configuration =>
+  BaseExerciseTypeConfiguration get configuration =>
       throw _privateConstructorUsedError;
   @override
   DateTime get timestamp => throw _privateConstructorUsedError;

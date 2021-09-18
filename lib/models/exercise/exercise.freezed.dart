@@ -26,7 +26,7 @@ class _$ExerciseTearOff {
       required String name,
       required String description,
       required String? creator,
-      required ExerciseTypeConfiguration configuration,
+      required BaseExerciseTypeConfiguration configuration,
       required List<ExerciseTag> tags,
       required List<Muscle> muscles,
       required List<Instruction> instructions,
@@ -58,7 +58,7 @@ mixin _$Exercise {
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String? get creator => throw _privateConstructorUsedError;
-  ExerciseTypeConfiguration get configuration =>
+  BaseExerciseTypeConfiguration get configuration =>
       throw _privateConstructorUsedError;
   List<ExerciseTag> get tags => throw _privateConstructorUsedError;
   List<Muscle> get muscles => throw _privateConstructorUsedError;
@@ -80,7 +80,7 @@ abstract class $ExerciseCopyWith<$Res> {
       String name,
       String description,
       String? creator,
-      ExerciseTypeConfiguration configuration,
+      BaseExerciseTypeConfiguration configuration,
       List<ExerciseTag> tags,
       List<Muscle> muscles,
       List<Instruction> instructions,
@@ -127,7 +127,7 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
       configuration: configuration == freezed
           ? _value.configuration
           : configuration // ignore: cast_nullable_to_non_nullable
-              as ExerciseTypeConfiguration,
+              as BaseExerciseTypeConfiguration,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -158,7 +158,7 @@ abstract class _$ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
       String name,
       String description,
       String? creator,
-      ExerciseTypeConfiguration configuration,
+      BaseExerciseTypeConfiguration configuration,
       List<ExerciseTag> tags,
       List<Muscle> muscles,
       List<Instruction> instructions,
@@ -206,7 +206,7 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
       configuration: configuration == freezed
           ? _value.configuration
           : configuration // ignore: cast_nullable_to_non_nullable
-              as ExerciseTypeConfiguration,
+              as BaseExerciseTypeConfiguration,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -254,7 +254,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
   @override
   final String? creator;
   @override
-  final ExerciseTypeConfiguration configuration;
+  final BaseExerciseTypeConfiguration configuration;
   @override
   final List<ExerciseTag> tags;
   @override
@@ -346,7 +346,7 @@ abstract class _Exercise extends Exercise {
       required String name,
       required String description,
       required String? creator,
-      required ExerciseTypeConfiguration configuration,
+      required BaseExerciseTypeConfiguration configuration,
       required List<ExerciseTag> tags,
       required List<Muscle> muscles,
       required List<Instruction> instructions,
@@ -364,7 +364,7 @@ abstract class _Exercise extends Exercise {
   @override
   String? get creator => throw _privateConstructorUsedError;
   @override
-  ExerciseTypeConfiguration get configuration =>
+  BaseExerciseTypeConfiguration get configuration =>
       throw _privateConstructorUsedError;
   @override
   List<ExerciseTag> get tags => throw _privateConstructorUsedError;

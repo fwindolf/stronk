@@ -5,7 +5,6 @@ import 'package:stronk/models/exercise/exercise_types.dart';
 part 'exercise_configuration.freezed.dart';
 part 'exercise_configuration.g.dart';
 
-@JsonSerializable()
 abstract class ExerciseTypeConfiguration {
   ExerciseType get type;
   Map<String, dynamic> get data;
@@ -51,7 +50,7 @@ class SetRepetitionConfiguration with _$SetRepetitionConfiguration {
   Map<String, dynamic> toDocument() => toJson()..remove('id');
 
   ExerciseType get type => exerciseType;
-  Map<String, dynamic> get configuration => toJson();
+  Map<String, dynamic> get data => toJson();
 }
 
 @freezed
@@ -80,7 +79,7 @@ class ThreeToSevenConfiguration with _$ThreeToSevenConfiguration {
   Map<String, dynamic> toDocument() => toJson()..remove('id');
 
   ExerciseType get type => exerciseType;
-  Map<String, dynamic> get configuration => toJson();
+  Map<String, dynamic> get data => toJson();
 }
 
 @freezed
@@ -108,7 +107,7 @@ class DoPauseConfiguration with _$DoPauseConfiguration {
   Map<String, dynamic> toDocument() => toJson()..remove('id');
 
   ExerciseType get type => exerciseType;
-  Map<String, dynamic> get configuration => toJson();
+  Map<String, dynamic> get data => toJson();
 }
 
 @freezed
@@ -135,7 +134,7 @@ class HoldConfiguration with _$HoldConfiguration {
   Map<String, dynamic> toDocument() => toJson()..remove('id');
 
   ExerciseType get type => exerciseType;
-  Map<String, dynamic> get configuration => toJson();
+  Map<String, dynamic> get data => toJson();
 }
 
 @freezed
@@ -162,10 +161,11 @@ class FlowConfiguration with _$FlowConfiguration {
   Map<String, dynamic> toDocument() => toJson()..remove('id');
 
   ExerciseType get type => exerciseType;
-  Map<String, dynamic> get configuration => toJson();
+  Map<String, dynamic> get data => toJson();
 }
 
-Map<String, dynamic> _exerciseTypeConfigurationfromJson(ExerciseTypeConfiguration configuration) {
+Map<String, dynamic> _exerciseTypeConfigurationfromJson(
+    BaseExerciseTypeConfiguration configuration) {
   switch (configuration.runtimeType) {
     case SetRepetitionConfiguration:
       return (configuration as SetRepetitionConfiguration).toJson();
@@ -182,18 +182,18 @@ Map<String, dynamic> _exerciseTypeConfigurationfromJson(ExerciseTypeConfiguratio
   }
 }
 
-ExerciseTypeConfiguration _exerciseTypeConfigurationtoJson(Map<String, dynamic> json) {
+BaseExerciseTypeConfiguration _exerciseTypeConfigurationtoJson(Map<String, dynamic> json) {
   switch (json["type"] as ExerciseType) {
     case ExerciseType.SetRepetition:
-      return SetRepetitionConfiguration.fromJson(json) as ExerciseTypeConfiguration;
+      return SetRepetitionConfiguration.fromJson(json) as BaseExerciseTypeConfiguration;
     case ExerciseType.ThreeToSeven:
-      return ThreeToSevenConfiguration.fromJson(json) as ExerciseTypeConfiguration;
+      return ThreeToSevenConfiguration.fromJson(json) as BaseExerciseTypeConfiguration;
     case ExerciseType.DoPause:
-      return DoPauseConfiguration.fromJson(json) as ExerciseTypeConfiguration;
+      return DoPauseConfiguration.fromJson(json) as BaseExerciseTypeConfiguration;
     case ExerciseType.Hold:
-      return HoldConfiguration.fromJson(json) as ExerciseTypeConfiguration;
+      return HoldConfiguration.fromJson(json) as BaseExerciseTypeConfiguration;
     case ExerciseType.Flow:
-      return FlowConfiguration.fromJson(json) as ExerciseTypeConfiguration;
+      return FlowConfiguration.fromJson(json) as BaseExerciseTypeConfiguration;
     default:
       throw Exception("Can not serialize ExerciseTypeConfiguration from $json");
   }

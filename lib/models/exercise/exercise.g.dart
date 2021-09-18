@@ -11,7 +11,7 @@ _$_Exercise _$$_ExerciseFromJson(Map<String, dynamic> json) => _$_Exercise(
       name: json['name'] as String,
       description: json['description'] as String,
       creator: json['creator'] as String?,
-      configuration: ExerciseTypeConfiguration.fromJson(
+      configuration: BaseExerciseTypeConfiguration.fromJson(
           json['configuration'] as Map<String, dynamic>),
       tags: (json['tags'] as List<dynamic>)
           .map((e) => ExerciseTag.fromJson(e as Map<String, dynamic>))

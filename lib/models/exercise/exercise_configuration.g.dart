@@ -6,14 +6,6 @@ part of 'exercise_configuration.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ExerciseTypeConfiguration _$ExerciseTypeConfigurationFromJson(
-        Map<String, dynamic> json) =>
-    ExerciseTypeConfiguration();
-
-Map<String, dynamic> _$ExerciseTypeConfigurationToJson(
-        ExerciseTypeConfiguration instance) =>
-    <String, dynamic>{};
-
 BaseExerciseTypeConfiguration _$BaseExerciseTypeConfigurationFromJson(
         Map<String, dynamic> json) =>
     BaseExerciseTypeConfiguration();

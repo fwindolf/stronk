@@ -16,7 +16,7 @@ class CompletedExercise with _$CompletedExercise {
     required String creator,
     required Exercise source,
     required String name,
-    required ExerciseTypeConfiguration configuration,
+    required BaseExerciseTypeConfiguration configuration,
     required DateTime timestamp,
   }) = _CompletedExercise;
 

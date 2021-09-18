@@ -12,7 +12,7 @@ _$_CompletedExercise _$$_CompletedExerciseFromJson(Map<String, dynamic> json) =>
       creator: json['creator'] as String,
       source: Exercise.fromJson(json['source'] as Map<String, dynamic>),
       name: json['name'] as String,
-      configuration: ExerciseTypeConfiguration.fromJson(
+      configuration: BaseExerciseTypeConfiguration.fromJson(
           json['configuration'] as Map<String, dynamic>),
       timestamp: DateTime.parse(json['timestamp'] as String),
     );

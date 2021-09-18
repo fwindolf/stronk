@@ -26,7 +26,7 @@ class _$ExerciseTearOff {
       required String name,
       required String description,
       required String? creator,
-      required ExerciseType type,
+      required ExerciseTypeConfiguration configuration,
       required List<ExerciseTag> tags,
       required List<Muscle> muscles,
       required List<Instruction> instructions,
@@ -36,7 +36,7 @@ class _$ExerciseTearOff {
       name: name,
       description: description,
       creator: creator,
-      type: type,
+      configuration: configuration,
       tags: tags,
       muscles: muscles,
       instructions: instructions,
@@ -58,7 +58,8 @@ mixin _$Exercise {
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String? get creator => throw _privateConstructorUsedError;
-  ExerciseType get type => throw _privateConstructorUsedError;
+  ExerciseTypeConfiguration get configuration =>
+      throw _privateConstructorUsedError;
   List<ExerciseTag> get tags => throw _privateConstructorUsedError;
   List<Muscle> get muscles => throw _privateConstructorUsedError;
   List<Instruction> get instructions => throw _privateConstructorUsedError;
@@ -79,7 +80,7 @@ abstract class $ExerciseCopyWith<$Res> {
       String name,
       String description,
       String? creator,
-      ExerciseType type,
+      ExerciseTypeConfiguration configuration,
       List<ExerciseTag> tags,
       List<Muscle> muscles,
       List<Instruction> instructions,
@@ -100,7 +101,7 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
     Object? name = freezed,
     Object? description = freezed,
     Object? creator = freezed,
-    Object? type = freezed,
+    Object? configuration = freezed,
     Object? tags = freezed,
     Object? muscles = freezed,
     Object? instructions = freezed,
@@ -123,10 +124,10 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
           ? _value.creator
           : creator // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as ExerciseType,
+      configuration: configuration == freezed
+          ? _value.configuration
+          : configuration // ignore: cast_nullable_to_non_nullable
+              as ExerciseTypeConfiguration,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -157,7 +158,7 @@ abstract class _$ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
       String name,
       String description,
       String? creator,
-      ExerciseType type,
+      ExerciseTypeConfiguration configuration,
       List<ExerciseTag> tags,
       List<Muscle> muscles,
       List<Instruction> instructions,
@@ -179,7 +180,7 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
     Object? name = freezed,
     Object? description = freezed,
     Object? creator = freezed,
-    Object? type = freezed,
+    Object? configuration = freezed,
     Object? tags = freezed,
     Object? muscles = freezed,
     Object? instructions = freezed,
@@ -202,10 +203,10 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
           ? _value.creator
           : creator // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as ExerciseType,
+      configuration: configuration == freezed
+          ? _value.configuration
+          : configuration // ignore: cast_nullable_to_non_nullable
+              as ExerciseTypeConfiguration,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -234,7 +235,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
       required this.name,
       required this.description,
       required this.creator,
-      required this.type,
+      required this.configuration,
       required this.tags,
       required this.muscles,
       required this.instructions,
@@ -253,7 +254,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
   @override
   final String? creator;
   @override
-  final ExerciseType type;
+  final ExerciseTypeConfiguration configuration;
   @override
   final List<ExerciseTag> tags;
   @override
@@ -266,7 +267,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Exercise(id: $id, name: $name, description: $description, creator: $creator, type: $type, tags: $tags, muscles: $muscles, instructions: $instructions, isFavourite: $isFavourite)';
+    return 'Exercise(id: $id, name: $name, description: $description, creator: $creator, configuration: $configuration, tags: $tags, muscles: $muscles, instructions: $instructions, isFavourite: $isFavourite)';
   }
 
   @override
@@ -278,7 +279,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('creator', creator))
-      ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('configuration', configuration))
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('muscles', muscles))
       ..add(DiagnosticsProperty('instructions', instructions))
@@ -299,8 +300,9 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
             (identical(other.creator, creator) ||
                 const DeepCollectionEquality()
                     .equals(other.creator, creator)) &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.configuration, configuration) ||
+                const DeepCollectionEquality()
+                    .equals(other.configuration, configuration)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.muscles, muscles) ||
@@ -321,7 +323,7 @@ class _$_Exercise extends _Exercise with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(creator) ^
-      const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(configuration) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(muscles) ^
       const DeepCollectionEquality().hash(instructions) ^
@@ -344,7 +346,7 @@ abstract class _Exercise extends Exercise {
       required String name,
       required String description,
       required String? creator,
-      required ExerciseType type,
+      required ExerciseTypeConfiguration configuration,
       required List<ExerciseTag> tags,
       required List<Muscle> muscles,
       required List<Instruction> instructions,
@@ -362,7 +364,8 @@ abstract class _Exercise extends Exercise {
   @override
   String? get creator => throw _privateConstructorUsedError;
   @override
-  ExerciseType get type => throw _privateConstructorUsedError;
+  ExerciseTypeConfiguration get configuration =>
+      throw _privateConstructorUsedError;
   @override
   List<ExerciseTag> get tags => throw _privateConstructorUsedError;
   @override

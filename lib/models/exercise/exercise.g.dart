@@ -11,7 +11,8 @@ _$_Exercise _$$_ExerciseFromJson(Map<String, dynamic> json) => _$_Exercise(
       name: json['name'] as String,
       description: json['description'] as String,
       creator: json['creator'] as String?,
-      type: _$enumDecode(_$ExerciseTypeEnumMap, json['type']),
+      configuration: ExerciseTypeConfiguration.fromJson(
+          json['configuration'] as Map<String, dynamic>),
       tags: (json['tags'] as List<dynamic>)
           .map((e) => ExerciseTag.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -30,43 +31,9 @@ Map<String, dynamic> _$$_ExerciseToJson(_$_Exercise instance) =>
       'name': instance.name,
       'description': instance.description,
       'creator': instance.creator,
-      'type': _$ExerciseTypeEnumMap[instance.type],
+      'configuration': instance.configuration,
       'tags': instance.tags,
       'muscles': instance.muscles,
       'instructions': instance.instructions,
       'isFavourite': instance.isFavourite,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
-
-const _$ExerciseTypeEnumMap = {
-  ExerciseType.SetRepetition: 'SetRepetition',
-  ExerciseType.ThreeToSeven: 'ThreeToSeven',
-  ExerciseType.DoPause: 'DoPause',
-  ExerciseType.Hold: 'Hold',
-  ExerciseType.Flow: 'Flow',
-};

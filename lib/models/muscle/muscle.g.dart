@@ -63,6 +63,5 @@ const _$MuscleRegionEnumMap = {
   MuscleRegion.Back: 'Back',
   MuscleRegion.Glutes: 'Glutes',
   MuscleRegion.Arms: 'Arms',
-  MuscleRegion.Thighs: 'Thighs',
   MuscleRegion.Legs: 'Legs',
 };

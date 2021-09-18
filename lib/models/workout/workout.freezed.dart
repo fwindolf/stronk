@@ -25,12 +25,14 @@ class _$WorkoutTearOff {
       {String? id,
       required String name,
       required String description,
+      required String? creator,
       List<WorkoutTag> tags = const <WorkoutTag>[],
       bool isFavourite = false}) {
     return _Workout(
       id: id,
       name: name,
       description: description,
+      creator: creator,
       tags: tags,
       isFavourite: isFavourite,
     );
@@ -49,6 +51,7 @@ mixin _$Workout {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String? get creator => throw _privateConstructorUsedError;
   List<WorkoutTag> get tags =>
       throw _privateConstructorUsedError; // Warmup? warmup,
 // Exercises? exercises,
@@ -68,6 +71,7 @@ abstract class $WorkoutCopyWith<$Res> {
       {String? id,
       String name,
       String description,
+      String? creator,
       List<WorkoutTag> tags,
       bool isFavourite});
 }
@@ -85,6 +89,7 @@ class _$WorkoutCopyWithImpl<$Res> implements $WorkoutCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? creator = freezed,
     Object? tags = freezed,
     Object? isFavourite = freezed,
   }) {
@@ -101,6 +106,10 @@ class _$WorkoutCopyWithImpl<$Res> implements $WorkoutCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      creator: creator == freezed
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as String?,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -122,6 +131,7 @@ abstract class _$WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
       {String? id,
       String name,
       String description,
+      String? creator,
       List<WorkoutTag> tags,
       bool isFavourite});
 }
@@ -140,6 +150,7 @@ class __$WorkoutCopyWithImpl<$Res> extends _$WorkoutCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
+    Object? creator = freezed,
     Object? tags = freezed,
     Object? isFavourite = freezed,
   }) {
@@ -156,6 +167,10 @@ class __$WorkoutCopyWithImpl<$Res> extends _$WorkoutCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      creator: creator == freezed
+          ? _value.creator
+          : creator // ignore: cast_nullable_to_non_nullable
+              as String?,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -175,6 +190,7 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
       {this.id,
       required this.name,
       required this.description,
+      required this.creator,
       this.tags = const <WorkoutTag>[],
       this.isFavourite = false})
       : super._();
@@ -188,6 +204,8 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
   final String name;
   @override
   final String description;
+  @override
+  final String? creator;
   @JsonKey(defaultValue: const <WorkoutTag>[])
   @override
   final List<WorkoutTag> tags;
@@ -199,7 +217,7 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Workout(id: $id, name: $name, description: $description, tags: $tags, isFavourite: $isFavourite)';
+    return 'Workout(id: $id, name: $name, description: $description, creator: $creator, tags: $tags, isFavourite: $isFavourite)';
   }
 
   @override
@@ -210,6 +228,7 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('creator', creator))
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('isFavourite', isFavourite));
   }
@@ -225,6 +244,9 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
+            (identical(other.creator, creator) ||
+                const DeepCollectionEquality()
+                    .equals(other.creator, creator)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.isFavourite, isFavourite) ||
@@ -238,6 +260,7 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(creator) ^
       const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(isFavourite);
 
@@ -257,6 +280,7 @@ abstract class _Workout extends Workout {
       {String? id,
       required String name,
       required String description,
+      required String? creator,
       List<WorkoutTag> tags,
       bool isFavourite}) = _$_Workout;
   const _Workout._() : super._();
@@ -269,6 +293,8 @@ abstract class _Workout extends Workout {
   String get name => throw _privateConstructorUsedError;
   @override
   String get description => throw _privateConstructorUsedError;
+  @override
+  String? get creator => throw _privateConstructorUsedError;
   @override
   List<WorkoutTag> get tags => throw _privateConstructorUsedError;
   @override // Warmup? warmup,

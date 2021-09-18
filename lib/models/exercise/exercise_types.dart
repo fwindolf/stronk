@@ -1,16 +1,26 @@
-abstract class ExerciseType {}
+enum ExerciseType {
+  SetRepetition,
+  ThreeToSeven,
+  DoPause,
+  Hold,
+  Flow,
+}
 
-/// n sets of m
-class SetRepetitionExerciseType implements ExerciseType {}
-
-/// 3-4-5-6-7 in rapid successions
-class ThreeToSevenExerciseType implements ExerciseType {}
-
-/// 20s pause between max possible reps
-class DoPauseExerciseType implements ExerciseType {}
-
-/// hold a position for n seconds
-class HoldExerciseType implements ExerciseType {}
-
-/// do a set of motions n times
-class FlowExerciseType implements ExerciseType {}
+extension ExerciseTypeDescription on ExerciseType {
+  String get description {
+    switch (this) {
+      case ExerciseType.SetRepetition:
+        return "Repeat a set for one exercise";
+      case ExerciseType.ThreeToSeven:
+        return "Repeat the exercise 3x, 4x, ..., 7x";
+      case ExerciseType.DoPause:
+        return "Do the exercise until exhaustion, then pause and repeat";
+      case ExerciseType.Hold:
+        return "Hold the exercise for a defined duration";
+      case ExerciseType.Flow:
+        return "Do the exercise once";
+      default:
+        return "Undefined type";
+    }
+  }
+}

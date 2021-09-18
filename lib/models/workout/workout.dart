@@ -15,6 +15,7 @@ class Workout with _$Workout {
     String? id,
     required String name,
     required String description,
+    required String? creator,
     @Default(<WorkoutTag>[]) List<WorkoutTag> tags,
     // Warmup? warmup,
     // Exercises? exercises,
@@ -22,7 +23,7 @@ class Workout with _$Workout {
     @Default(false) bool isFavourite,
   }) = _Workout;
 
-  factory Workout.empty() => const Workout(name: '', description: '');
+  factory Workout.empty() => const Workout(name: '', description: '', creator: null);
 
   factory Workout.fromJson(Map<String, dynamic> json) => _$WorkoutFromJson(json);
 

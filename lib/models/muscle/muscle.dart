@@ -13,7 +13,6 @@ enum MuscleRegion {
   Back,
   Glutes,
   Arms,
-  Thighs,
   Legs,
 }
 

@@ -10,6 +10,7 @@ _$_Workout _$$_WorkoutFromJson(Map<String, dynamic> json) => _$_Workout(
       id: json['id'] as String?,
       name: json['name'] as String,
       description: json['description'] as String,
+      creator: json['creator'] as String?,
       tags: (json['tags'] as List<dynamic>?)
               ?.map((e) => WorkoutTag.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$_WorkoutToJson(_$_Workout instance) =>
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'creator': instance.creator,
       'tags': instance.tags,
       'isFavourite': instance.isFavourite,
     };

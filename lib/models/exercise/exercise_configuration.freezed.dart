@@ -26,11 +26,13 @@ class _$SetRepetitionConfigurationTearOff {
       {String? id,
       required int repetitions,
       required int sets,
+      required double weightKg,
       required int pauseSeconds}) {
     return _SetRepetitionConfiguration(
       id: id,
       repetitions: repetitions,
       sets: sets,
+      weightKg: weightKg,
       pauseSeconds: pauseSeconds,
     );
   }
@@ -48,6 +50,7 @@ mixin _$SetRepetitionConfiguration {
   String? get id => throw _privateConstructorUsedError;
   int get repetitions => throw _privateConstructorUsedError;
   int get sets => throw _privateConstructorUsedError;
+  double get weightKg => throw _privateConstructorUsedError;
   int get pauseSeconds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,7 +64,12 @@ abstract class $SetRepetitionConfigurationCopyWith<$Res> {
   factory $SetRepetitionConfigurationCopyWith(SetRepetitionConfiguration value,
           $Res Function(SetRepetitionConfiguration) then) =
       _$SetRepetitionConfigurationCopyWithImpl<$Res>;
-  $Res call({String? id, int repetitions, int sets, int pauseSeconds});
+  $Res call(
+      {String? id,
+      int repetitions,
+      int sets,
+      double weightKg,
+      int pauseSeconds});
 }
 
 /// @nodoc
@@ -78,6 +86,7 @@ class _$SetRepetitionConfigurationCopyWithImpl<$Res>
     Object? id = freezed,
     Object? repetitions = freezed,
     Object? sets = freezed,
+    Object? weightKg = freezed,
     Object? pauseSeconds = freezed,
   }) {
     return _then(_value.copyWith(
@@ -93,6 +102,10 @@ class _$SetRepetitionConfigurationCopyWithImpl<$Res>
           ? _value.sets
           : sets // ignore: cast_nullable_to_non_nullable
               as int,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double,
       pauseSeconds: pauseSeconds == freezed
           ? _value.pauseSeconds
           : pauseSeconds // ignore: cast_nullable_to_non_nullable
@@ -109,7 +122,12 @@ abstract class _$SetRepetitionConfigurationCopyWith<$Res>
           $Res Function(_SetRepetitionConfiguration) then) =
       __$SetRepetitionConfigurationCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, int repetitions, int sets, int pauseSeconds});
+  $Res call(
+      {String? id,
+      int repetitions,
+      int sets,
+      double weightKg,
+      int pauseSeconds});
 }
 
 /// @nodoc
@@ -129,6 +147,7 @@ class __$SetRepetitionConfigurationCopyWithImpl<$Res>
     Object? id = freezed,
     Object? repetitions = freezed,
     Object? sets = freezed,
+    Object? weightKg = freezed,
     Object? pauseSeconds = freezed,
   }) {
     return _then(_SetRepetitionConfiguration(
@@ -144,6 +163,10 @@ class __$SetRepetitionConfigurationCopyWithImpl<$Res>
           ? _value.sets
           : sets // ignore: cast_nullable_to_non_nullable
               as int,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double,
       pauseSeconds: pauseSeconds == freezed
           ? _value.pauseSeconds
           : pauseSeconds // ignore: cast_nullable_to_non_nullable
@@ -154,12 +177,13 @@ class __$SetRepetitionConfigurationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@Implements(ExerciseTypeConfiguration)
+@Implements(BaseExerciseTypeConfiguration)
 class _$_SetRepetitionConfiguration extends _SetRepetitionConfiguration {
   const _$_SetRepetitionConfiguration(
       {this.id,
       required this.repetitions,
       required this.sets,
+      required this.weightKg,
       required this.pauseSeconds})
       : super._();
 
@@ -173,11 +197,13 @@ class _$_SetRepetitionConfiguration extends _SetRepetitionConfiguration {
   @override
   final int sets;
   @override
+  final double weightKg;
+  @override
   final int pauseSeconds;
 
   @override
   String toString() {
-    return 'SetRepetitionConfiguration(id: $id, repetitions: $repetitions, sets: $sets, pauseSeconds: $pauseSeconds)';
+    return 'SetRepetitionConfiguration(id: $id, repetitions: $repetitions, sets: $sets, weightKg: $weightKg, pauseSeconds: $pauseSeconds)';
   }
 
   @override
@@ -191,6 +217,9 @@ class _$_SetRepetitionConfiguration extends _SetRepetitionConfiguration {
                     .equals(other.repetitions, repetitions)) &&
             (identical(other.sets, sets) ||
                 const DeepCollectionEquality().equals(other.sets, sets)) &&
+            (identical(other.weightKg, weightKg) ||
+                const DeepCollectionEquality()
+                    .equals(other.weightKg, weightKg)) &&
             (identical(other.pauseSeconds, pauseSeconds) ||
                 const DeepCollectionEquality()
                     .equals(other.pauseSeconds, pauseSeconds)));
@@ -202,6 +231,7 @@ class _$_SetRepetitionConfiguration extends _SetRepetitionConfiguration {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(repetitions) ^
       const DeepCollectionEquality().hash(sets) ^
+      const DeepCollectionEquality().hash(weightKg) ^
       const DeepCollectionEquality().hash(pauseSeconds);
 
   @JsonKey(ignore: true)
@@ -217,11 +247,12 @@ class _$_SetRepetitionConfiguration extends _SetRepetitionConfiguration {
 }
 
 abstract class _SetRepetitionConfiguration extends SetRepetitionConfiguration
-    implements ExerciseTypeConfiguration {
+    implements BaseExerciseTypeConfiguration {
   const factory _SetRepetitionConfiguration(
       {String? id,
       required int repetitions,
       required int sets,
+      required double weightKg,
       required int pauseSeconds}) = _$_SetRepetitionConfiguration;
   const _SetRepetitionConfiguration._() : super._();
 
@@ -234,6 +265,8 @@ abstract class _SetRepetitionConfiguration extends SetRepetitionConfiguration
   int get repetitions => throw _privateConstructorUsedError;
   @override
   int get sets => throw _privateConstructorUsedError;
+  @override
+  double get weightKg => throw _privateConstructorUsedError;
   @override
   int get pauseSeconds => throw _privateConstructorUsedError;
   @override
@@ -255,11 +288,13 @@ class _$ThreeToSevenConfigurationTearOff {
       {String? id,
       int minRepetitions = 3,
       int maxRepetitions = 7,
-      int pauseSeconds = 20}) {
+      double? weightKg,
+      int pauseSeconds = 15}) {
     return _ThreeToSevenConfiguration(
       id: id,
       minRepetitions: minRepetitions,
       maxRepetitions: maxRepetitions,
+      weightKg: weightKg,
       pauseSeconds: pauseSeconds,
     );
   }
@@ -277,6 +312,7 @@ mixin _$ThreeToSevenConfiguration {
   String? get id => throw _privateConstructorUsedError;
   int get minRepetitions => throw _privateConstructorUsedError;
   int get maxRepetitions => throw _privateConstructorUsedError;
+  double? get weightKg => throw _privateConstructorUsedError;
   int get pauseSeconds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -291,7 +327,11 @@ abstract class $ThreeToSevenConfigurationCopyWith<$Res> {
           $Res Function(ThreeToSevenConfiguration) then) =
       _$ThreeToSevenConfigurationCopyWithImpl<$Res>;
   $Res call(
-      {String? id, int minRepetitions, int maxRepetitions, int pauseSeconds});
+      {String? id,
+      int minRepetitions,
+      int maxRepetitions,
+      double? weightKg,
+      int pauseSeconds});
 }
 
 /// @nodoc
@@ -308,6 +348,7 @@ class _$ThreeToSevenConfigurationCopyWithImpl<$Res>
     Object? id = freezed,
     Object? minRepetitions = freezed,
     Object? maxRepetitions = freezed,
+    Object? weightKg = freezed,
     Object? pauseSeconds = freezed,
   }) {
     return _then(_value.copyWith(
@@ -323,6 +364,10 @@ class _$ThreeToSevenConfigurationCopyWithImpl<$Res>
           ? _value.maxRepetitions
           : maxRepetitions // ignore: cast_nullable_to_non_nullable
               as int,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double?,
       pauseSeconds: pauseSeconds == freezed
           ? _value.pauseSeconds
           : pauseSeconds // ignore: cast_nullable_to_non_nullable
@@ -339,7 +384,11 @@ abstract class _$ThreeToSevenConfigurationCopyWith<$Res>
       __$ThreeToSevenConfigurationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id, int minRepetitions, int maxRepetitions, int pauseSeconds});
+      {String? id,
+      int minRepetitions,
+      int maxRepetitions,
+      double? weightKg,
+      int pauseSeconds});
 }
 
 /// @nodoc
@@ -359,6 +408,7 @@ class __$ThreeToSevenConfigurationCopyWithImpl<$Res>
     Object? id = freezed,
     Object? minRepetitions = freezed,
     Object? maxRepetitions = freezed,
+    Object? weightKg = freezed,
     Object? pauseSeconds = freezed,
   }) {
     return _then(_ThreeToSevenConfiguration(
@@ -374,6 +424,10 @@ class __$ThreeToSevenConfigurationCopyWithImpl<$Res>
           ? _value.maxRepetitions
           : maxRepetitions // ignore: cast_nullable_to_non_nullable
               as int,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double?,
       pauseSeconds: pauseSeconds == freezed
           ? _value.pauseSeconds
           : pauseSeconds // ignore: cast_nullable_to_non_nullable
@@ -384,13 +438,14 @@ class __$ThreeToSevenConfigurationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@Implements(ExerciseTypeConfiguration)
+@Implements(BaseExerciseTypeConfiguration)
 class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
   const _$_ThreeToSevenConfiguration(
       {this.id,
       this.minRepetitions = 3,
       this.maxRepetitions = 7,
-      this.pauseSeconds = 20})
+      this.weightKg,
+      this.pauseSeconds = 15})
       : super._();
 
   factory _$_ThreeToSevenConfiguration.fromJson(Map<String, dynamic> json) =>
@@ -404,13 +459,15 @@ class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
   @JsonKey(defaultValue: 7)
   @override
   final int maxRepetitions;
-  @JsonKey(defaultValue: 20)
+  @override
+  final double? weightKg;
+  @JsonKey(defaultValue: 15)
   @override
   final int pauseSeconds;
 
   @override
   String toString() {
-    return 'ThreeToSevenConfiguration(id: $id, minRepetitions: $minRepetitions, maxRepetitions: $maxRepetitions, pauseSeconds: $pauseSeconds)';
+    return 'ThreeToSevenConfiguration(id: $id, minRepetitions: $minRepetitions, maxRepetitions: $maxRepetitions, weightKg: $weightKg, pauseSeconds: $pauseSeconds)';
   }
 
   @override
@@ -425,6 +482,9 @@ class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
             (identical(other.maxRepetitions, maxRepetitions) ||
                 const DeepCollectionEquality()
                     .equals(other.maxRepetitions, maxRepetitions)) &&
+            (identical(other.weightKg, weightKg) ||
+                const DeepCollectionEquality()
+                    .equals(other.weightKg, weightKg)) &&
             (identical(other.pauseSeconds, pauseSeconds) ||
                 const DeepCollectionEquality()
                     .equals(other.pauseSeconds, pauseSeconds)));
@@ -436,6 +496,7 @@ class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(minRepetitions) ^
       const DeepCollectionEquality().hash(maxRepetitions) ^
+      const DeepCollectionEquality().hash(weightKg) ^
       const DeepCollectionEquality().hash(pauseSeconds);
 
   @JsonKey(ignore: true)
@@ -452,11 +513,12 @@ class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
 }
 
 abstract class _ThreeToSevenConfiguration extends ThreeToSevenConfiguration
-    implements ExerciseTypeConfiguration {
+    implements BaseExerciseTypeConfiguration {
   const factory _ThreeToSevenConfiguration(
       {String? id,
       int minRepetitions,
       int maxRepetitions,
+      double? weightKg,
       int pauseSeconds}) = _$_ThreeToSevenConfiguration;
   const _ThreeToSevenConfiguration._() : super._();
 
@@ -469,6 +531,8 @@ abstract class _ThreeToSevenConfiguration extends ThreeToSevenConfiguration
   int get minRepetitions => throw _privateConstructorUsedError;
   @override
   int get maxRepetitions => throw _privateConstructorUsedError;
+  @override
+  double? get weightKg => throw _privateConstructorUsedError;
   @override
   int get pauseSeconds => throw _privateConstructorUsedError;
   @override
@@ -486,10 +550,14 @@ class _$DoPauseConfigurationTearOff {
   const _$DoPauseConfigurationTearOff();
 
   _DoPauseConfiguration call(
-      {String? id, required int repetitions, int pauseSeconds = 20}) {
+      {String? id,
+      required int repetitions,
+      double? weightKg,
+      int pauseSeconds = 20}) {
     return _DoPauseConfiguration(
       id: id,
       repetitions: repetitions,
+      weightKg: weightKg,
       pauseSeconds: pauseSeconds,
     );
   }
@@ -506,6 +574,7 @@ const $DoPauseConfiguration = _$DoPauseConfigurationTearOff();
 mixin _$DoPauseConfiguration {
   String? get id => throw _privateConstructorUsedError;
   int get repetitions => throw _privateConstructorUsedError;
+  double? get weightKg => throw _privateConstructorUsedError;
   int get pauseSeconds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -519,7 +588,7 @@ abstract class $DoPauseConfigurationCopyWith<$Res> {
   factory $DoPauseConfigurationCopyWith(DoPauseConfiguration value,
           $Res Function(DoPauseConfiguration) then) =
       _$DoPauseConfigurationCopyWithImpl<$Res>;
-  $Res call({String? id, int repetitions, int pauseSeconds});
+  $Res call({String? id, int repetitions, double? weightKg, int pauseSeconds});
 }
 
 /// @nodoc
@@ -535,6 +604,7 @@ class _$DoPauseConfigurationCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? repetitions = freezed,
+    Object? weightKg = freezed,
     Object? pauseSeconds = freezed,
   }) {
     return _then(_value.copyWith(
@@ -546,6 +616,10 @@ class _$DoPauseConfigurationCopyWithImpl<$Res>
           ? _value.repetitions
           : repetitions // ignore: cast_nullable_to_non_nullable
               as int,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double?,
       pauseSeconds: pauseSeconds == freezed
           ? _value.pauseSeconds
           : pauseSeconds // ignore: cast_nullable_to_non_nullable
@@ -561,7 +635,7 @@ abstract class _$DoPauseConfigurationCopyWith<$Res>
           $Res Function(_DoPauseConfiguration) then) =
       __$DoPauseConfigurationCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, int repetitions, int pauseSeconds});
+  $Res call({String? id, int repetitions, double? weightKg, int pauseSeconds});
 }
 
 /// @nodoc
@@ -579,6 +653,7 @@ class __$DoPauseConfigurationCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? repetitions = freezed,
+    Object? weightKg = freezed,
     Object? pauseSeconds = freezed,
   }) {
     return _then(_DoPauseConfiguration(
@@ -590,6 +665,10 @@ class __$DoPauseConfigurationCopyWithImpl<$Res>
           ? _value.repetitions
           : repetitions // ignore: cast_nullable_to_non_nullable
               as int,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double?,
       pauseSeconds: pauseSeconds == freezed
           ? _value.pauseSeconds
           : pauseSeconds // ignore: cast_nullable_to_non_nullable
@@ -600,10 +679,13 @@ class __$DoPauseConfigurationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@Implements(ExerciseTypeConfiguration)
+@Implements(BaseExerciseTypeConfiguration)
 class _$_DoPauseConfiguration extends _DoPauseConfiguration {
   const _$_DoPauseConfiguration(
-      {this.id, required this.repetitions, this.pauseSeconds = 20})
+      {this.id,
+      required this.repetitions,
+      this.weightKg,
+      this.pauseSeconds = 20})
       : super._();
 
   factory _$_DoPauseConfiguration.fromJson(Map<String, dynamic> json) =>
@@ -613,13 +695,15 @@ class _$_DoPauseConfiguration extends _DoPauseConfiguration {
   final String? id;
   @override
   final int repetitions;
+  @override
+  final double? weightKg;
   @JsonKey(defaultValue: 20)
   @override
   final int pauseSeconds;
 
   @override
   String toString() {
-    return 'DoPauseConfiguration(id: $id, repetitions: $repetitions, pauseSeconds: $pauseSeconds)';
+    return 'DoPauseConfiguration(id: $id, repetitions: $repetitions, weightKg: $weightKg, pauseSeconds: $pauseSeconds)';
   }
 
   @override
@@ -631,6 +715,9 @@ class _$_DoPauseConfiguration extends _DoPauseConfiguration {
             (identical(other.repetitions, repetitions) ||
                 const DeepCollectionEquality()
                     .equals(other.repetitions, repetitions)) &&
+            (identical(other.weightKg, weightKg) ||
+                const DeepCollectionEquality()
+                    .equals(other.weightKg, weightKg)) &&
             (identical(other.pauseSeconds, pauseSeconds) ||
                 const DeepCollectionEquality()
                     .equals(other.pauseSeconds, pauseSeconds)));
@@ -641,6 +728,7 @@ class _$_DoPauseConfiguration extends _DoPauseConfiguration {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(repetitions) ^
+      const DeepCollectionEquality().hash(weightKg) ^
       const DeepCollectionEquality().hash(pauseSeconds);
 
   @JsonKey(ignore: true)
@@ -656,10 +744,11 @@ class _$_DoPauseConfiguration extends _DoPauseConfiguration {
 }
 
 abstract class _DoPauseConfiguration extends DoPauseConfiguration
-    implements ExerciseTypeConfiguration {
+    implements BaseExerciseTypeConfiguration {
   const factory _DoPauseConfiguration(
       {String? id,
       required int repetitions,
+      double? weightKg,
       int pauseSeconds}) = _$_DoPauseConfiguration;
   const _DoPauseConfiguration._() : super._();
 
@@ -670,6 +759,8 @@ abstract class _DoPauseConfiguration extends DoPauseConfiguration
   String? get id => throw _privateConstructorUsedError;
   @override
   int get repetitions => throw _privateConstructorUsedError;
+  @override
+  double? get weightKg => throw _privateConstructorUsedError;
   @override
   int get pauseSeconds => throw _privateConstructorUsedError;
   @override
@@ -686,9 +777,11 @@ HoldConfiguration _$HoldConfigurationFromJson(Map<String, dynamic> json) {
 class _$HoldConfigurationTearOff {
   const _$HoldConfigurationTearOff();
 
-  _HoldConfiguration call({String? id, int holdSeconds = 60}) {
+  _HoldConfiguration call(
+      {String? id, double? weightKg, int holdSeconds = 60}) {
     return _HoldConfiguration(
       id: id,
+      weightKg: weightKg,
       holdSeconds: holdSeconds,
     );
   }
@@ -704,6 +797,7 @@ const $HoldConfiguration = _$HoldConfigurationTearOff();
 /// @nodoc
 mixin _$HoldConfiguration {
   String? get id => throw _privateConstructorUsedError;
+  double? get weightKg => throw _privateConstructorUsedError;
   int get holdSeconds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -717,7 +811,7 @@ abstract class $HoldConfigurationCopyWith<$Res> {
   factory $HoldConfigurationCopyWith(
           HoldConfiguration value, $Res Function(HoldConfiguration) then) =
       _$HoldConfigurationCopyWithImpl<$Res>;
-  $Res call({String? id, int holdSeconds});
+  $Res call({String? id, double? weightKg, int holdSeconds});
 }
 
 /// @nodoc
@@ -732,6 +826,7 @@ class _$HoldConfigurationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? weightKg = freezed,
     Object? holdSeconds = freezed,
   }) {
     return _then(_value.copyWith(
@@ -739,6 +834,10 @@ class _$HoldConfigurationCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double?,
       holdSeconds: holdSeconds == freezed
           ? _value.holdSeconds
           : holdSeconds // ignore: cast_nullable_to_non_nullable
@@ -754,7 +853,7 @@ abstract class _$HoldConfigurationCopyWith<$Res>
           _HoldConfiguration value, $Res Function(_HoldConfiguration) then) =
       __$HoldConfigurationCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, int holdSeconds});
+  $Res call({String? id, double? weightKg, int holdSeconds});
 }
 
 /// @nodoc
@@ -771,6 +870,7 @@ class __$HoldConfigurationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? weightKg = freezed,
     Object? holdSeconds = freezed,
   }) {
     return _then(_HoldConfiguration(
@@ -778,6 +878,10 @@ class __$HoldConfigurationCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double?,
       holdSeconds: holdSeconds == freezed
           ? _value.holdSeconds
           : holdSeconds // ignore: cast_nullable_to_non_nullable
@@ -788,22 +892,25 @@ class __$HoldConfigurationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@Implements(ExerciseTypeConfiguration)
+@Implements(BaseExerciseTypeConfiguration)
 class _$_HoldConfiguration extends _HoldConfiguration {
-  const _$_HoldConfiguration({this.id, this.holdSeconds = 60}) : super._();
+  const _$_HoldConfiguration({this.id, this.weightKg, this.holdSeconds = 60})
+      : super._();
 
   factory _$_HoldConfiguration.fromJson(Map<String, dynamic> json) =>
       _$$_HoldConfigurationFromJson(json);
 
   @override
   final String? id;
+  @override
+  final double? weightKg;
   @JsonKey(defaultValue: 60)
   @override
   final int holdSeconds;
 
   @override
   String toString() {
-    return 'HoldConfiguration(id: $id, holdSeconds: $holdSeconds)';
+    return 'HoldConfiguration(id: $id, weightKg: $weightKg, holdSeconds: $holdSeconds)';
   }
 
   @override
@@ -812,6 +919,9 @@ class _$_HoldConfiguration extends _HoldConfiguration {
         (other is _HoldConfiguration &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.weightKg, weightKg) ||
+                const DeepCollectionEquality()
+                    .equals(other.weightKg, weightKg)) &&
             (identical(other.holdSeconds, holdSeconds) ||
                 const DeepCollectionEquality()
                     .equals(other.holdSeconds, holdSeconds)));
@@ -821,6 +931,7 @@ class _$_HoldConfiguration extends _HoldConfiguration {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(weightKg) ^
       const DeepCollectionEquality().hash(holdSeconds);
 
   @JsonKey(ignore: true)
@@ -835,9 +946,9 @@ class _$_HoldConfiguration extends _HoldConfiguration {
 }
 
 abstract class _HoldConfiguration extends HoldConfiguration
-    implements ExerciseTypeConfiguration {
-  const factory _HoldConfiguration({String? id, int holdSeconds}) =
-      _$_HoldConfiguration;
+    implements BaseExerciseTypeConfiguration {
+  const factory _HoldConfiguration(
+      {String? id, double? weightKg, int holdSeconds}) = _$_HoldConfiguration;
   const _HoldConfiguration._() : super._();
 
   factory _HoldConfiguration.fromJson(Map<String, dynamic> json) =
@@ -845,6 +956,8 @@ abstract class _HoldConfiguration extends HoldConfiguration
 
   @override
   String? get id => throw _privateConstructorUsedError;
+  @override
+  double? get weightKg => throw _privateConstructorUsedError;
   @override
   int get holdSeconds => throw _privateConstructorUsedError;
   @override
@@ -861,10 +974,12 @@ FlowConfiguration _$FlowConfigurationFromJson(Map<String, dynamic> json) {
 class _$FlowConfigurationTearOff {
   const _$FlowConfigurationTearOff();
 
-  _FlowConfiguration call({String? id, required int repetitions}) {
+  _FlowConfiguration call(
+      {String? id, required int repetitions, double? weightKg}) {
     return _FlowConfiguration(
       id: id,
       repetitions: repetitions,
+      weightKg: weightKg,
     );
   }
 
@@ -880,6 +995,7 @@ const $FlowConfiguration = _$FlowConfigurationTearOff();
 mixin _$FlowConfiguration {
   String? get id => throw _privateConstructorUsedError;
   int get repetitions => throw _privateConstructorUsedError;
+  double? get weightKg => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -892,7 +1008,7 @@ abstract class $FlowConfigurationCopyWith<$Res> {
   factory $FlowConfigurationCopyWith(
           FlowConfiguration value, $Res Function(FlowConfiguration) then) =
       _$FlowConfigurationCopyWithImpl<$Res>;
-  $Res call({String? id, int repetitions});
+  $Res call({String? id, int repetitions, double? weightKg});
 }
 
 /// @nodoc
@@ -908,6 +1024,7 @@ class _$FlowConfigurationCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? repetitions = freezed,
+    Object? weightKg = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -918,6 +1035,10 @@ class _$FlowConfigurationCopyWithImpl<$Res>
           ? _value.repetitions
           : repetitions // ignore: cast_nullable_to_non_nullable
               as int,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -929,7 +1050,7 @@ abstract class _$FlowConfigurationCopyWith<$Res>
           _FlowConfiguration value, $Res Function(_FlowConfiguration) then) =
       __$FlowConfigurationCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, int repetitions});
+  $Res call({String? id, int repetitions, double? weightKg});
 }
 
 /// @nodoc
@@ -947,6 +1068,7 @@ class __$FlowConfigurationCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? repetitions = freezed,
+    Object? weightKg = freezed,
   }) {
     return _then(_FlowConfiguration(
       id: id == freezed
@@ -957,15 +1079,21 @@ class __$FlowConfigurationCopyWithImpl<$Res>
           ? _value.repetitions
           : repetitions // ignore: cast_nullable_to_non_nullable
               as int,
+      weightKg: weightKg == freezed
+          ? _value.weightKg
+          : weightKg // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-@Implements(ExerciseTypeConfiguration)
+@Implements(BaseExerciseTypeConfiguration)
 class _$_FlowConfiguration extends _FlowConfiguration {
-  const _$_FlowConfiguration({this.id, required this.repetitions}) : super._();
+  const _$_FlowConfiguration(
+      {this.id, required this.repetitions, this.weightKg})
+      : super._();
 
   factory _$_FlowConfiguration.fromJson(Map<String, dynamic> json) =>
       _$$_FlowConfigurationFromJson(json);
@@ -974,10 +1102,12 @@ class _$_FlowConfiguration extends _FlowConfiguration {
   final String? id;
   @override
   final int repetitions;
+  @override
+  final double? weightKg;
 
   @override
   String toString() {
-    return 'FlowConfiguration(id: $id, repetitions: $repetitions)';
+    return 'FlowConfiguration(id: $id, repetitions: $repetitions, weightKg: $weightKg)';
   }
 
   @override
@@ -988,14 +1118,18 @@ class _$_FlowConfiguration extends _FlowConfiguration {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.repetitions, repetitions) ||
                 const DeepCollectionEquality()
-                    .equals(other.repetitions, repetitions)));
+                    .equals(other.repetitions, repetitions)) &&
+            (identical(other.weightKg, weightKg) ||
+                const DeepCollectionEquality()
+                    .equals(other.weightKg, weightKg)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(repetitions);
+      const DeepCollectionEquality().hash(repetitions) ^
+      const DeepCollectionEquality().hash(weightKg);
 
   @JsonKey(ignore: true)
   @override
@@ -1009,9 +1143,11 @@ class _$_FlowConfiguration extends _FlowConfiguration {
 }
 
 abstract class _FlowConfiguration extends FlowConfiguration
-    implements ExerciseTypeConfiguration {
-  const factory _FlowConfiguration({String? id, required int repetitions}) =
-      _$_FlowConfiguration;
+    implements BaseExerciseTypeConfiguration {
+  const factory _FlowConfiguration(
+      {String? id,
+      required int repetitions,
+      double? weightKg}) = _$_FlowConfiguration;
   const _FlowConfiguration._() : super._();
 
   factory _FlowConfiguration.fromJson(Map<String, dynamic> json) =
@@ -1021,6 +1157,8 @@ abstract class _FlowConfiguration extends FlowConfiguration
   String? get id => throw _privateConstructorUsedError;
   @override
   int get repetitions => throw _privateConstructorUsedError;
+  @override
+  double? get weightKg => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$FlowConfigurationCopyWith<_FlowConfiguration> get copyWith =>

@@ -3,7 +3,7 @@ import 'package:riverpod/riverpod.dart';
 
 import 'package:stronk/providers.dart';
 
-import 'package:stronk/models/workout/challenge.dart';
+import 'package:stronk/models/challenge/challenge.dart';
 
 import 'package:stronk/repositories/extensions.dart';
 import 'package:stronk/repositories/exception.dart';

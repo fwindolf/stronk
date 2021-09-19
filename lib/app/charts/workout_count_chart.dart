@@ -65,6 +65,7 @@ class WorkoutCountChart extends ConsumerWidget {
     final workoutTarget = 4;
 
     // Find week of year
+    // TODO: Correct for jumps in year
     final today = DateTime.now();
     final startOfYear = DateTime(today.year, 1, 1, 0, 0);
     final firstMonday = startOfYear.weekday;

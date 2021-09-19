@@ -20,6 +20,7 @@ _$_SetRepetitionConfiguration _$$_SetRepetitionConfigurationFromJson(
       id: json['id'] as String?,
       repetitions: json['repetitions'] as int,
       sets: json['sets'] as int,
+      weightKg: (json['weightKg'] as num).toDouble(),
       pauseSeconds: json['pauseSeconds'] as int,
     );
 
@@ -29,6 +30,7 @@ Map<String, dynamic> _$$_SetRepetitionConfigurationToJson(
       'id': instance.id,
       'repetitions': instance.repetitions,
       'sets': instance.sets,
+      'weightKg': instance.weightKg,
       'pauseSeconds': instance.pauseSeconds,
     };
 
@@ -38,7 +40,8 @@ _$_ThreeToSevenConfiguration _$$_ThreeToSevenConfigurationFromJson(
       id: json['id'] as String?,
       minRepetitions: json['minRepetitions'] as int? ?? 3,
       maxRepetitions: json['maxRepetitions'] as int? ?? 7,
-      pauseSeconds: json['pauseSeconds'] as int? ?? 20,
+      weightKg: (json['weightKg'] as num?)?.toDouble(),
+      pauseSeconds: json['pauseSeconds'] as int? ?? 15,
     );
 
 Map<String, dynamic> _$$_ThreeToSevenConfigurationToJson(
@@ -47,6 +50,7 @@ Map<String, dynamic> _$$_ThreeToSevenConfigurationToJson(
       'id': instance.id,
       'minRepetitions': instance.minRepetitions,
       'maxRepetitions': instance.maxRepetitions,
+      'weightKg': instance.weightKg,
       'pauseSeconds': instance.pauseSeconds,
     };
 
@@ -55,6 +59,7 @@ _$_DoPauseConfiguration _$$_DoPauseConfigurationFromJson(
     _$_DoPauseConfiguration(
       id: json['id'] as String?,
       repetitions: json['repetitions'] as int,
+      weightKg: (json['weightKg'] as num?)?.toDouble(),
       pauseSeconds: json['pauseSeconds'] as int? ?? 20,
     );
 
@@ -63,12 +68,14 @@ Map<String, dynamic> _$$_DoPauseConfigurationToJson(
     <String, dynamic>{
       'id': instance.id,
       'repetitions': instance.repetitions,
+      'weightKg': instance.weightKg,
       'pauseSeconds': instance.pauseSeconds,
     };
 
 _$_HoldConfiguration _$$_HoldConfigurationFromJson(Map<String, dynamic> json) =>
     _$_HoldConfiguration(
       id: json['id'] as String?,
+      weightKg: (json['weightKg'] as num?)?.toDouble(),
       holdSeconds: json['holdSeconds'] as int? ?? 60,
     );
 
@@ -76,6 +83,7 @@ Map<String, dynamic> _$$_HoldConfigurationToJson(
         _$_HoldConfiguration instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'weightKg': instance.weightKg,
       'holdSeconds': instance.holdSeconds,
     };
 
@@ -83,6 +91,7 @@ _$_FlowConfiguration _$$_FlowConfigurationFromJson(Map<String, dynamic> json) =>
     _$_FlowConfiguration(
       id: json['id'] as String?,
       repetitions: json['repetitions'] as int,
+      weightKg: (json['weightKg'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$_FlowConfigurationToJson(
@@ -90,4 +99,5 @@ Map<String, dynamic> _$$_FlowConfigurationToJson(
     <String, dynamic>{
       'id': instance.id,
       'repetitions': instance.repetitions,
+      'weightKg': instance.weightKg,
     };

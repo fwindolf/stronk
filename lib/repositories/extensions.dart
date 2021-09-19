@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 extension FirebaseFirestoreX on FirebaseFirestore {
   CollectionReference exerciseRef(String userId) {
-    return collection('exercises').doc(userId).collection("user_exercises");
+    return collection('exercises').doc(userId).collection('user_exercises');
   }
 
   CollectionReference exercisePresetsRef() {
@@ -10,7 +10,7 @@ extension FirebaseFirestoreX on FirebaseFirestore {
   }
 
   CollectionReference exerciseTagRef(String userId) {
-    return collection('exercise_tags').doc(userId).collection("tags");
+    return collection('exercise_tags').doc(userId).collection('tags');
   }
 
   CollectionReference muscleRef() {
@@ -18,6 +18,10 @@ extension FirebaseFirestoreX on FirebaseFirestore {
   }
 
   CollectionReference workoutRef(String userId) {
-    return collection('workouts').doc(userId).collection("user_workouts");
+    return collection('workouts').doc(userId).collection('user_workouts');
+  }
+
+  CollectionReference challengeRef(String userId) {
+    return collection('challenges').doc(userId).collection('user_challenges');
   }
 }

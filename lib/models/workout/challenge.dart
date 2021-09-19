@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stronk/models/exercise/exercise.dart';
@@ -20,6 +21,11 @@ class Challenge with _$Challenge {
   }) = _Challenge;
 
   factory Challenge.fromJson(Map<String, dynamic> json) => _$ChallengeFromJson(json);
+
+  factory Challenge.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data()! as Map<String, dynamic>;
+    return Challenge.fromJson(data).copyWith(id: doc.id);
+  }
 
   Map<String, dynamic> toDocument() => toJson()..remove('id');
 }

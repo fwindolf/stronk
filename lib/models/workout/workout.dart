@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stronk/models/exercise/exercise.dart';
 
@@ -25,6 +26,11 @@ class Workout with _$Workout {
   factory Workout.empty() => const Workout(name: '', description: '', creator: null, exercises: []);
 
   factory Workout.fromJson(Map<String, dynamic> json) => _$WorkoutFromJson(json);
+
+  factory Workout.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data()! as Map<String, dynamic>;
+    return Workout.fromJson(data).copyWith(id: doc.id);
+  }
 
   Map<String, dynamic> toDocument() => toJson()..remove('id');
 }

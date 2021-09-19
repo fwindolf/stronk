@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stronk/models/exercise/exercise.dart';
-import 'package:stronk/models/exercise/exercise_collection.dart';
 
 part 'challenge.freezed.dart';
 part 'challenge.g.dart';

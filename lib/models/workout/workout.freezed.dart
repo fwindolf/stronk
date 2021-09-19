@@ -27,6 +27,9 @@ class _$WorkoutTearOff {
       required String description,
       required String? creator,
       List<WorkoutTag> tags = const <WorkoutTag>[],
+      List<Exercise>? warmup,
+      required List<Exercise> exercises,
+      List<Exercise>? cooldown,
       bool isFavourite = false}) {
     return _Workout(
       id: id,
@@ -34,6 +37,9 @@ class _$WorkoutTearOff {
       description: description,
       creator: creator,
       tags: tags,
+      warmup: warmup,
+      exercises: exercises,
+      cooldown: cooldown,
       isFavourite: isFavourite,
     );
   }
@@ -52,10 +58,10 @@ mixin _$Workout {
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String? get creator => throw _privateConstructorUsedError;
-  List<WorkoutTag> get tags =>
-      throw _privateConstructorUsedError; // Warmup? warmup,
-// Exercises? exercises,
-// Cooldown? cooldown,
+  List<WorkoutTag> get tags => throw _privateConstructorUsedError;
+  List<Exercise>? get warmup => throw _privateConstructorUsedError;
+  List<Exercise> get exercises => throw _privateConstructorUsedError;
+  List<Exercise>? get cooldown => throw _privateConstructorUsedError;
   bool get isFavourite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -73,6 +79,9 @@ abstract class $WorkoutCopyWith<$Res> {
       String description,
       String? creator,
       List<WorkoutTag> tags,
+      List<Exercise>? warmup,
+      List<Exercise> exercises,
+      List<Exercise>? cooldown,
       bool isFavourite});
 }
 
@@ -91,6 +100,9 @@ class _$WorkoutCopyWithImpl<$Res> implements $WorkoutCopyWith<$Res> {
     Object? description = freezed,
     Object? creator = freezed,
     Object? tags = freezed,
+    Object? warmup = freezed,
+    Object? exercises = freezed,
+    Object? cooldown = freezed,
     Object? isFavourite = freezed,
   }) {
     return _then(_value.copyWith(
@@ -114,6 +126,18 @@ class _$WorkoutCopyWithImpl<$Res> implements $WorkoutCopyWith<$Res> {
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<WorkoutTag>,
+      warmup: warmup == freezed
+          ? _value.warmup
+          : warmup // ignore: cast_nullable_to_non_nullable
+              as List<Exercise>?,
+      exercises: exercises == freezed
+          ? _value.exercises
+          : exercises // ignore: cast_nullable_to_non_nullable
+              as List<Exercise>,
+      cooldown: cooldown == freezed
+          ? _value.cooldown
+          : cooldown // ignore: cast_nullable_to_non_nullable
+              as List<Exercise>?,
       isFavourite: isFavourite == freezed
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
@@ -133,6 +157,9 @@ abstract class _$WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
       String description,
       String? creator,
       List<WorkoutTag> tags,
+      List<Exercise>? warmup,
+      List<Exercise> exercises,
+      List<Exercise>? cooldown,
       bool isFavourite});
 }
 
@@ -152,6 +179,9 @@ class __$WorkoutCopyWithImpl<$Res> extends _$WorkoutCopyWithImpl<$Res>
     Object? description = freezed,
     Object? creator = freezed,
     Object? tags = freezed,
+    Object? warmup = freezed,
+    Object? exercises = freezed,
+    Object? cooldown = freezed,
     Object? isFavourite = freezed,
   }) {
     return _then(_Workout(
@@ -175,6 +205,18 @@ class __$WorkoutCopyWithImpl<$Res> extends _$WorkoutCopyWithImpl<$Res>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<WorkoutTag>,
+      warmup: warmup == freezed
+          ? _value.warmup
+          : warmup // ignore: cast_nullable_to_non_nullable
+              as List<Exercise>?,
+      exercises: exercises == freezed
+          ? _value.exercises
+          : exercises // ignore: cast_nullable_to_non_nullable
+              as List<Exercise>,
+      cooldown: cooldown == freezed
+          ? _value.cooldown
+          : cooldown // ignore: cast_nullable_to_non_nullable
+              as List<Exercise>?,
       isFavourite: isFavourite == freezed
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
@@ -185,13 +227,16 @@ class __$WorkoutCopyWithImpl<$Res> extends _$WorkoutCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Workout extends _Workout with DiagnosticableTreeMixin {
+class _$_Workout extends _Workout {
   const _$_Workout(
       {this.id,
       required this.name,
       required this.description,
       required this.creator,
       this.tags = const <WorkoutTag>[],
+      this.warmup,
+      required this.exercises,
+      this.cooldown,
       this.isFavourite = false})
       : super._();
 
@@ -209,28 +254,19 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
   @JsonKey(defaultValue: const <WorkoutTag>[])
   @override
   final List<WorkoutTag> tags;
+  @override
+  final List<Exercise>? warmup;
+  @override
+  final List<Exercise> exercises;
+  @override
+  final List<Exercise>? cooldown;
   @JsonKey(defaultValue: false)
-  @override // Warmup? warmup,
-// Exercises? exercises,
-// Cooldown? cooldown,
+  @override
   final bool isFavourite;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Workout(id: $id, name: $name, description: $description, creator: $creator, tags: $tags, isFavourite: $isFavourite)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Workout'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('creator', creator))
-      ..add(DiagnosticsProperty('tags', tags))
-      ..add(DiagnosticsProperty('isFavourite', isFavourite));
+  String toString() {
+    return 'Workout(id: $id, name: $name, description: $description, creator: $creator, tags: $tags, warmup: $warmup, exercises: $exercises, cooldown: $cooldown, isFavourite: $isFavourite)';
   }
 
   @override
@@ -249,6 +285,14 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
                     .equals(other.creator, creator)) &&
             (identical(other.tags, tags) ||
                 const DeepCollectionEquality().equals(other.tags, tags)) &&
+            (identical(other.warmup, warmup) ||
+                const DeepCollectionEquality().equals(other.warmup, warmup)) &&
+            (identical(other.exercises, exercises) ||
+                const DeepCollectionEquality()
+                    .equals(other.exercises, exercises)) &&
+            (identical(other.cooldown, cooldown) ||
+                const DeepCollectionEquality()
+                    .equals(other.cooldown, cooldown)) &&
             (identical(other.isFavourite, isFavourite) ||
                 const DeepCollectionEquality()
                     .equals(other.isFavourite, isFavourite)));
@@ -262,6 +306,9 @@ class _$_Workout extends _Workout with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(creator) ^
       const DeepCollectionEquality().hash(tags) ^
+      const DeepCollectionEquality().hash(warmup) ^
+      const DeepCollectionEquality().hash(exercises) ^
+      const DeepCollectionEquality().hash(cooldown) ^
       const DeepCollectionEquality().hash(isFavourite);
 
   @JsonKey(ignore: true)
@@ -282,6 +329,9 @@ abstract class _Workout extends Workout {
       required String description,
       required String? creator,
       List<WorkoutTag> tags,
+      List<Exercise>? warmup,
+      required List<Exercise> exercises,
+      List<Exercise>? cooldown,
       bool isFavourite}) = _$_Workout;
   const _Workout._() : super._();
 
@@ -297,9 +347,13 @@ abstract class _Workout extends Workout {
   String? get creator => throw _privateConstructorUsedError;
   @override
   List<WorkoutTag> get tags => throw _privateConstructorUsedError;
-  @override // Warmup? warmup,
-// Exercises? exercises,
-// Cooldown? cooldown,
+  @override
+  List<Exercise>? get warmup => throw _privateConstructorUsedError;
+  @override
+  List<Exercise> get exercises => throw _privateConstructorUsedError;
+  @override
+  List<Exercise>? get cooldown => throw _privateConstructorUsedError;
+  @override
   bool get isFavourite => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
-import 'package:stronk/models/exercise/exercise_collection.dart';
+import 'package:stronk/models/exercise/exercise.dart';
 
 import 'package:stronk/models/workout/workout_tag.dart';
 
@@ -17,13 +16,13 @@ class Workout with _$Workout {
     required String description,
     required String? creator,
     @Default(<WorkoutTag>[]) List<WorkoutTag> tags,
-    // Warmup? warmup,
-    // Exercises? exercises,
-    // Cooldown? cooldown,
+    List<Exercise>? warmup,
+    required List<Exercise> exercises,
+    List<Exercise>? cooldown,
     @Default(false) bool isFavourite,
   }) = _Workout;
 
-  factory Workout.empty() => const Workout(name: '', description: '', creator: null);
+  factory Workout.empty() => const Workout(name: '', description: '', creator: null, exercises: []);
 
   factory Workout.fromJson(Map<String, dynamic> json) => _$WorkoutFromJson(json);
 

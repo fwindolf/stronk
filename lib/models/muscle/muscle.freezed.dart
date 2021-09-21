@@ -25,11 +25,13 @@ class _$MuscleTearOff {
       {String? id,
       required String name,
       MuscleRegion? region,
+      MuscleSide? side,
       String? imagePath}) {
     return _Muscle(
       id: id,
       name: name,
       region: region,
+      side: side,
       imagePath: imagePath,
     );
   }
@@ -47,6 +49,7 @@ mixin _$Muscle {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   MuscleRegion? get region => throw _privateConstructorUsedError;
+  MuscleSide? get side => throw _privateConstructorUsedError;
   String? get imagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,7 +61,12 @@ mixin _$Muscle {
 abstract class $MuscleCopyWith<$Res> {
   factory $MuscleCopyWith(Muscle value, $Res Function(Muscle) then) =
       _$MuscleCopyWithImpl<$Res>;
-  $Res call({String? id, String name, MuscleRegion? region, String? imagePath});
+  $Res call(
+      {String? id,
+      String name,
+      MuscleRegion? region,
+      MuscleSide? side,
+      String? imagePath});
 }
 
 /// @nodoc
@@ -74,6 +82,7 @@ class _$MuscleCopyWithImpl<$Res> implements $MuscleCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? region = freezed,
+    Object? side = freezed,
     Object? imagePath = freezed,
   }) {
     return _then(_value.copyWith(
@@ -89,6 +98,10 @@ class _$MuscleCopyWithImpl<$Res> implements $MuscleCopyWith<$Res> {
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as MuscleRegion?,
+      side: side == freezed
+          ? _value.side
+          : side // ignore: cast_nullable_to_non_nullable
+              as MuscleSide?,
       imagePath: imagePath == freezed
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -102,7 +115,12 @@ abstract class _$MuscleCopyWith<$Res> implements $MuscleCopyWith<$Res> {
   factory _$MuscleCopyWith(_Muscle value, $Res Function(_Muscle) then) =
       __$MuscleCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, String name, MuscleRegion? region, String? imagePath});
+  $Res call(
+      {String? id,
+      String name,
+      MuscleRegion? region,
+      MuscleSide? side,
+      String? imagePath});
 }
 
 /// @nodoc
@@ -119,6 +137,7 @@ class __$MuscleCopyWithImpl<$Res> extends _$MuscleCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? region = freezed,
+    Object? side = freezed,
     Object? imagePath = freezed,
   }) {
     return _then(_Muscle(
@@ -134,6 +153,10 @@ class __$MuscleCopyWithImpl<$Res> extends _$MuscleCopyWithImpl<$Res>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as MuscleRegion?,
+      side: side == freezed
+          ? _value.side
+          : side // ignore: cast_nullable_to_non_nullable
+              as MuscleSide?,
       imagePath: imagePath == freezed
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -145,7 +168,8 @@ class __$MuscleCopyWithImpl<$Res> extends _$MuscleCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
-  const _$_Muscle({this.id, required this.name, this.region, this.imagePath})
+  const _$_Muscle(
+      {this.id, required this.name, this.region, this.side, this.imagePath})
       : super._();
 
   factory _$_Muscle.fromJson(Map<String, dynamic> json) =>
@@ -158,11 +182,13 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
   @override
   final MuscleRegion? region;
   @override
+  final MuscleSide? side;
+  @override
   final String? imagePath;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Muscle(id: $id, name: $name, region: $region, imagePath: $imagePath)';
+    return 'Muscle(id: $id, name: $name, region: $region, side: $side, imagePath: $imagePath)';
   }
 
   @override
@@ -173,6 +199,7 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('region', region))
+      ..add(DiagnosticsProperty('side', side))
       ..add(DiagnosticsProperty('imagePath', imagePath));
   }
 
@@ -186,6 +213,8 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.region, region) ||
                 const DeepCollectionEquality().equals(other.region, region)) &&
+            (identical(other.side, side) ||
+                const DeepCollectionEquality().equals(other.side, side)) &&
             (identical(other.imagePath, imagePath) ||
                 const DeepCollectionEquality()
                     .equals(other.imagePath, imagePath)));
@@ -197,6 +226,7 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(region) ^
+      const DeepCollectionEquality().hash(side) ^
       const DeepCollectionEquality().hash(imagePath);
 
   @JsonKey(ignore: true)
@@ -215,6 +245,7 @@ abstract class _Muscle extends Muscle {
       {String? id,
       required String name,
       MuscleRegion? region,
+      MuscleSide? side,
       String? imagePath}) = _$_Muscle;
   const _Muscle._() : super._();
 
@@ -226,6 +257,8 @@ abstract class _Muscle extends Muscle {
   String get name => throw _privateConstructorUsedError;
   @override
   MuscleRegion? get region => throw _privateConstructorUsedError;
+  @override
+  MuscleSide? get side => throw _privateConstructorUsedError;
   @override
   String? get imagePath => throw _privateConstructorUsedError;
   @override

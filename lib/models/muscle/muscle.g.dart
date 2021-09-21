@@ -10,6 +10,7 @@ _$_Muscle _$$_MuscleFromJson(Map<String, dynamic> json) => _$_Muscle(
       id: json['id'] as String?,
       name: json['name'] as String,
       region: _$enumDecodeNullable(_$MuscleRegionEnumMap, json['region']),
+      side: _$enumDecodeNullable(_$MuscleSideEnumMap, json['side']),
       imagePath: json['imagePath'] as String?,
     );
 
@@ -17,6 +18,7 @@ Map<String, dynamic> _$$_MuscleToJson(_$_Muscle instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'region': _$MuscleRegionEnumMap[instance.region],
+      'side': _$MuscleSideEnumMap[instance.side],
       'imagePath': instance.imagePath,
     };
 
@@ -66,4 +68,10 @@ const _$MuscleRegionEnumMap = {
   MuscleRegion.Glutes: 'Glutes',
   MuscleRegion.Arms: 'Arms',
   MuscleRegion.Legs: 'Legs',
+};
+
+const _$MuscleSideEnumMap = {
+  MuscleSide.Front: 'Front',
+  MuscleSide.Back: 'Back',
+  MuscleSide.Both: 'Both',
 };

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/common_widgets/enum_dropdown_field.dart';
+import 'package:stronk/app/exercises/exercise_type_field.dart';
 
 import 'package:stronk/app/exercises/exercises_tag_field_widget.dart';
 import 'package:stronk/app/exercises/instruction_field.dart';
-import 'package:stronk/app/exercises/muscle_field_widget.dart';
+import 'package:stronk/app/exercises/exercise_muscle_field.dart';
 
 import 'package:stronk/controllers/auth_controller.dart';
 import 'package:stronk/controllers/exercise_tag_controller.dart';
@@ -21,11 +22,6 @@ import 'package:stronk/models/exercise/exercise_tag.dart';
 import 'package:stronk/models/muscle/muscle.dart';
 
 import 'package:stronk/repositories/exercise_repository.dart';
-
-final exerciseValidationProvider =
-    StateNotifierProvider<ExerciseValidationNotifier, ExerciseValidationItems>((ref) {
-  return ExerciseValidationNotifier();
-});
 
 class ExerciseNameFormField extends StatelessWidget {
   final ValidationItem state;
@@ -173,13 +169,7 @@ class ExerciseEditScreen extends ConsumerWidget {
                 ),
                 // Padding(
                 //   padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
-                //   child: EnumDropdownField<ExerciseType>(
-                //     name: "Exercise Type",
-                //     choices: Map<ExerciseType, String>.fromIterable(
-                //       ExerciseType.values,
-                //       key: (e) => e,
-                //       value: (e) => (e as ExerciseType).description,
-                //     ),
+                //   child: ExerciseTypeField(
                 //     state: ref.watch(exerciseValidationProvider).type,
                 //     updateState: ref.read(exerciseValidationProvider.notifier).updateType,
                 //   ),

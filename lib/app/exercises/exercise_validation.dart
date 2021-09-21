@@ -7,6 +7,11 @@ import 'package:stronk/models/exercise/exercise_tag.dart';
 import 'package:stronk/models/exercise/instruction.dart';
 import 'package:stronk/models/muscle/muscle.dart';
 
+final exerciseValidationProvider =
+    StateNotifierProvider<ExerciseValidationNotifier, ExerciseValidationItems>((ref) {
+  return ExerciseValidationNotifier();
+});
+
 class ExerciseValidationItems {
   final ValidationItem<String> name;
   final ValidationItem<String> description;
@@ -132,8 +137,6 @@ class ExerciseValidationNotifier extends StateNotifier<ExerciseValidationItems> 
   }
 
   void updateTags(List<ExerciseTag>? value) {
-    print("Updating tags ${value?.map((el) => el.name).toList()}");
-
     if (tagValidator.isValid(value)) {
       state = state.copyWith(tags: ValidationItem<List<ExerciseTag>>(value, null));
     } else {

@@ -1,0 +1,77 @@
+[
+    {
+        "name": "Anterior deltoid",
+        "image": "anterior_deltoid.svg",
+        "region": "Shoulder"
+    },
+    {
+        "name": "Biceps brachii",
+        "image": "biceps_brachii.svg",
+        "region": "Arms"
+    },
+    {
+        "name": "Biceps femoris",
+        "image": "biceps_femoris.svg",
+        "region": "Legs"
+    },
+    {
+        "name": "Brachialis",
+        "image": "brachialis.svg",
+        "region": "Arms"
+    },
+    {
+        "name": "Gastrocnemius",
+        "image": "gastrocnemius.svg",
+        "region": "Legs"
+    },
+    {
+        "name": "Gluteus maximus",
+        "image": "gluteus_maximus.svg",
+        "region": "Glutes"
+    },
+    {
+        "name": "Latissimus dorsi",
+        "image": "latissimus_dorsi.svg",
+        "region": "Back"
+    },
+    {
+        "name": "Obliquus externus abdominis",
+        "image": "obliquus_externus_abdominis.svg",
+        "region": "Abs"
+    },
+    {
+        "name": "Pectoralis major",
+        "image": "pectoralis_major.svg",
+        "region": "Chest"
+    },
+    {
+        "name": "Quadriceps femoris",
+        "image": "quadriceps_femoris.svg",
+        "region": "Legs"
+    },
+    {
+        "name": "Rectus abdominis",
+        "image": "rectus_abdominis.svg",
+        "region": "Abs"
+    },
+    {
+        "name": "Serratus anterior",
+        "image": "serratus_anterior.svg",
+        "region": "Chest"
+    },
+    {
+        "name": "Soleus",
+        "image": "soleus.svg",
+        "region": "Legs"
+    },
+    {
+        "name": "Trapezius",
+        "image": "trapezius.svg",
+        "region": "Shoulder"
+    },
+    {
+        "name": "Triceps brachii",
+        "image": "triceps_brachii.svg",
+        "region": "Arms"
+    }
+]

@@ -10,12 +10,14 @@ _$_Muscle _$$_MuscleFromJson(Map<String, dynamic> json) => _$_Muscle(
       id: json['id'] as String?,
       name: json['name'] as String,
       region: _$enumDecodeNullable(_$MuscleRegionEnumMap, json['region']),
+      imagePath: json['imagePath'] as String?,
     );
 
 Map<String, dynamic> _$$_MuscleToJson(_$_Muscle instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'region': _$MuscleRegionEnumMap[instance.region],
+      'imagePath': instance.imagePath,
     };
 
 K _$enumDecode<K, V>(

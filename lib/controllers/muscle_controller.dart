@@ -7,7 +7,7 @@ import 'package:stronk/repositories/muscle_repository.dart';
 
 final muscleListExceptionProvider = StateProvider<DataTransferException?>((_) => null);
 
-final exericseTagListProvider = Provider<List<Muscle>>((ref) {
+final muscleListProvider = Provider<List<Muscle>>((ref) {
   final muscleListState = ref.watch(muscleListControllerProvider);
 
   return muscleListState.maybeWhen(
@@ -18,18 +18,14 @@ final exericseTagListProvider = Provider<List<Muscle>>((ref) {
 
 final muscleListControllerProvider =
     StateNotifierProvider<MuscleListController, AsyncValue<List<Muscle>>>((ref) {
-  final user = ref.watch(authControllerProvider);
-  return MuscleListController(ref.read, user?.uid);
+  return MuscleListController(ref.read);
 });
 
 class MuscleListController extends StateNotifier<AsyncValue<List<Muscle>>> {
   final Reader _read;
-  final String? _userId;
 
-  MuscleListController(this._read, this._userId) : super(AsyncValue.loading()) {
-    if (_userId != null) {
-      retrieveItems();
-    }
+  MuscleListController(this._read) : super(AsyncValue.loading()) {
+    retrieveItems();
   }
 
   Future<void> retrieveItems({bool isRefreshing = false}) async {
@@ -38,7 +34,7 @@ class MuscleListController extends StateNotifier<AsyncValue<List<Muscle>>> {
     }
 
     try {
-      final muscles = await _read(muscleRepositoryProvider).retrieve(userId: _userId!);
+      final muscles = await _read(muscleRepositoryProvider).retrieve();
       if (mounted) {
         state = AsyncValue.data(muscles);
       }

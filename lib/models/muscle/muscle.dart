@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -23,10 +24,11 @@ class Muscle with _$Muscle {
   const factory Muscle({
     String? id,
     required String name,
-    required MuscleRegion? region,
+    MuscleRegion? region,
+    String? imagePath,
   }) = _Muscle;
 
-  factory Muscle.empty() => const Muscle(name: '', region: null);
+  factory Muscle.empty() => const Muscle(name: '');
 
   factory Muscle.fromJson(Map<String, dynamic> json) => _$MuscleFromJson(json);
 

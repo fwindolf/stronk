@@ -23,13 +23,11 @@ class MuscleField extends ConsumerWidget {
   void _createMuscle(Muscle muscle, WidgetRef ref) {
     print("Create muscle ${muscle.name}");
     // Create if not exists, add to created
-    final user = ref.read(authControllerProvider);
-    if (user != null) {
-      print("Creating muscle on repo ${muscle.name}");
-      ref.read(muscleRepositoryProvider).create(userId: user.uid, muscle: muscle);
-      _activateMuscle(muscle);
-      ref.read(muscleListControllerProvider.notifier).retrieveItems();
-    }
+
+    print("Creating muscle on repo ${muscle.name}");
+    ref.read(muscleRepositoryProvider).create(muscle: muscle);
+    _activateMuscle(muscle);
+    ref.read(muscleListControllerProvider.notifier).retrieveItems();
   }
 
   void _activateMuscle(Muscle muscle) {
@@ -53,12 +51,10 @@ class MuscleField extends ConsumerWidget {
     _deactivateMuscle(muscle);
 
     // Delete if exists, add to deleted
-    final user = ref.read(authControllerProvider);
-    if (user != null) {
-      print("Deleting muscle on repo ${muscle.name}");
-      ref.read(muscleRepositoryProvider).delete(userId: user.uid, muscleId: muscle.id!);
-      ref.read(muscleListControllerProvider.notifier).retrieveItems();
-    }
+
+    print("Deleting muscle on repo ${muscle.name}");
+    ref.read(muscleRepositoryProvider).delete(muscleId: muscle.id!);
+    ref.read(muscleListControllerProvider.notifier).retrieveItems();
   }
 
   Widget _buildContent(BuildContext context, WidgetRef ref, [List<Muscle>? muscles]) {

@@ -31,9 +31,9 @@ class ChallengeRepository implements ChallengeRepositoryBase {
 
       return snapshot.docs.map((doc) => Challenge.fromDocument(doc)).toList();
     } on FirebaseException catch (e) {
-      throw DataTransferException(message: "Failed to retrieve Excercises: ${e.message}");
+      throw DataTransferException(message: "Failed to retrieve Challenges: ${e.message}");
     } catch (e) {
-      throw DataTransferException(message: "Failed to parse Excercises: ${e.toString()}");
+      throw DataTransferException(message: "Failed to parse Challenges: ${e.toString()}");
     }
   }
 
@@ -44,7 +44,7 @@ class ChallengeRepository implements ChallengeRepositoryBase {
           await _read(firebaseFirestoreProvider).challengeRef(userId).add(challenge.toDocument());
       return docRef.id;
     } on FirebaseException catch (e) {
-      throw DataTransferException(message: "Failed to create Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to create Challenge: ${e.message}");
     }
   }
 
@@ -56,7 +56,7 @@ class ChallengeRepository implements ChallengeRepositoryBase {
           .doc(challenge.id)
           .update(challenge.toDocument());
     } on FirebaseException catch (e) {
-      throw DataTransferException(message: "Failed to update Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to update Challenge: ${e.message}");
     }
   }
 
@@ -65,7 +65,7 @@ class ChallengeRepository implements ChallengeRepositoryBase {
     try {
       await _read(firebaseFirestoreProvider).challengeRef(userId).doc(challengeId).delete();
     } on FirebaseException catch (e) {
-      throw DataTransferException(message: "Failed to delete Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to delete Challenge: ${e.message}");
     }
   }
 }

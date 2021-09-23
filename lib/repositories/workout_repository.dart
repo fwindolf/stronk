@@ -31,9 +31,9 @@ class WorkoutRepository implements WorkoutRepositoryBase {
 
       return snapshot.docs.map((doc) => Workout.fromDocument(doc)).toList();
     } on FirebaseException catch (e) {
-      throw DataTransferException(message: "Failed to retrieve Excercises: ${e.message}");
+      throw DataTransferException(message: "Failed to retrieve Workouts: ${e.message}");
     } catch (e) {
-      throw DataTransferException(message: "Failed to parse Excercises: ${e.toString()}");
+      throw DataTransferException(message: "Failed to parse Workouts: ${e.toString()}");
     }
   }
 
@@ -44,7 +44,7 @@ class WorkoutRepository implements WorkoutRepositoryBase {
           await _read(firebaseFirestoreProvider).workoutRef(userId).add(workout.toDocument());
       return docRef.id;
     } on FirebaseException catch (e) {
-      throw DataTransferException(message: "Failed to create Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to create Workout: ${e.message}");
     }
   }
 
@@ -56,7 +56,7 @@ class WorkoutRepository implements WorkoutRepositoryBase {
           .doc(workout.id)
           .update(workout.toDocument());
     } on FirebaseException catch (e) {
-      throw DataTransferException(message: "Failed to update Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to update Workout: ${e.message}");
     }
   }
 
@@ -65,7 +65,7 @@ class WorkoutRepository implements WorkoutRepositoryBase {
     try {
       await _read(firebaseFirestoreProvider).workoutRef(userId).doc(workoutId).delete();
     } on FirebaseException catch (e) {
-      throw DataTransferException(message: "Failed to delete Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to delete Workout: ${e.message}");
     }
   }
 }

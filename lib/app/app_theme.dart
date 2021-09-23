@@ -4,6 +4,9 @@ final paletteDark = [
   Color(0x22BCBF),
   Color(0xE0E0E0),
   Color(0xFF8A5B),
+  // Colors.green.shade300,
+  // Colors.green.shade800,
+  // Colors.purple.shade700
 ];
 
 final paletteLight = [
@@ -20,9 +23,8 @@ final lightTheme = ThemeData(
     secondaryVariant: paletteDark[2],
   ),
   textTheme: const TextTheme(
-    headline1: TextStyle(fontSize: 54.0, fontWeight: FontWeight.bold),
-    headline6: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+    headline1: TextStyle(fontSize: 44.0, fontWeight: FontWeight.bold),
+    headline6: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
   ),
 );
 
@@ -34,8 +36,7 @@ final darkTheme = ThemeData(
     secondaryVariant: paletteLight[2],
   ),
   textTheme: const TextTheme(
-    headline1: TextStyle(fontSize: 54.0, fontWeight: FontWeight.bold),
-    headline6: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+    headline1: TextStyle(fontSize: 44.0, fontWeight: FontWeight.bold),
+    headline6: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
   ),
 );

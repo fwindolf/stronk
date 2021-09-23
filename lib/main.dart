@@ -22,10 +22,11 @@ class Stronk extends ConsumerWidget {
 
     return MaterialApp(
       title: 'Stronk',
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       theme: lightTheme,
       darkTheme: darkTheme,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.exerciseEdit,
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => AppRouter.onGenerateRoute(settings),
     );
   }

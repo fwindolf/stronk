@@ -29,10 +29,16 @@ class DataGenerator {
     final file_contents = await rootBundle.loadString(MUSCLES_FILE);
     final data = jsonDecode(file_contents) as List<dynamic>;
 
+    final muscles = await _repo.retrieve();
     data.forEach((element) {
       try {
         final muscle = Muscle.fromJson(element);
-        _repo.create(muscle: muscle);
+        final existingMuscle = muscles.where((el) => el.name == muscle.name);
+        if (existingMuscle.isEmpty) {
+          _repo.create(muscle: muscle);
+        } else {
+          _repo.update(muscle: muscle.copyWith(id: existingMuscle.first.id));
+        }
       } on DataTransferException catch (e) {
         print("Could not create Muscle: $e");
       } on Exception catch (e) {

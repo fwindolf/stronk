@@ -349,7 +349,6 @@ class ChallengeChart extends ConsumerWidget {
     final today = DateTime.now();
     final earliest = today.subtract(Duration(days: monthsShown * 30));
     final startOfChart = DateTime(earliest.year, earliest.month, 1);
-    final dayCount = today.difference(startOfChart).inDays;
 
     final challengesPerDate = <String, Map<DateTime, double>>{};
     challenges.forEach((challenge) {

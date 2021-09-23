@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/common_widgets/enum_dropdown_field.dart';
@@ -23,22 +24,71 @@ import 'package:stronk/models/muscle/muscle.dart';
 
 import 'package:stronk/repositories/exercise_repository.dart';
 
-class ExerciseNameFormField extends StatelessWidget {
+class ExerciseNameFormField extends StatefulWidget {
   final ValidationItem state;
   final Function updateState;
 
   const ExerciseNameFormField({required this.state, required this.updateState});
 
   @override
+  State<ExerciseNameFormField> createState() => _ExerciseNameFormFieldState();
+}
+
+class _ExerciseNameFormFieldState extends State<ExerciseNameFormField> {
+  String? _labelText = "Exercise Name";
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.state.value != null || widget.state.error != null) {
+      _labelText = null;
+      print("Labeltext: $_labelText (${widget.state.value})");
+    }
+
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: _labelText,
+          errorText: widget.state.error,
+          errorStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
+                color: Theme.of(context).colorScheme.error,
+                height: 0.3,
+              ),
+          isCollapsed: true,
+          isDense: true,
+          border: InputBorder.none,
+        ),
+        style: Theme.of(context).textTheme.headline6,
+        autocorrect: false,
+        textInputAction: TextInputAction.next,
+        onChanged: (value) {
+          setState(() {
+            widget.updateState(value);
+          });
+        },
+      ),
+    );
+  }
+}
+
+class ExerciseDescriptionFormField extends StatelessWidget {
+  final ValidationItem state;
+  final Function updateState;
+
+  const ExerciseDescriptionFormField({required this.state, required this.updateState});
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
         decoration: InputDecoration(
-          labelText: "Name",
+          labelText: "Exercise Description",
           errorText: state.error,
           border: OutlineInputBorder(),
         ),
         textInputAction: TextInputAction.next,
+        minLines: 1,
+        maxLines: 3,
         onChanged: (value) => updateState(value),
       ),
     );
@@ -109,10 +159,20 @@ class ExerciseEditScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(editedExercise != null ? "Edit Exercise" : "New Exercise"),
-        actions: <Widget>[
-          IconButton(icon: const Icon(Icons.save), onPressed: () => _saveForm(context, ref)),
-        ],
+        // title: Text(editedExercise != null ? editedExercise!.name : "Exercise Name"),
+        title: ExerciseNameFormField(
+          state: ref.watch(exerciseValidationProvider).name,
+          updateState: ref.read(exerciseValidationProvider.notifier).updateName,
+        ),
+        // actions: <Widget>[
+        //   IconButton(icon: const Icon(Icons.save), onPressed: () => _saveForm(context, ref)),
+        // ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _saveForm(context, ref),
+        child: Icon(
+          Icons.save_outlined,
+        ),
       ),
       body: Form(
         key: _form,
@@ -124,9 +184,9 @@ class ExerciseEditScreen extends ConsumerWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 5, right: 5),
-                  child: ExerciseNameFormField(
-                    state: ref.watch(exerciseValidationProvider).name,
-                    updateState: ref.read(exerciseValidationProvider.notifier).updateName,
+                  child: ExerciseDescriptionFormField(
+                    state: ref.watch(exerciseValidationProvider).description,
+                    updateState: ref.read(exerciseValidationProvider.notifier).updateDescription,
                   ),
                 ),
                 Padding(
@@ -150,30 +210,18 @@ class ExerciseEditScreen extends ConsumerWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0, left: 5, right: 5),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey.shade500, // set border color
-                          width: 1.0), // set border width
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(5.0)), // set rounded corner radius
-                    ),
-                    constraints: BoxConstraints(minHeight: 40),
-                    padding: const EdgeInsets.only(top: 5, bottom: 5.0, left: 7, right: 7),
-                    child: MuscleField(
-                      state: ref.watch(exerciseValidationProvider).muscles,
-                      updateState: ref.read(exerciseValidationProvider.notifier).updateMuscles,
-                    ),
+                  child: MuscleField(
+                    state: ref.watch(exerciseValidationProvider).muscles,
+                    updateState: ref.read(exerciseValidationProvider.notifier).updateMuscles,
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
-                //   child: ExerciseTypeField(
-                //     state: ref.watch(exerciseValidationProvider).type,
-                //     updateState: ref.read(exerciseValidationProvider.notifier).updateType,
-                //   ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
+                  child: ExerciseTypeField(
+                    state: ref.watch(exerciseValidationProvider).type,
+                    updateState: ref.read(exerciseValidationProvider.notifier).updateType,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
                   child: InstructionField(

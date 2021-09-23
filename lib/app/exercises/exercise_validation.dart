@@ -17,7 +17,7 @@ class ExerciseValidationItems {
   final ValidationItem<String> description;
   final ValidationItem<List<ExerciseTag>> tags;
   final ValidationItem<List<Muscle>> muscles;
-  final ValidationItem<ExerciseType> type;
+  final ValidationItem<BaseExerciseTypeConfiguration> type;
   final ValidationItem<List<Instruction>> instructions;
 
   ExerciseValidationItems({
@@ -25,7 +25,7 @@ class ExerciseValidationItems {
     this.description = const ValidationItem<String>(null, null),
     this.tags = const ValidationItem<List<ExerciseTag>>(null, null),
     this.muscles = const ValidationItem<List<Muscle>>(null, null),
-    this.type = const ValidationItem<ExerciseType>(null, null),
+    this.type = const ValidationItem<BaseExerciseTypeConfiguration>(null, null),
     this.instructions = const ValidationItem<List<Instruction>>(null, null),
   });
 
@@ -91,7 +91,7 @@ class ExerciseValidationNotifier extends StateNotifier<ExerciseValidationItems> 
     String? description,
     List<ExerciseTag>? tags,
     List<Muscle>? muscles,
-    ExerciseType? type,
+    BaseExerciseTypeConfiguration? type,
     List<Instruction>? instructions,
   }) : super(
           ExerciseValidationItems(
@@ -99,7 +99,7 @@ class ExerciseValidationNotifier extends StateNotifier<ExerciseValidationItems> 
             description: ValidationItem<String>(description, null),
             tags: ValidationItem<List<ExerciseTag>>(tags, null),
             muscles: ValidationItem<List<Muscle>>(muscles, null),
-            type: ValidationItem<ExerciseType>(type, null),
+            type: ValidationItem<BaseExerciseTypeConfiguration>(type, null),
             instructions: ValidationItem<List<Instruction>>(instructions, null),
           ),
         );

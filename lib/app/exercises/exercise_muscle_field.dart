@@ -355,23 +355,31 @@ class MuscleField extends ConsumerWidget {
         trailing: IconButton(
           icon: Icon(Icons.add),
           onPressed: () async {
-            final muscle = await Navigator.of(context).push(MaterialPageRoute(
+            await Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => MuscleSelectionScreen(),
               fullscreenDialog: true,
             ));
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Muscles updated: $muscle")),
-            );
           },
         ),
       ),
     );
 
-    return Wrap(
-      children: muscleWidgets,
-      spacing: 5.0,
-      runSpacing: 5.0,
-      runAlignment: WrapAlignment.start,
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border.all(
+            color: Colors.grey.shade500, // set border color
+            width: 1.0), // set border width
+        borderRadius: BorderRadius.all(Radius.circular(5.0)), // set rounded corner radius
+      ),
+      constraints: BoxConstraints(minHeight: 40),
+      padding: const EdgeInsets.only(top: 5, bottom: 5.0, left: 7, right: 7),
+      child: Wrap(
+        children: muscleWidgets,
+        spacing: 5.0,
+        runSpacing: 5.0,
+        runAlignment: WrapAlignment.start,
+      ),
     );
   }
 }

@@ -38,6 +38,7 @@ _$_ThreeToSevenConfiguration _$$_ThreeToSevenConfigurationFromJson(
         Map<String, dynamic> json) =>
     _$_ThreeToSevenConfiguration(
       id: json['id'] as String?,
+      sets: json['sets'] as int? ?? 1,
       minRepetitions: json['minRepetitions'] as int? ?? 3,
       maxRepetitions: json['maxRepetitions'] as int? ?? 7,
       weightKg: (json['weightKg'] as num?)?.toDouble(),
@@ -48,6 +49,7 @@ Map<String, dynamic> _$$_ThreeToSevenConfigurationToJson(
         _$_ThreeToSevenConfiguration instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'sets': instance.sets,
       'minRepetitions': instance.minRepetitions,
       'maxRepetitions': instance.maxRepetitions,
       'weightKg': instance.weightKg,

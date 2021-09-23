@@ -286,12 +286,14 @@ class _$ThreeToSevenConfigurationTearOff {
 
   _ThreeToSevenConfiguration call(
       {String? id,
+      int sets = 1,
       int minRepetitions = 3,
       int maxRepetitions = 7,
       double? weightKg,
       int pauseSeconds = 15}) {
     return _ThreeToSevenConfiguration(
       id: id,
+      sets: sets,
       minRepetitions: minRepetitions,
       maxRepetitions: maxRepetitions,
       weightKg: weightKg,
@@ -310,6 +312,7 @@ const $ThreeToSevenConfiguration = _$ThreeToSevenConfigurationTearOff();
 /// @nodoc
 mixin _$ThreeToSevenConfiguration {
   String? get id => throw _privateConstructorUsedError;
+  int get sets => throw _privateConstructorUsedError;
   int get minRepetitions => throw _privateConstructorUsedError;
   int get maxRepetitions => throw _privateConstructorUsedError;
   double? get weightKg => throw _privateConstructorUsedError;
@@ -328,6 +331,7 @@ abstract class $ThreeToSevenConfigurationCopyWith<$Res> {
       _$ThreeToSevenConfigurationCopyWithImpl<$Res>;
   $Res call(
       {String? id,
+      int sets,
       int minRepetitions,
       int maxRepetitions,
       double? weightKg,
@@ -346,6 +350,7 @@ class _$ThreeToSevenConfigurationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? sets = freezed,
     Object? minRepetitions = freezed,
     Object? maxRepetitions = freezed,
     Object? weightKg = freezed,
@@ -356,6 +361,10 @@ class _$ThreeToSevenConfigurationCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      sets: sets == freezed
+          ? _value.sets
+          : sets // ignore: cast_nullable_to_non_nullable
+              as int,
       minRepetitions: minRepetitions == freezed
           ? _value.minRepetitions
           : minRepetitions // ignore: cast_nullable_to_non_nullable
@@ -385,6 +394,7 @@ abstract class _$ThreeToSevenConfigurationCopyWith<$Res>
   @override
   $Res call(
       {String? id,
+      int sets,
       int minRepetitions,
       int maxRepetitions,
       double? weightKg,
@@ -406,6 +416,7 @@ class __$ThreeToSevenConfigurationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? sets = freezed,
     Object? minRepetitions = freezed,
     Object? maxRepetitions = freezed,
     Object? weightKg = freezed,
@@ -416,6 +427,10 @@ class __$ThreeToSevenConfigurationCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      sets: sets == freezed
+          ? _value.sets
+          : sets // ignore: cast_nullable_to_non_nullable
+              as int,
       minRepetitions: minRepetitions == freezed
           ? _value.minRepetitions
           : minRepetitions // ignore: cast_nullable_to_non_nullable
@@ -442,6 +457,7 @@ class __$ThreeToSevenConfigurationCopyWithImpl<$Res>
 class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
   const _$_ThreeToSevenConfiguration(
       {this.id,
+      this.sets = 1,
       this.minRepetitions = 3,
       this.maxRepetitions = 7,
       this.weightKg,
@@ -453,6 +469,9 @@ class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
 
   @override
   final String? id;
+  @JsonKey(defaultValue: 1)
+  @override
+  final int sets;
   @JsonKey(defaultValue: 3)
   @override
   final int minRepetitions;
@@ -467,7 +486,7 @@ class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
 
   @override
   String toString() {
-    return 'ThreeToSevenConfiguration(id: $id, minRepetitions: $minRepetitions, maxRepetitions: $maxRepetitions, weightKg: $weightKg, pauseSeconds: $pauseSeconds)';
+    return 'ThreeToSevenConfiguration(id: $id, sets: $sets, minRepetitions: $minRepetitions, maxRepetitions: $maxRepetitions, weightKg: $weightKg, pauseSeconds: $pauseSeconds)';
   }
 
   @override
@@ -476,6 +495,8 @@ class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
         (other is _ThreeToSevenConfiguration &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.sets, sets) ||
+                const DeepCollectionEquality().equals(other.sets, sets)) &&
             (identical(other.minRepetitions, minRepetitions) ||
                 const DeepCollectionEquality()
                     .equals(other.minRepetitions, minRepetitions)) &&
@@ -494,6 +515,7 @@ class _$_ThreeToSevenConfiguration extends _ThreeToSevenConfiguration {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(sets) ^
       const DeepCollectionEquality().hash(minRepetitions) ^
       const DeepCollectionEquality().hash(maxRepetitions) ^
       const DeepCollectionEquality().hash(weightKg) ^
@@ -516,6 +538,7 @@ abstract class _ThreeToSevenConfiguration extends ThreeToSevenConfiguration
     implements BaseExerciseTypeConfiguration {
   const factory _ThreeToSevenConfiguration(
       {String? id,
+      int sets,
       int minRepetitions,
       int maxRepetitions,
       double? weightKg,
@@ -527,6 +550,8 @@ abstract class _ThreeToSevenConfiguration extends ThreeToSevenConfiguration
 
   @override
   String? get id => throw _privateConstructorUsedError;
+  @override
+  int get sets => throw _privateConstructorUsedError;
   @override
   int get minRepetitions => throw _privateConstructorUsedError;
   @override

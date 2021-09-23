@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stronk/models/exercise/exercise_types.dart';
@@ -8,7 +9,7 @@ part 'exercise_configuration.g.dart';
 abstract class ExerciseTypeConfiguration {
   ExerciseType get type;
   Map<String, dynamic> get data;
-  double get loadEquivalent;
+  double get weight;
 }
 
 @JsonSerializable()
@@ -20,14 +21,34 @@ class BaseExerciseTypeConfiguration implements ExerciseTypeConfiguration {
 
   Map<String, dynamic> toJson() => _$BaseExerciseTypeConfigurationToJson(this);
 
+  static BaseExerciseTypeConfiguration? fromType(ExerciseType type) {
+    switch (type) {
+      case ExerciseType.SetRepetition:
+        return SetRepetitionConfiguration.empty() as BaseExerciseTypeConfiguration;
+      case ExerciseType.ThreeToSeven:
+        return ThreeToSevenConfiguration.empty() as BaseExerciseTypeConfiguration;
+      case ExerciseType.DoPause:
+        return ThreeToSevenConfiguration.empty() as BaseExerciseTypeConfiguration;
+      case ExerciseType.Hold:
+        return ThreeToSevenConfiguration.empty() as BaseExerciseTypeConfiguration;
+      case ExerciseType.Flow:
+        return ThreeToSevenConfiguration.empty() as BaseExerciseTypeConfiguration;
+      default:
+        return null;
+    }
+  }
+
   ExerciseType get type => throw UnimplementedError();
   Map<String, dynamic> get data => throw UnimplementedError();
   double get loadEquivalent => throw UnimplementedError();
+  double get weight => throw UnimplementedError();
 }
 
 @freezed
 class SetRepetitionConfiguration with _$SetRepetitionConfiguration {
   static ExerciseType exerciseType = ExerciseType.SetRepetition;
+  static double loadFactor = 1.0;
+
   const SetRepetitionConfiguration._();
 
   @Implements(BaseExerciseTypeConfiguration)
@@ -59,17 +80,20 @@ class SetRepetitionConfiguration with _$SetRepetitionConfiguration {
   ExerciseType get type => exerciseType;
   Map<String, dynamic> get data => toJson();
   double get loadEquivalent => sets * repetitions * weightKg;
+  double get weight => weightKg;
 }
 
 @freezed
 class ThreeToSevenConfiguration with _$ThreeToSevenConfiguration {
   static ExerciseType exerciseType = ExerciseType.ThreeToSeven;
-  static double loadFactor = 30 / 25;
+  static double loadFactor = 1.2;
+
   const ThreeToSevenConfiguration._();
 
   @Implements(BaseExerciseTypeConfiguration)
   const factory ThreeToSevenConfiguration({
     String? id,
+    @Default(1) int sets,
     @Default(3) int minRepetitions,
     @Default(7) int maxRepetitions,
     double? weightKg,
@@ -96,11 +120,15 @@ class ThreeToSevenConfiguration with _$ThreeToSevenConfiguration {
             .fold(0, (int a, b) => a + b);
     return totalReps * (weightKg ?? 1) * loadFactor;
   }
+
+  double get weight => weightKg ?? 1;
 }
 
 @freezed
 class DoPauseConfiguration with _$DoPauseConfiguration {
   static ExerciseType exerciseType = ExerciseType.DoPause;
+  static double loadFactor = 1.0;
+
   const DoPauseConfiguration._();
 
   @Implements(BaseExerciseTypeConfiguration)
@@ -126,6 +154,7 @@ class DoPauseConfiguration with _$DoPauseConfiguration {
   ExerciseType get type => exerciseType;
   Map<String, dynamic> get data => toJson();
   double get loadEquivalent => repetitions * (weightKg ?? 1);
+  double get weight => weightKg ?? 1;
 }
 
 @freezed
@@ -155,6 +184,7 @@ class HoldConfiguration with _$HoldConfiguration {
   ExerciseType get type => exerciseType;
   Map<String, dynamic> get data => toJson();
   double get loadEquivalent => holdSeconds * (weightKg ?? 1);
+  double get weight => weightKg ?? 1;
 }
 
 @freezed
@@ -184,6 +214,7 @@ class FlowConfiguration with _$FlowConfiguration {
   ExerciseType get type => exerciseType;
   Map<String, dynamic> get data => toJson();
   double get loadEquivalent => repetitions * (weightKg ?? 1);
+  double get weight => weightKg ?? 1;
 }
 
 Map<String, dynamic> _exerciseTypeConfigurationfromJson(

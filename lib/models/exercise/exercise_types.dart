@@ -63,15 +63,15 @@ extension ExerciseTypeDescription on ExerciseType {
   String get description {
     switch (this) {
       case ExerciseType.SetRepetition:
-        return "Repeat a set for one exercise";
+        return "Do the exercise for a given number of sets and repetitions within each set";
       case ExerciseType.ThreeToSeven:
-        return "Repeat the exercise 3x, 4x, ..., 7x";
+        return "Repeat the exercise 3x, 4x, ..., 7x with short pause in between";
       case ExerciseType.DoPause:
-        return "Do the exercise until exhaustion, then pause and repeat";
+        return "Do the exercise until exhaustion, pause and repeat until you finish all repetitions";
       case ExerciseType.Hold:
         return "Hold the exercise for a defined duration";
       case ExerciseType.Flow:
-        return "Do the exercise once";
+        return "Do the exercise's movement a given number of times";
       default:
         return "Undefined type";
     }

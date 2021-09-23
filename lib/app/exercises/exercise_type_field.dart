@@ -16,12 +16,40 @@ class ExerciseTypeConfigurationScreen extends StatelessWidget {
         title: const Text("Select Exercise Type"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView.builder(
-          itemBuilder: (_, index) => Container(),
-          itemCount: 1,
-        ),
-      ),
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: ExerciseType.values.map((type) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: InkWell(
+                  onTap: () => Navigator.of(context).pop(type),
+                  child: Container(
+                    padding: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      border: Border.all(),
+                    ),
+                    child: ListTile(
+                      leading: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: ClipOval(
+                          child: Material(
+                            color: Colors.grey.withOpacity(0.5),
+                            child: Center(
+                              child: Text(type.short),
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: Text(type.name),
+                      subtitle: Text(type.description),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          )),
     );
   }
 }
@@ -33,8 +61,9 @@ class SetRepetitionTypeField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Container(
+      child: Text("${configuration.sets} X ${configuration.repetitions}"),
+    );
   }
 }
 
@@ -44,8 +73,10 @@ class ThreeToSevenTypeField extends ConsumerWidget {
   const ThreeToSevenTypeField(this.configuration);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Container(
+      child: Text(
+          "${configuration.sets} X ${configuration.minRepetitions}-${configuration.maxRepetitions}"),
+    );
   }
 }
 
@@ -124,6 +155,27 @@ class ExerciseTypeField extends ConsumerWidget {
     required this.updateState,
   });
 
+  void _updateType(ExerciseType type) {
+    if (state.value != null && state.value!.type == type) return;
+
+    // if (state.value == null) {
+    switch (type) {
+      case ExerciseType.SetRepetition:
+        return updateState(SetRepetitionConfiguration.empty() as BaseExerciseTypeConfiguration);
+      case ExerciseType.ThreeToSeven:
+        return updateState(ThreeToSevenConfiguration.empty() as BaseExerciseTypeConfiguration);
+      case ExerciseType.DoPause:
+        return updateState(DoPauseConfiguration.empty() as BaseExerciseTypeConfiguration);
+      case ExerciseType.Hold:
+        return updateState(HoldConfiguration.empty() as BaseExerciseTypeConfiguration);
+      case ExerciseType.Flow:
+        return updateState(FlowConfiguration.empty() as BaseExerciseTypeConfiguration);
+    }
+    // } else {
+    //   return updateState(state.value!.to(type) as BaseExerciseTypeConfiguration);
+    // }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final type = state.value;
@@ -141,51 +193,44 @@ class ExerciseTypeField extends ConsumerWidget {
       ),
       constraints: BoxConstraints(minHeight: 50),
       padding: const EdgeInsets.only(top: 5, bottom: 5.0, left: 7, right: 7),
-      child: Row(
-        children: [
-          Flexible(
-            flex: 1,
-            child: InkWell(
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => ExerciseTypeConfigurationScreen(),
-                  fullscreenDialog: true,
-                ),
-              ),
+      child: InkWell(
+        onTap: () async {
+          final type = await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => ExerciseTypeConfigurationScreen(),
+              fullscreenDialog: true,
+            ),
+          );
+          _updateType(type);
+        },
+        child: Row(
+          children: [
+            Flexible(
+              flex: 1,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: ClipOval(
-                          child: Material(
-                            color: Colors.red,
-                            child: Center(
-                              child: Text(state.value?.type.description ?? "??"),
-                            ),
-                          ),
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 40,
+                    child: ClipOval(
+                      child: Material(
+                        color: Colors.grey.withOpacity(0.5),
+                        child: Center(
+                          child: Text(state.value?.type.short ?? "??"),
                         ),
                       ),
                     ),
-                    Flexible(
-                      flex: 1,
-                      child: Text(state.value?.type.description ?? "Type"),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Flexible(
-            flex: 3,
-            child: ExerciseTypeConfigurationBuilder(state.value),
-          ),
-        ],
+            Flexible(
+              flex: 5,
+              child: ExerciseTypeConfigurationBuilder(state.value),
+            ),
+          ],
+        ),
       ),
     );
   }

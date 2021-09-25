@@ -5,7 +5,6 @@ Wow, such stronk, much gainz
 ## App Design
 
 ![App Overview](./stronk.svg)
-<img src="./stronk.svg">
 
 
 ## Architecture

@@ -9,18 +9,25 @@ import 'package:stronk/repositories/exception.dart';
 
 enum ExerciseFilter { all, onlyUser, onlyPreset }
 
-final exerciseSourceFilterProvider = StateProvider<ExerciseFilter>((_) => ExerciseFilter.all);
+final exerciseSourceFilterProvider =
+    StateProvider<ExerciseFilter>((_) => ExerciseFilter.all);
 
 final exerciseMuscleFilterProvider = StateProvider<List<Muscle>?>((_) => null);
-final exerciseMuscleRegionFilterProvider = StateProvider<MuscleRegion?>((_) => null);
-final exerciseTagFilterProvider = StateProvider<List<ExerciseTag>?>((_) => null);
+final exerciseMuscleRegionFilterProvider =
+    StateProvider<MuscleRegion?>((_) => null);
+final exerciseTagFilterProvider =
+    StateProvider<List<ExerciseTag>?>((_) => null);
 
-final exerciseListExceptionProvider = StateProvider<DataTransferException?>((_) => null);
+final exerciseListExceptionProvider =
+    StateProvider<DataTransferException?>((_) => null);
 
 final filteredExerciseListProvider = Provider<List<Exercise>>((ref) {
-  final exerciseSourceFilterState = ref.watch(exerciseSourceFilterProvider).state;
-  final exerciseMuscleFilterState = ref.watch(exerciseMuscleFilterProvider).state;
-  final exerciseMuscleRegionFilterState = ref.watch(exerciseMuscleRegionFilterProvider).state;
+  final exerciseSourceFilterState =
+      ref.watch(exerciseSourceFilterProvider).state;
+  final exerciseMuscleFilterState =
+      ref.watch(exerciseMuscleFilterProvider).state;
+  final exerciseMuscleRegionFilterState =
+      ref.watch(exerciseMuscleRegionFilterProvider).state;
   final exerciseTagFilterState = ref.watch(exerciseTagFilterProvider).state;
 
   final exerciseListState = ref.watch(exerciseListControllerProvider);
@@ -29,7 +36,8 @@ final filteredExerciseListProvider = Provider<List<Exercise>>((ref) {
       data: (exercises) {
         return exercises.where((exercise) {
           // Exercise creator is null for presets
-          if (exerciseSourceFilterState == ExerciseFilter.onlyPreset && exercise.creator != null) {
+          if (exerciseSourceFilterState == ExerciseFilter.onlyPreset &&
+              exercise.creator != null) {
             return false;
           } else if (exerciseSourceFilterState == ExerciseFilter.onlyUser &&
               exercise.creator == null) {
@@ -41,7 +49,8 @@ final filteredExerciseListProvider = Provider<List<Exercise>>((ref) {
             var matchesMuscle = false;
             exercise.muscles.forEach((muscle) {
               final _matchesMuscle = exerciseMuscleFilterState.contains(muscle);
-              final _matchesRegion = exerciseMuscleRegionFilterState == muscle.region;
+              final _matchesRegion =
+                  exerciseMuscleRegionFilterState == muscle.region;
               matchesMuscle = matchesMuscle || _matchesRegion || _matchesMuscle;
             });
             if (!matchesMuscle) {
@@ -67,16 +76,20 @@ final filteredExerciseListProvider = Provider<List<Exercise>>((ref) {
 });
 
 final exerciseListControllerProvider =
-    StateNotifierProvider<ExerciseListController, AsyncValue<List<Exercise>>>((ref) {
-  final user = ref.watch(authControllerProvider);
-  return ExerciseListController(ref.read, user?.uid);
+    StateNotifierProvider<ExerciseListController, AsyncValue<List<Exercise>>>(
+        (ref) {
+  return ref.watch(authControllerProvider).maybeWhen(
+        data: (user) => ExerciseListController(ref.read, user.uid),
+        orElse: () => ExerciseListController(ref.read, null),
+      );
 });
 
 class ExerciseListController extends StateNotifier<AsyncValue<List<Exercise>>> {
   final Reader _read;
   final String? _userId;
 
-  ExerciseListController(this._read, this._userId) : super(AsyncValue.loading()) {
+  ExerciseListController(this._read, this._userId)
+      : super(AsyncValue.loading()) {
     if (_userId != null) {
       retrieveItems();
     }
@@ -88,7 +101,8 @@ class ExerciseListController extends StateNotifier<AsyncValue<List<Exercise>>> {
     }
 
     try {
-      final exercises = await _read(exerciseRepositoryProvider).retrieve(userId: _userId!);
+      final exercises =
+          await _read(exerciseRepositoryProvider).retrieve(userId: _userId!);
       if (mounted) {
         state = AsyncValue.data(exercises);
       }

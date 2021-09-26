@@ -1,27 +1,28 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter_hooks/flutter_hooks.dart';
-// import 'package:flutter_signin_button/flutter_signin_button.dart';
-// import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// import 'package:stronk/controllers/auth_controller.dart';
-// import 'package:stronk/repositories/exception.dart';
+import 'package:stronk/controllers/auth_controller.dart';
+import 'package:stronk/repositories/exception.dart';
 
-// class LoginScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: ListView(
-//         padding: const EdgeInsets.all(8),
-//         children: <Widget>[
-//           EmailPasswordSection(),
-//           // PhoneSignInSection(),
-//           // AnonymousSignInSection(),
-//         ],
-//       ),
-//     );
-//   }
-// }
+class LoginScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          // EmailPasswordSection(),
+          // PhoneSignInSection(),
+          // AnonymousSignInSection(),
+          Center(child: Text("This is a placeholder for the login screen")),
+        ],
+      ),
+    );
+  }
+}
 
 // class EmailPasswordSection extends HookConsumerWidget {
 //   @override

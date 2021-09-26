@@ -47,18 +47,18 @@ class EnumDialog {
   }
 }
 
-
 void _updateSettings(WidgetRef ref, Settings settings) {
-  final user = ref.read(authControllerProvider);
-  if (user != null) {
-    ref.read(settingsRepositoryProvider).update(
-          userId: user.uid,
-          settings: settings,
-        );
-    ref.read(settingsControllerProvider.notifier).retrieveItems();
-  }
+  ref.read(authControllerProvider).maybeWhen(
+        data: (user) {
+          ref.read(settingsRepositoryProvider).update(
+                userId: user.uid,
+                settings: settings,
+              );
+          ref.read(settingsControllerProvider(user).notifier).retrieveItems();
+        },
+        orElse: () {},
+      );
 }
-
 
 class UserSettingsWidget extends ConsumerWidget {
   const UserSettingsWidget();
@@ -172,10 +172,14 @@ class UserSettingsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(settingsControllerProvider).when(
-        data: (settings) => _buildContent(settings, context, ref),
-        loading: () => _buildLoading(),
-        error: (error, _) => _buildError(error));
+    return ref.read(authControllerProvider).maybeWhen(
+          data: (user) => ref.watch(settingsControllerProvider(user)).when(
+                data: (settings) => _buildContent(settings, context, ref),
+                loading: () => _buildLoading(),
+                error: (error, _) => _buildError(error),
+              ),
+          orElse: () => _buildError("Not logged in!"),
+        );
   }
 }
 
@@ -232,9 +236,9 @@ class WorkoutSettingsWidget extends ConsumerWidget {
               }
             },
           ),
-        
-        
-        ],),);
+        ],
+      ),
+    );
   }
 
   _buildLoading() {
@@ -247,10 +251,13 @@ class WorkoutSettingsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(settingsControllerProvider).when(
-        data: (settings) => _buildContent(settings, context, ref),
-        loading: () => _buildLoading(),
-        error: (error, _) => _buildError(error));
+    return ref.read(authControllerProvider).maybeWhen(
+        data: (user) => ref.watch(settingsControllerProvider(user)).when(
+              data: (settings) => _buildContent(settings, context, ref),
+              loading: () => _buildLoading(),
+              error: (error, _) => _buildError(error),
+            ),
+        orElse: () => _buildError("Not logged in!"));
   }
 }
 

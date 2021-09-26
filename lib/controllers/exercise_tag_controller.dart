@@ -5,7 +5,8 @@ import 'package:stronk/models/exercise/exercise_tag.dart';
 import 'package:stronk/repositories/exception.dart';
 import 'package:stronk/repositories/exercise_tag_repository.dart';
 
-final exerciseTagListExceptionProvider = StateProvider<DataTransferException?>((_) => null);
+final exerciseTagListExceptionProvider =
+    StateProvider<DataTransferException?>((_) => null);
 
 final exericseTagListProvider = Provider<List<ExerciseTag>>((ref) {
   final exerciseTagListState = ref.watch(exerciseTagListControllerProvider);
@@ -16,17 +17,21 @@ final exericseTagListProvider = Provider<List<ExerciseTag>>((ref) {
   );
 });
 
-final exerciseTagListControllerProvider =
-    StateNotifierProvider<ExerciseTagListController, AsyncValue<List<ExerciseTag>>>((ref) {
-  final user = ref.watch(authControllerProvider);
-  return ExerciseTagListController(ref.read, user?.uid);
+final exerciseTagListControllerProvider = StateNotifierProvider<
+    ExerciseTagListController, AsyncValue<List<ExerciseTag>>>((ref) {
+  return ref.watch(authControllerProvider).maybeWhen(
+        data: (user) => ExerciseTagListController(ref.read, user.uid),
+        orElse: () => ExerciseTagListController(ref.read, null),
+      );
 });
 
-class ExerciseTagListController extends StateNotifier<AsyncValue<List<ExerciseTag>>> {
+class ExerciseTagListController
+    extends StateNotifier<AsyncValue<List<ExerciseTag>>> {
   final Reader _read;
   final String? _userId;
 
-  ExerciseTagListController(this._read, this._userId) : super(AsyncValue.loading()) {
+  ExerciseTagListController(this._read, this._userId)
+      : super(AsyncValue.loading()) {
     if (_userId != null) {
       retrieveItems();
     }
@@ -38,7 +43,8 @@ class ExerciseTagListController extends StateNotifier<AsyncValue<List<ExerciseTa
     }
 
     try {
-      final exerciseTags = await _read(exerciseTagRepositoryProvider).retrieve(userId: _userId!);
+      final exerciseTags =
+          await _read(exerciseTagRepositoryProvider).retrieve(userId: _userId!);
       if (mounted) {
         state = AsyncValue.data(exerciseTags);
       }

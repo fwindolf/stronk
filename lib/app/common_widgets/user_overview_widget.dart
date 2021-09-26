@@ -8,10 +8,16 @@ class UserOverviewWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(authControllerProvider);
-
-    var name = user?.displayName;
-    if (name == null || name.isEmpty) name = "Anonymous User";
+    final userName = ref.watch(authControllerProvider).when(
+          data: (user) {
+            if (user.displayName == null || user.displayName!.isEmpty) {
+              return "Anonymous User";
+            }
+            return user.displayName!;
+          },
+          loading: () => "Loading User",
+          error: (error, _) => "Unknown User",
+        );
 
     return Card(
       elevation: 5,
@@ -21,7 +27,7 @@ class UserOverviewWidget extends ConsumerWidget {
           leading: CircleAvatar(
             child: Icon(Icons.person),
           ),
-          title: Text(name),
+          title: Text(userName),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

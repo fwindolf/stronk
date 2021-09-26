@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:stronk/controllers/auth_controller.dart';
 
@@ -8,8 +9,8 @@ import 'package:stronk/repositories/settings_repository.dart';
 
 final settingsExceptionProvider = StateProvider<DataTransferException?>((_) => null);
 
-final settingsProvider = Provider<Settings>((ref) {
-  final settingsState = ref.watch(settingsControllerProvider);
+final settingsProvider = Provider.family<Settings, User>((ref, user) {
+  final settingsState = ref.watch(settingsControllerProvider(user));
 
   return settingsState.maybeWhen(
     data: (settings) => settings,
@@ -18,17 +19,13 @@ final settingsProvider = Provider<Settings>((ref) {
 });
 
 final settingsControllerProvider =
-    StateNotifierProvider<SettingsController, AsyncValue<Settings>>((ref) {
-  
-  final user = ref.watch(authControllerProvider);
-
-  if (user == null) throw UnimplementedError("Need user to read settings");
+    StateNotifierProvider.family<SettingsController, AsyncValue<Settings>, User>((ref, user) {
   return SettingsController(ref.read, user.uid);
 });
 
 class SettingsController extends StateNotifier<AsyncValue<Settings>> {
   final Reader _read;
-  final String? _userId;
+  final String _userId;
 
   SettingsController(this._read, this._userId) : super(AsyncValue.loading()) {
     retrieveItems();

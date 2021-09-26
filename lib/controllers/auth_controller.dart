@@ -4,19 +4,26 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:stronk/repositories/auth_repository.dart';
 
-final authControllerProvider = StateNotifierProvider<AuthController, User?>(
+final authControllerProvider =
+    StateNotifierProvider<AuthController, AsyncValue<User>>(
   (ref) => AuthController(ref.read)..appStarted(),
 );
 
-class AuthController extends StateNotifier<User?> {
+class AuthController extends StateNotifier<AsyncValue<User>> {
   final Reader _read;
 
   StreamSubscription<User?>? _authStateChangesSubscription;
 
-  AuthController(this._read) : super(null) {
+  AuthController(this._read) : super(AsyncValue.loading()) {
     _authStateChangesSubscription?.cancel();
     _authStateChangesSubscription =
-        _read(authRepositoryProvider).authStateChanges.listen((user) => state = user);
+        _read(authRepositoryProvider).authStateChanges.listen((user) {
+      if (user == null) {
+        state = AsyncValue.loading();
+      } else {
+        state = AsyncValue.data(user);
+      }
+    });
   }
 
   @override

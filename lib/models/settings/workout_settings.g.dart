@@ -8,7 +8,6 @@ part of 'workout_settings.dart';
 
 _$_WorkoutSettings _$$_WorkoutSettingsFromJson(Map<String, dynamic> json) =>
     _$_WorkoutSettings(
-      id: json['id'] as String?,
       sessionGoals: (json['sessionGoals'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(_$enumDecode(_$TimeframeEnumMap, k), e as int),
       ),
@@ -23,12 +22,11 @@ _$_WorkoutSettings _$$_WorkoutSettingsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_WorkoutSettingsToJson(_$_WorkoutSettings instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'sessionGoals': instance.sessionGoals
           .map((k, e) => MapEntry(_$TimeframeEnumMap[k], e)),
       'unit': _$UnitEnumMap[instance.unit],
-      'slotChoices': instance.slotChoices,
-      'reminders': instance.reminders,
+      'slotChoices': instance.slotChoices.map((e) => e.toJson()).toList(),
+      'reminders': instance.reminders.map((e) => e.toJson()).toList(),
     };
 
 K _$enumDecode<K, V>(
@@ -65,6 +63,6 @@ const _$TimeframeEnumMap = {
 };
 
 const _$UnitEnumMap = {
-  Unit.Kg: 'Kg',
-  Unit.Lbs: 'Lbs',
+  Unit.Metric: 'Metric',
+  Unit.Imperial: 'Imperial',
 };

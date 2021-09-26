@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stronk/app/settings/settings_screen.dart';
 
 import 'package:stronk/models/exercise/exercise.dart';
 
@@ -69,6 +69,12 @@ class AppRouter {
       //   settings: settings,
       //   fullscreenDialog: true,
       // );
+      case AppRoutes.settings:
+        return MaterialPageRoute(
+          builder: (_) => SettingsScreen(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
       default:
         // TODO: Throw
         return null;

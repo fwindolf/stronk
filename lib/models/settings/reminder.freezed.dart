@@ -21,9 +21,8 @@ ReminderTimeslot _$ReminderTimeslotFromJson(Map<String, dynamic> json) {
 class _$ReminderTimeslotTearOff {
   const _$ReminderTimeslotTearOff();
 
-  _RequiredTimeslot call({String? id, required int hourOfDay}) {
+  _RequiredTimeslot call({required int hourOfDay}) {
     return _RequiredTimeslot(
-      id: id,
       hourOfDay: hourOfDay,
     );
   }
@@ -38,7 +37,6 @@ const $ReminderTimeslot = _$ReminderTimeslotTearOff();
 
 /// @nodoc
 mixin _$ReminderTimeslot {
-  String? get id => throw _privateConstructorUsedError;
   int get hourOfDay => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +50,7 @@ abstract class $ReminderTimeslotCopyWith<$Res> {
   factory $ReminderTimeslotCopyWith(
           ReminderTimeslot value, $Res Function(ReminderTimeslot) then) =
       _$ReminderTimeslotCopyWithImpl<$Res>;
-  $Res call({String? id, int hourOfDay});
+  $Res call({int hourOfDay});
 }
 
 /// @nodoc
@@ -66,14 +64,9 @@ class _$ReminderTimeslotCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? hourOfDay = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       hourOfDay: hourOfDay == freezed
           ? _value.hourOfDay
           : hourOfDay // ignore: cast_nullable_to_non_nullable
@@ -89,7 +82,7 @@ abstract class _$RequiredTimeslotCopyWith<$Res>
           _RequiredTimeslot value, $Res Function(_RequiredTimeslot) then) =
       __$RequiredTimeslotCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, int hourOfDay});
+  $Res call({int hourOfDay});
 }
 
 /// @nodoc
@@ -105,14 +98,9 @@ class __$RequiredTimeslotCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? hourOfDay = freezed,
   }) {
     return _then(_RequiredTimeslot(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       hourOfDay: hourOfDay == freezed
           ? _value.hourOfDay
           : hourOfDay // ignore: cast_nullable_to_non_nullable
@@ -125,19 +113,17 @@ class __$RequiredTimeslotCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RequiredTimeslot extends _RequiredTimeslot
     with DiagnosticableTreeMixin {
-  const _$_RequiredTimeslot({this.id, required this.hourOfDay}) : super._();
+  const _$_RequiredTimeslot({required this.hourOfDay}) : super._();
 
   factory _$_RequiredTimeslot.fromJson(Map<String, dynamic> json) =>
       _$$_RequiredTimeslotFromJson(json);
 
   @override
-  final String? id;
-  @override
   final int hourOfDay;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ReminderTimeslot(id: $id, hourOfDay: $hourOfDay)';
+    return 'ReminderTimeslot(hourOfDay: $hourOfDay)';
   }
 
   @override
@@ -145,7 +131,6 @@ class _$_RequiredTimeslot extends _RequiredTimeslot
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ReminderTimeslot'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('hourOfDay', hourOfDay));
   }
 
@@ -153,8 +138,6 @@ class _$_RequiredTimeslot extends _RequiredTimeslot
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _RequiredTimeslot &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.hourOfDay, hourOfDay) ||
                 const DeepCollectionEquality()
                     .equals(other.hourOfDay, hourOfDay)));
@@ -162,9 +145,7 @@ class _$_RequiredTimeslot extends _RequiredTimeslot
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(hourOfDay);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(hourOfDay);
 
   @JsonKey(ignore: true)
   @override
@@ -178,15 +159,13 @@ class _$_RequiredTimeslot extends _RequiredTimeslot
 }
 
 abstract class _RequiredTimeslot extends ReminderTimeslot {
-  const factory _RequiredTimeslot({String? id, required int hourOfDay}) =
+  const factory _RequiredTimeslot({required int hourOfDay}) =
       _$_RequiredTimeslot;
   const _RequiredTimeslot._() : super._();
 
   factory _RequiredTimeslot.fromJson(Map<String, dynamic> json) =
       _$_RequiredTimeslot.fromJson;
 
-  @override
-  String? get id => throw _privateConstructorUsedError;
   @override
   int get hourOfDay => throw _privateConstructorUsedError;
   @override
@@ -204,14 +183,12 @@ class _$ReminderTearOff {
   const _$ReminderTearOff();
 
   _Reminder call(
-      {String? id,
-      required ReminderTimeframe timeframe,
+      {required ReminderTimeframe timeframe,
       required List<ReminderTimeslot> selectedSlots,
       bool continuouslyRemind = false,
       bool snoozeAllowed = true,
       int snoozeMinutes = 30}) {
     return _Reminder(
-      id: id,
       timeframe: timeframe,
       selectedSlots: selectedSlots,
       continuouslyRemind: continuouslyRemind,
@@ -230,7 +207,6 @@ const $Reminder = _$ReminderTearOff();
 
 /// @nodoc
 mixin _$Reminder {
-  String? get id => throw _privateConstructorUsedError;
   ReminderTimeframe get timeframe => throw _privateConstructorUsedError;
   List<ReminderTimeslot> get selectedSlots =>
       throw _privateConstructorUsedError;
@@ -249,8 +225,7 @@ abstract class $ReminderCopyWith<$Res> {
   factory $ReminderCopyWith(Reminder value, $Res Function(Reminder) then) =
       _$ReminderCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
-      ReminderTimeframe timeframe,
+      {ReminderTimeframe timeframe,
       List<ReminderTimeslot> selectedSlots,
       bool continuouslyRemind,
       bool snoozeAllowed,
@@ -267,7 +242,6 @@ class _$ReminderCopyWithImpl<$Res> implements $ReminderCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? timeframe = freezed,
     Object? selectedSlots = freezed,
     Object? continuouslyRemind = freezed,
@@ -275,10 +249,6 @@ class _$ReminderCopyWithImpl<$Res> implements $ReminderCopyWith<$Res> {
     Object? snoozeMinutes = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       timeframe: timeframe == freezed
           ? _value.timeframe
           : timeframe // ignore: cast_nullable_to_non_nullable
@@ -309,8 +279,7 @@ abstract class _$ReminderCopyWith<$Res> implements $ReminderCopyWith<$Res> {
       __$ReminderCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
-      ReminderTimeframe timeframe,
+      {ReminderTimeframe timeframe,
       List<ReminderTimeslot> selectedSlots,
       bool continuouslyRemind,
       bool snoozeAllowed,
@@ -328,7 +297,6 @@ class __$ReminderCopyWithImpl<$Res> extends _$ReminderCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? timeframe = freezed,
     Object? selectedSlots = freezed,
     Object? continuouslyRemind = freezed,
@@ -336,10 +304,6 @@ class __$ReminderCopyWithImpl<$Res> extends _$ReminderCopyWithImpl<$Res>
     Object? snoozeMinutes = freezed,
   }) {
     return _then(_Reminder(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       timeframe: timeframe == freezed
           ? _value.timeframe
           : timeframe // ignore: cast_nullable_to_non_nullable
@@ -368,8 +332,7 @@ class __$ReminderCopyWithImpl<$Res> extends _$ReminderCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Reminder extends _Reminder with DiagnosticableTreeMixin {
   const _$_Reminder(
-      {this.id,
-      required this.timeframe,
+      {required this.timeframe,
       required this.selectedSlots,
       this.continuouslyRemind = false,
       this.snoozeAllowed = true,
@@ -379,8 +342,6 @@ class _$_Reminder extends _Reminder with DiagnosticableTreeMixin {
   factory _$_Reminder.fromJson(Map<String, dynamic> json) =>
       _$$_ReminderFromJson(json);
 
-  @override
-  final String? id;
   @override
   final ReminderTimeframe timeframe;
   @override
@@ -397,7 +358,7 @@ class _$_Reminder extends _Reminder with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Reminder(id: $id, timeframe: $timeframe, selectedSlots: $selectedSlots, continuouslyRemind: $continuouslyRemind, snoozeAllowed: $snoozeAllowed, snoozeMinutes: $snoozeMinutes)';
+    return 'Reminder(timeframe: $timeframe, selectedSlots: $selectedSlots, continuouslyRemind: $continuouslyRemind, snoozeAllowed: $snoozeAllowed, snoozeMinutes: $snoozeMinutes)';
   }
 
   @override
@@ -405,7 +366,6 @@ class _$_Reminder extends _Reminder with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Reminder'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('timeframe', timeframe))
       ..add(DiagnosticsProperty('selectedSlots', selectedSlots))
       ..add(DiagnosticsProperty('continuouslyRemind', continuouslyRemind))
@@ -417,8 +377,6 @@ class _$_Reminder extends _Reminder with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Reminder &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.timeframe, timeframe) ||
                 const DeepCollectionEquality()
                     .equals(other.timeframe, timeframe)) &&
@@ -439,7 +397,6 @@ class _$_Reminder extends _Reminder with DiagnosticableTreeMixin {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(timeframe) ^
       const DeepCollectionEquality().hash(selectedSlots) ^
       const DeepCollectionEquality().hash(continuouslyRemind) ^
@@ -459,8 +416,7 @@ class _$_Reminder extends _Reminder with DiagnosticableTreeMixin {
 
 abstract class _Reminder extends Reminder {
   const factory _Reminder(
-      {String? id,
-      required ReminderTimeframe timeframe,
+      {required ReminderTimeframe timeframe,
       required List<ReminderTimeslot> selectedSlots,
       bool continuouslyRemind,
       bool snoozeAllowed,
@@ -469,8 +425,6 @@ abstract class _Reminder extends Reminder {
 
   factory _Reminder.fromJson(Map<String, dynamic> json) = _$_Reminder.fromJson;
 
-  @override
-  String? get id => throw _privateConstructorUsedError;
   @override
   ReminderTimeframe get timeframe => throw _privateConstructorUsedError;
   @override

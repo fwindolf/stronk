@@ -24,4 +24,9 @@ extension FirebaseFirestoreX on FirebaseFirestore {
   CollectionReference challengeRef(String userId) {
     return collection('challenges').doc(userId).collection('user_challenges');
   }
+
+  CollectionReference settingsRef(String userId) {
+    return collection('settings').doc(userId).collection('settings');
+  }
+
 }

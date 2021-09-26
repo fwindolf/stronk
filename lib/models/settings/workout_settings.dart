@@ -12,9 +12,35 @@ enum Timeframe {
   WorkoutsPerTwoWeeks,
 }
 
+extension TimeframeExtension on Timeframe {
+  String get name{
+    switch(this) {
+      case Timeframe.HoursPerDay:
+        return "Hours / Day";
+      case Timeframe.HoursPerWeek:
+        return "Hours / Week";
+      case Timeframe.WorkoutsPerWeek:
+        return "Workouts / Week";
+      case Timeframe.WorkoutsPerTwoWeeks:
+        return "Workouts / 2 Weeks";
+    }
+  }
+}
+
 enum Unit {
-  Kg,
-  Lbs,
+  Metric,
+  Imperial,
+}
+
+extension UnitExtension on Unit {
+  String get name {
+    switch(this) {
+      case Unit.Metric:
+        return "Metric (kilogram, kilometers, meters)";
+      case Unit.Imperial:
+        return "Imperial (pounds, miles, inches)";
+    }
+  }
 }
 
 @freezed
@@ -22,7 +48,6 @@ class WorkoutSettings with _$WorkoutSettings {
   const WorkoutSettings._();
 
   const factory WorkoutSettings({
-    String? id,
     required Map<Timeframe, int> sessionGoals,
     required Unit unit,
     required List<ReminderTimeslot> slotChoices,
@@ -31,7 +56,7 @@ class WorkoutSettings with _$WorkoutSettings {
 
   factory WorkoutSettings.empty() => const WorkoutSettings(
         sessionGoals: {},
-        unit: Unit.Kg,
+        unit: Unit.Metric,
         slotChoices: <ReminderTimeslot>[
           ReminderTimeslot(hourOfDay: 7),
           ReminderTimeslot(hourOfDay: 9),

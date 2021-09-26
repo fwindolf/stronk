@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/app_theme.dart';
+import 'package:stronk/controllers/auth_controller.dart';
+import 'package:stronk/controllers/settings_controller.dart';
 
 import 'package:stronk/util/data.dart';
 
@@ -20,9 +22,11 @@ class Stronk extends ConsumerWidget {
     final datagen = ref.read(dataGeneratorProvider);
     datagen.generateMusclesFromFile();
 
+    final settings = ref.watch(settingsControllerProvider).data?.value;
+    
     return MaterialApp(
       title: 'Stronk',
-      themeMode: ThemeMode.dark,
+      themeMode: settings == null ? ThemeMode.system : settings.userSettings.theme,
       theme: lightTheme,
       darkTheme: darkTheme,
       initialRoute: AppRoutes.home,

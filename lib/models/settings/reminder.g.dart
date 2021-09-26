@@ -8,18 +8,15 @@ part of 'reminder.dart';
 
 _$_RequiredTimeslot _$$_RequiredTimeslotFromJson(Map<String, dynamic> json) =>
     _$_RequiredTimeslot(
-      id: json['id'] as String?,
       hourOfDay: json['hourOfDay'] as int,
     );
 
 Map<String, dynamic> _$$_RequiredTimeslotToJson(_$_RequiredTimeslot instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'hourOfDay': instance.hourOfDay,
     };
 
 _$_Reminder _$$_ReminderFromJson(Map<String, dynamic> json) => _$_Reminder(
-      id: json['id'] as String?,
       timeframe: _$enumDecode(_$ReminderTimeframeEnumMap, json['timeframe']),
       selectedSlots: (json['selectedSlots'] as List<dynamic>)
           .map((e) => ReminderTimeslot.fromJson(e as Map<String, dynamic>))
@@ -31,9 +28,8 @@ _$_Reminder _$$_ReminderFromJson(Map<String, dynamic> json) => _$_Reminder(
 
 Map<String, dynamic> _$$_ReminderToJson(_$_Reminder instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'timeframe': _$ReminderTimeframeEnumMap[instance.timeframe],
-      'selectedSlots': instance.selectedSlots,
+      'selectedSlots': instance.selectedSlots.map((e) => e.toJson()).toList(),
       'continuouslyRemind': instance.continuouslyRemind,
       'snoozeAllowed': instance.snoozeAllowed,
       'snoozeMinutes': instance.snoozeMinutes,

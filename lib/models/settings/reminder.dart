@@ -16,7 +16,6 @@ class ReminderTimeslot with _$ReminderTimeslot {
   const ReminderTimeslot._();
 
   const factory ReminderTimeslot({
-    String? id,
     required int hourOfDay,
   }) = _RequiredTimeslot;
 
@@ -32,7 +31,6 @@ class Reminder with _$Reminder {
   const Reminder._();
 
   const factory Reminder({
-    String? id,
     required ReminderTimeframe timeframe,
     required List<ReminderTimeslot> selectedSlots,
     @Default(false) bool continuouslyRemind,

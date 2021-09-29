@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stronk/app/login/login_screen.dart';
+import 'package:stronk/app/login/startup_screen.dart';
 import 'package:stronk/app/settings/settings_screen.dart';
 
 import 'package:stronk/models/exercise/exercise.dart';
@@ -9,8 +11,10 @@ import 'package:stronk/app/exercises/exercises_screen.dart';
 import 'package:stronk/app/exercises/exercises_edit_screen.dart';
 
 class AppRoutes {
-  static const home = "/";
+  static const home = '/';
+  static const startup = '/starup';
   static const profile = '/profile';
+  static const login = '/login';
   static const settings = '/settings';
   static const reminders = '/reminders';
   static const exercises = '/exercises';
@@ -32,9 +36,21 @@ class AppRouter {
     final args = settings.arguments;
 
     switch (settings.name) {
+      case AppRoutes.startup:
+        return MaterialPageRoute(
+          builder: (_) => StartupScreen(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
       case AppRoutes.home:
         return MaterialPageRoute<dynamic>(
           builder: (_) => HomeScreen(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      case AppRoutes.login:
+        return MaterialPageRoute(
+          builder: (_) => LoginScreen(),
           settings: settings,
           fullscreenDialog: true,
         );

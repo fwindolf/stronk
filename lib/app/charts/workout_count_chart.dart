@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ class WorkoutCountBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final barElements = List.generate(targetCount, (index) => index).map((index) {
+    final barElements =
+        List.generate(targetCount, (index) => index).map((index) {
       var radius = null;
       if (index == 0) {
         radius = BorderRadius.only(
@@ -32,24 +34,23 @@ class WorkoutCountBar extends StatelessWidget {
         color = Theme.of(context).colorScheme.primary;
       }
 
-      return Container(
-        height: 30,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black,
-            width: 1.0,
+      return Flexible(
+        flex: 1,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.black,
+              width: 1.0,
+            ),
+            color: color,
+            borderRadius: radius,
           ),
-          color: color,
-          borderRadius: radius,
         ),
       );
     }).toList();
 
-    return Container(
-      width: 25,
-      child: Column(
-        children: barElements,
-      ),
+    return Column(
+      children: barElements,
     );
   }
 }
@@ -59,56 +60,113 @@ class WorkoutCountChart extends ConsumerWidget {
 
   const WorkoutCountChart({this.weeksShown = 8});
 
+  Map<int, List<CompletedWorkout>> _splitWorkouts(
+    List<CompletedWorkout> workouts,
+    int weeksShown,
+  ) {
+    // Find start of shown period
+    final today = DateTime.now();
+    final earliest = today.subtract(Duration(
+      days: today.weekday + 7 * (weeksShown - 1),
+    ));
+
+    final applicableWorkouts =
+        workouts.where((workout) => workout.startTime.isAfter(earliest));
+
+    // Weeks start with 0 until Thursday, with 1 on/after Thursday
+    final startOfYear = DateTime(earliest.year, 1, 1);
+    final firstWeekNumber = (8 - startOfYear.weekday > 3) ? 1 : 0;
+    final earliestWeekNumber =
+        firstWeekNumber + (earliest.difference(startOfYear).inDays / 7).ceil();
+
+    var workoutsPerWeek = LinkedHashMap<int, List<CompletedWorkout>>();
+
+    List.generate(weeksShown, (index) => index).forEach((index) {
+      final startOfWeek = earliest.add(Duration(days: 7 * index));
+      final endOfWeek = earliest.add(Duration(days: 7 * (index + 1)));
+
+      var week = 0;
+      if (endOfWeek.year == earliest.year) {
+        // Week is within the same year as earliest
+        week = earliestWeekNumber + index;
+      } else {
+        final startOfNextYear = DateTime(endOfWeek.year, 1, 1);
+        final nextFirstWeekNumber = (8 - startOfNextYear.weekday > 3) ? 1 : 0;
+
+        if (startOfWeek.year == earliest.year) {
+          // Week is between years
+          week = nextFirstWeekNumber == 1
+              ? nextFirstWeekNumber
+              : earliestWeekNumber + index; // 52 or 53 as there is no week 0
+        } else {
+          // Week is within the next year
+          week = nextFirstWeekNumber +
+              (startOfWeek.difference(startOfNextYear).inDays / 7).ceil();
+        }
+      }
+
+      // Add workouts for this week
+      workoutsPerWeek[week] = [];
+      applicableWorkouts.forEach((workout) {
+        if (workout.startTime.isBefore(startOfWeek)) return;
+        if (workout.startTime.isAfter(endOfWeek.add(
+          Duration(hours: 23, minutes: 59, seconds: 50),
+        ))) return;
+
+        workoutsPerWeek[week]!.add(workout);
+      });
+    });
+
+    return workoutsPerWeek;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final workouts = <CompletedWorkout>[];
+    final workoutsPerWeek = _splitWorkouts(workouts, weeksShown);
     final workoutTarget = 4;
 
-    // Find week of year
-    // TODO: Correct for jumps in year
-    final today = DateTime.now();
-    final startOfYear = DateTime(today.year, 1, 1, 0, 0);
-    final firstMonday = startOfYear.weekday;
-    final daysInFirstWeek = 8 - firstMonday;
-    final firstWeek = (daysInFirstWeek > 3) ? 1 : 0;
-
-    // Count per week
-    final earliest = today.subtract(Duration(days: today.weekday + 7 * (weeksShown - 1)));
-    final earliestWeek =
-        firstWeek + ((earliest.difference(startOfYear).inDays - daysInFirstWeek) / 7).ceil();
-
-    // Visible weeks
-    final weeks = Iterable<int>.generate(weeksShown).map((weekNumber) {
-      return earliestWeek + weekNumber;
-    });
-
-    // Split per week
-    var workoutsPerWeek = <int, List<CompletedWorkout>>{};
-    workouts.forEach((workout) {
-      if (workout.startTime.isBefore(earliest)) return;
-
-      final diff = workout.startTime.difference(startOfYear);
-      final week = firstWeek + ((diff.inDays - daysInFirstWeek) / 7).ceil();
-
-      workoutsPerWeek[week] = List.from(workoutsPerWeek[week] ?? [])..add(workout);
-    });
-
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8.0),
       width: double.infinity,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: weeks.map((week) {
-          return Column(
-            children: [
-              // WorkoutCountBar(workoutTarget, workoutsPerWeek[week]?.length ?? 0),
-              Expanded(
-                  child: WorkoutCountBar(workoutTarget, Random.secure().nextInt(workoutTarget))),
-              SizedBox(height: 10),
-              Text(week.toString()),
-            ],
-          );
-        }).toList(),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Text(
+              "Completed Workouts",
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: workoutsPerWeek.keys.map((week) {
+                return Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: Column(
+                      children: [
+                        // WorkoutCountBar(workoutTarget, workoutsPerWeek[week]?.length ?? 0),
+                        Expanded(
+                          child: WorkoutCountBar(
+                            workoutTarget,
+                            Random.secure().nextInt(workoutTarget),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(week.toString()),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -13,8 +13,8 @@ enum Timeframe {
 }
 
 extension TimeframeExtension on Timeframe {
-  String get name{
-    switch(this) {
+  String get name {
+    switch (this) {
       case Timeframe.HoursPerDay:
         return "Hours / Day";
       case Timeframe.HoursPerWeek:
@@ -25,6 +25,34 @@ extension TimeframeExtension on Timeframe {
         return "Workouts / 2 Weeks";
     }
   }
+
+  int get max {
+    switch (this) {
+      case Timeframe.HoursPerDay:
+        return 24;
+      case Timeframe.HoursPerWeek:
+        return 7 * 24;
+      case Timeframe.WorkoutsPerWeek:
+        return 2 * 7;
+      case Timeframe.WorkoutsPerTwoWeeks:
+        return 2 * 2 * 7;
+    }
+  }
+}
+
+@freezed
+class SessionGoal with _$SessionGoal {
+  const SessionGoal._();
+
+  const factory SessionGoal({
+    required Timeframe timeframe,
+    required int count,
+  }) = _SessionGoal;
+
+  factory SessionGoal.fromJson(Map<String, dynamic> json) =>
+      _$SessionGoalFromJson(json);
+
+  Map<String, dynamic> toDocument() => toJson();
 }
 
 enum Unit {
@@ -34,7 +62,7 @@ enum Unit {
 
 extension UnitExtension on Unit {
   String get name {
-    switch(this) {
+    switch (this) {
       case Unit.Metric:
         return "Metric (kilogram, kilometers, meters)";
       case Unit.Imperial:
@@ -48,14 +76,13 @@ class WorkoutSettings with _$WorkoutSettings {
   const WorkoutSettings._();
 
   const factory WorkoutSettings({
-    required Map<Timeframe, int> sessionGoals,
     required Unit unit,
+    SessionGoal? sessionGoal,
     required List<ReminderTimeslot> slotChoices,
     required List<Reminder> reminders,
   }) = _WorkoutSettings;
 
   factory WorkoutSettings.empty() => const WorkoutSettings(
-        sessionGoals: {},
         unit: Unit.Metric,
         slotChoices: <ReminderTimeslot>[
           ReminderTimeslot(hourOfDay: 7),
@@ -70,5 +97,5 @@ class WorkoutSettings with _$WorkoutSettings {
   factory WorkoutSettings.fromJson(Map<String, dynamic> json) =>
       _$WorkoutSettingsFromJson(json);
 
-  Map<String, dynamic> toDocument() => toJson()..remove('id');
+  Map<String, dynamic> toDocument() => toJson();
 }

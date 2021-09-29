@@ -7,6 +7,117 @@ import 'package:stronk/models/settings/settings.dart';
 import 'package:stronk/models/settings/user_settings.dart';
 import 'package:stronk/app/settings/util.dart';
 
+class LanguageSettingsItem extends StatelessWidget {
+  final Language language;
+  final Function updateLanguage;
+
+  const LanguageSettingsItem({
+    required this.language,
+    required this.updateLanguage,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 4.0,
+          vertical: 12.0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Text(
+                "Language",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              flex: 1,
+            ),
+            Flexible(
+              child: Text(
+                language.name,
+                style: TextStyle(fontSize: 18),
+              ),
+              flex: 2,
+            ),
+          ],
+        ),
+      ),
+      onTap: () async {
+        final _language = await EnumDialog.show<Language>(
+          context,
+          "Select Language",
+          Language.values
+              .asMap()
+              .map((_, value) => MapEntry(value, value.name)),
+          language,
+        );
+        if (_language != null) {
+          updateLanguage(_language);
+        }
+      },
+    );
+  }
+}
+
+class ThemeSettingsItem extends StatelessWidget {
+  final ThemeMode theme;
+  final Function updateTheme;
+
+  const ThemeSettingsItem({
+    required this.theme,
+    required this.updateTheme,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 4.0,
+          vertical: 12.0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Text(
+                "Theme",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              flex: 1,
+            ),
+            Flexible(
+              child: Text(
+                theme.name,
+                style: TextStyle(fontSize: 18),
+              ),
+              flex: 2,
+            ),
+          ],
+        ),
+      ),
+      onTap: () async {
+        final _theme = await EnumDialog.show<ThemeMode>(
+          context,
+          "Select Theme",
+          ThemeMode.values
+              .asMap()
+              .map((_, value) => MapEntry(value, value.name)),
+          theme,
+        );
+        if (_theme != null) {
+          updateTheme(_theme);
+        }
+      },
+    );
+  }
+}
+
 class UserSettingsWidget extends ConsumerWidget {
   const UserSettingsWidget();
 
@@ -16,103 +127,27 @@ class UserSettingsWidget extends ConsumerWidget {
       width: double.infinity,
       child: Column(
         children: [
-          InkWell(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 4.0,
-                vertical: 12.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Language",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    flex: 1,
-                  ),
-                  Flexible(
-                    child: Text(
-                      userSettings.language.name,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    flex: 2,
-                  ),
-                ],
+          LanguageSettingsItem(
+            language: settings.userSettings.language,
+            updateLanguage: (language) => updateSettings(
+              ref,
+              settings.copyWith(
+                userSettings: userSettings.copyWith(
+                  language: language,
+                ),
               ),
             ),
-            onTap: () async {
-              final language = await EnumDialog.show<Language>(
-                context,
-                "Select Language",
-                Language.values
-                    .asMap()
-                    .map((_, value) => MapEntry(value, value.name)),
-                userSettings.language,
-              );
-              if (language != null) {
-                updateSettings(
-                  ref,
-                  settings.copyWith(
-                    userSettings: userSettings.copyWith(
-                      language: language,
-                    ),
-                  ),
-                );
-              }
-            },
           ),
-          InkWell(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 4.0,
-                vertical: 12.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Theme",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    flex: 1,
-                  ),
-                  Flexible(
-                    child: Text(
-                      userSettings.theme.name,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    flex: 2,
-                  ),
-                ],
+          ThemeSettingsItem(
+            theme: settings.userSettings.theme,
+            updateTheme: (theme) => updateSettings(
+              ref,
+              settings.copyWith(
+                userSettings: userSettings.copyWith(
+                  theme: theme,
+                ),
               ),
             ),
-            onTap: () async {
-              final theme = await EnumDialog.show<ThemeMode>(
-                context,
-                "Select Theme",
-                ThemeMode.values
-                    .asMap()
-                    .map((_, value) => MapEntry(value, value.name)),
-                userSettings.theme,
-              );
-              if (theme != null) {
-                updateSettings(
-                  ref,
-                  settings.copyWith(
-                    userSettings: userSettings.copyWith(
-                      theme: theme,
-                    ),
-                  ),
-                );
-              }
-            },
           ),
         ],
       ),

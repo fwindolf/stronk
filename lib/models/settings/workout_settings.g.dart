@@ -6,27 +6,16 @@ part of 'workout_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_WorkoutSettings _$$_WorkoutSettingsFromJson(Map<String, dynamic> json) =>
-    _$_WorkoutSettings(
-      sessionGoals: (json['sessionGoals'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(_$enumDecode(_$TimeframeEnumMap, k), e as int),
-      ),
-      unit: _$enumDecode(_$UnitEnumMap, json['unit']),
-      slotChoices: (json['slotChoices'] as List<dynamic>)
-          .map((e) => ReminderTimeslot.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      reminders: (json['reminders'] as List<dynamic>)
-          .map((e) => Reminder.fromJson(e as Map<String, dynamic>))
-          .toList(),
+_$_SessionGoal _$$_SessionGoalFromJson(Map<String, dynamic> json) =>
+    _$_SessionGoal(
+      timeframe: _$enumDecode(_$TimeframeEnumMap, json['timeframe']),
+      count: json['count'] as int,
     );
 
-Map<String, dynamic> _$$_WorkoutSettingsToJson(_$_WorkoutSettings instance) =>
+Map<String, dynamic> _$$_SessionGoalToJson(_$_SessionGoal instance) =>
     <String, dynamic>{
-      'sessionGoals': instance.sessionGoals
-          .map((k, e) => MapEntry(_$TimeframeEnumMap[k], e)),
-      'unit': _$UnitEnumMap[instance.unit],
-      'slotChoices': instance.slotChoices.map((e) => e.toJson()).toList(),
-      'reminders': instance.reminders.map((e) => e.toJson()).toList(),
+      'timeframe': _$TimeframeEnumMap[instance.timeframe],
+      'count': instance.count,
     };
 
 K _$enumDecode<K, V>(
@@ -61,6 +50,28 @@ const _$TimeframeEnumMap = {
   Timeframe.WorkoutsPerWeek: 'WorkoutsPerWeek',
   Timeframe.WorkoutsPerTwoWeeks: 'WorkoutsPerTwoWeeks',
 };
+
+_$_WorkoutSettings _$$_WorkoutSettingsFromJson(Map<String, dynamic> json) =>
+    _$_WorkoutSettings(
+      unit: _$enumDecode(_$UnitEnumMap, json['unit']),
+      sessionGoal: json['sessionGoal'] == null
+          ? null
+          : SessionGoal.fromJson(json['sessionGoal'] as Map<String, dynamic>),
+      slotChoices: (json['slotChoices'] as List<dynamic>)
+          .map((e) => ReminderTimeslot.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reminders: (json['reminders'] as List<dynamic>)
+          .map((e) => Reminder.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_WorkoutSettingsToJson(_$_WorkoutSettings instance) =>
+    <String, dynamic>{
+      'unit': _$UnitEnumMap[instance.unit],
+      'sessionGoal': instance.sessionGoal?.toJson(),
+      'slotChoices': instance.slotChoices.map((e) => e.toJson()).toList(),
+      'reminders': instance.reminders.map((e) => e.toJson()).toList(),
+    };
 
 const _$UnitEnumMap = {
   Unit.Metric: 'Metric',

@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:stronk/app/common_widgets/dial_widgets.dart';
 import 'package:stronk/app/settings/enum_dialog.dart';
 import 'package:stronk/app/settings/util.dart';
 import 'package:stronk/controllers/auth_controller.dart';
@@ -8,8 +11,218 @@ import 'package:stronk/models/settings/reminder.dart';
 import 'package:stronk/models/settings/settings.dart';
 import 'package:stronk/models/settings/workout_settings.dart';
 
-class WorkoutSettingsWidget extends ConsumerWidget {
-  const WorkoutSettingsWidget();
+class UnitsItem extends StatelessWidget {
+  final Unit unit;
+  final Function updateUnit;
+
+  const UnitsItem({
+    required this.unit,
+    required this.updateUnit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 4.0,
+          vertical: 12.0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Text(
+                "Units",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              flex: 1,
+            ),
+            Flexible(
+              child: Text(
+                unit.name,
+                style: TextStyle(fontSize: 18),
+              ),
+              flex: 2,
+            ),
+          ],
+        ),
+      ),
+      onTap: () async {
+        final _unit = await EnumDialog.show<Unit>(
+          context,
+          "Select Units",
+          Unit.values.asMap().map((_, value) => MapEntry(value, value.name)),
+          unit,
+        );
+        if (_unit != null) {
+          updateUnit(_unit);
+        }
+      },
+    );
+  }
+}
+
+class GoalItem extends StatelessWidget {
+  final Timeframe timeframe;
+  final int count;
+
+  final Function(BuildContext) onShowDialog;
+  final Function() onDelete;
+  final Function(Timeframe, int) onUpdate;
+
+  const GoalItem({
+    required this.timeframe,
+    required this.count,
+    required this.onShowDialog,
+    required this.onDelete,
+    required this.onUpdate,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkWell(
+                  child: Text(
+                    timeframe.name,
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  onTap: () async {
+                    final Timeframe? _timeframe = await onShowDialog(context);
+                    if (_timeframe != null) {
+                      onUpdate(_timeframe, 1);
+                    }
+                  },
+                ),
+                Dial<int>(
+                  value: count,
+                  onUpdate: (int count) => onUpdate(timeframe, count),
+                  increment: 1,
+                  minv: 1,
+                  maxv: timeframe.max,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              iconSize: 26,
+              onPressed: () => onDelete(),
+              icon: Icon(Icons.delete),
+              splashRadius: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SessionGoalSettingsItem extends StatelessWidget {
+  final SessionGoal? sessionGoal;
+  final Function updateSessionGoal;
+
+  const SessionGoalSettingsItem({
+    required this.sessionGoal,
+    required this.updateSessionGoal,
+  });
+
+  _showGoalsDialog(BuildContext context) async {
+    return EnumDialog.show(
+      context,
+      "Select how you want to measure your goals",
+      Timeframe.values.asMap().map((_, value) => MapEntry(value, value.name)),
+      Timeframe.values.first,
+    );
+  }
+
+  Widget _buildEmpty(BuildContext context) {
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 23.5),
+        child: Text(
+          "Define your goals",
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
+      onTap: () async {
+        final timeframe = await _showGoalsDialog(context);
+        if (timeframe != null) {
+          updateSessionGoal(SessionGoal(timeframe: timeframe, count: 1));
+        }
+      },
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    return GoalItem(
+      timeframe: sessionGoal!.timeframe,
+      count: sessionGoal!.count,
+      onUpdate: (timeframe, count) => updateSessionGoal(
+        sessionGoal?.copyWith(
+          timeframe: timeframe,
+          count: count,
+        ),
+      ),
+      onDelete: () => updateSessionGoal(null),
+      onShowDialog: _showGoalsDialog,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 4.0,
+              vertical: 12.0,
+            ),
+            child: Text(
+              "Sessions",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: sessionGoal == null
+              ? _buildEmpty(context)
+              : _buildContent(context),
+        ),
+      ],
+    );
+  }
+}
+
+class ReminderSlotsSettingsItem extends StatelessWidget {
+  final List<ReminderTimeslot> slotChoices;
+  final Function updateSlots;
+
+  const ReminderSlotsSettingsItem({
+    required this.slotChoices,
+    required this.updateSlots,
+  });
 
   String _hourToTime(int hour) {
     if (hour == 0 || hour == 24)
@@ -34,12 +247,9 @@ class WorkoutSettingsWidget extends ConsumerWidget {
 
   void _showSlotSelection(
     BuildContext context,
-    WidgetRef ref,
-    Settings settings,
     ReminderTimeslot slot,
   ) async {
-    final choices = settings.workoutSettings.slotChoices;
-    final selected = choices
+    final selected = slotChoices
         .where((s) => s.hourOfDay != slot.hourOfDay)
         .map((s) => s.hourOfDay)
         .toList();
@@ -80,20 +290,79 @@ class WorkoutSettingsWidget extends ConsumerWidget {
         );
       },
     );
-    if (hourOfDay == null) return;
+    if (hourOfDay != null) {
+      updateSlots(
+        slotChoices
+          ..remove(slot)
+          ..add(ReminderTimeslot(hourOfDay: hourOfDay))
+          ..sort((a, b) => a.hourOfDay - b.hourOfDay),
+      );
+    }
+  }
 
-    updateSettings(
-      ref,
-      settings.copyWith(
-        workoutSettings: settings.workoutSettings.copyWith(
-          slotChoices: choices
-            ..remove(slot)
-            ..add(ReminderTimeslot(hourOfDay: hourOfDay))
-            ..sort((a, b) => a.hourOfDay - b.hourOfDay),
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Flexible(
+              flex: 1,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 4.0,
+                  vertical: 12.0,
+                ),
+                child: Text(
+                  "Reminder Timeslots",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            // Flexible(
+            //   flex: 2,
+            //   child: Container(),
+            // ),
+          ],
         ),
-      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: slotChoices.map(
+            (slot) {
+              return Flexible(
+                fit: FlexFit.loose,
+                child: InkWell(
+                  child: Container(
+                    margin: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      border: Border.all(width: 1, color: Colors.grey),
+                    ),
+                    child: Center(
+                      child: Text(_hourToTime(slot.hourOfDay)),
+                    ),
+                  ),
+                  onTap: () => _showSlotSelection(
+                    context,
+                    slot,
+                  ),
+                ),
+              );
+            },
+          ).toList(),
+        ),
+      ],
     );
   }
+}
+
+class WorkoutSettingsWidget extends ConsumerWidget {
+  const WorkoutSettingsWidget();
 
   _buildContent(Settings settings, BuildContext context, WidgetRef ref) {
     final workoutSettings = settings.workoutSettings;
@@ -102,55 +371,36 @@ class WorkoutSettingsWidget extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InkWell(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 4.0,
-                vertical: 12.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      "Units",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    flex: 1,
-                  ),
-                  Flexible(
-                    child: Text(
-                      workoutSettings.unit.name,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    flex: 2,
-                  ),
-                ],
+          UnitsItem(
+            unit: workoutSettings.unit,
+            updateUnit: (unit) => updateSettings(
+              ref,
+              settings.copyWith(
+                workoutSettings: workoutSettings.copyWith(unit: unit),
               ),
             ),
-            onTap: () async {
-              final unit = await EnumDialog.show<Unit>(
-                context,
-                "Select Units",
-                Unit.values
-                    .asMap()
-                    .map((_, value) => MapEntry(value, value.name)),
-                workoutSettings.unit,
-              );
-              if (unit != null) {
-                updateSettings(
-                  ref,
-                  settings.copyWith(
-                    workoutSettings: workoutSettings.copyWith(
-                      unit: unit,
-                    ),
-                  ),
-                );
-              }
-            },
+          ),
+          SessionGoalSettingsItem(
+            sessionGoal: workoutSettings.sessionGoal,
+            updateSessionGoal: (sessionGoal) => updateSettings(
+              ref,
+              settings.copyWith(
+                workoutSettings: workoutSettings.copyWith(
+                  sessionGoal: sessionGoal,
+                ),
+              ),
+            ),
+          ),
+          ReminderSlotsSettingsItem(
+            slotChoices: workoutSettings.slotChoices,
+            updateSlots: (slotChoices) => updateSettings(
+              ref,
+              settings.copyWith(
+                workoutSettings: workoutSettings.copyWith(
+                  slotChoices: slotChoices,
+                ),
+              ),
+            ),
           ),
           Row(
             children: [
@@ -162,7 +412,7 @@ class WorkoutSettingsWidget extends ConsumerWidget {
                     vertical: 12.0,
                   ),
                   child: Text(
-                    "Reminder Timeslots",
+                    "Reminders",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -176,34 +426,6 @@ class WorkoutSettingsWidget extends ConsumerWidget {
                 child: Container(),
               ),
             ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: settings.workoutSettings.slotChoices.map(
-              (slot) {
-                return Expanded(
-                  child: InkWell(
-                    child: Container(
-                      margin: const EdgeInsets.all(5.0),
-                      padding: const EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        border: Border.all(width: 1, color: Colors.grey),
-                      ),
-                      child: Center(
-                        child: Text(_hourToTime(slot.hourOfDay)),
-                      ),
-                    ),
-                    onTap: () => _showSlotSelection(
-                      context,
-                      ref,
-                      settings,
-                      slot,
-                    ),
-                  ),
-                );
-              },
-            ).toList(),
           ),
         ],
       ),

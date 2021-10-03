@@ -203,12 +203,14 @@ class _$WorkoutSettingsTearOff {
 
   _WorkoutSettings call(
       {required Unit unit,
-      SessionGoal? sessionGoal,
+      SessionGoal? workoutGoal,
+      Map<String, SessionGoal> challengeGoals = const {},
       required List<ReminderTimeslot> slotChoices,
-      required List<Reminder> reminders}) {
+      Map<String, Reminder> reminders = const {}}) {
     return _WorkoutSettings(
       unit: unit,
-      sessionGoal: sessionGoal,
+      workoutGoal: workoutGoal,
+      challengeGoals: challengeGoals,
       slotChoices: slotChoices,
       reminders: reminders,
     );
@@ -225,9 +227,11 @@ const $WorkoutSettings = _$WorkoutSettingsTearOff();
 /// @nodoc
 mixin _$WorkoutSettings {
   Unit get unit => throw _privateConstructorUsedError;
-  SessionGoal? get sessionGoal => throw _privateConstructorUsedError;
+  SessionGoal? get workoutGoal => throw _privateConstructorUsedError;
+  Map<String, SessionGoal> get challengeGoals =>
+      throw _privateConstructorUsedError;
   List<ReminderTimeslot> get slotChoices => throw _privateConstructorUsedError;
-  List<Reminder> get reminders => throw _privateConstructorUsedError;
+  Map<String, Reminder> get reminders => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -242,11 +246,12 @@ abstract class $WorkoutSettingsCopyWith<$Res> {
       _$WorkoutSettingsCopyWithImpl<$Res>;
   $Res call(
       {Unit unit,
-      SessionGoal? sessionGoal,
+      SessionGoal? workoutGoal,
+      Map<String, SessionGoal> challengeGoals,
       List<ReminderTimeslot> slotChoices,
-      List<Reminder> reminders});
+      Map<String, Reminder> reminders});
 
-  $SessionGoalCopyWith<$Res>? get sessionGoal;
+  $SessionGoalCopyWith<$Res>? get workoutGoal;
 }
 
 /// @nodoc
@@ -261,7 +266,8 @@ class _$WorkoutSettingsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? unit = freezed,
-    Object? sessionGoal = freezed,
+    Object? workoutGoal = freezed,
+    Object? challengeGoals = freezed,
     Object? slotChoices = freezed,
     Object? reminders = freezed,
   }) {
@@ -270,10 +276,14 @@ class _$WorkoutSettingsCopyWithImpl<$Res>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as Unit,
-      sessionGoal: sessionGoal == freezed
-          ? _value.sessionGoal
-          : sessionGoal // ignore: cast_nullable_to_non_nullable
+      workoutGoal: workoutGoal == freezed
+          ? _value.workoutGoal
+          : workoutGoal // ignore: cast_nullable_to_non_nullable
               as SessionGoal?,
+      challengeGoals: challengeGoals == freezed
+          ? _value.challengeGoals
+          : challengeGoals // ignore: cast_nullable_to_non_nullable
+              as Map<String, SessionGoal>,
       slotChoices: slotChoices == freezed
           ? _value.slotChoices
           : slotChoices // ignore: cast_nullable_to_non_nullable
@@ -281,18 +291,18 @@ class _$WorkoutSettingsCopyWithImpl<$Res>
       reminders: reminders == freezed
           ? _value.reminders
           : reminders // ignore: cast_nullable_to_non_nullable
-              as List<Reminder>,
+              as Map<String, Reminder>,
     ));
   }
 
   @override
-  $SessionGoalCopyWith<$Res>? get sessionGoal {
-    if (_value.sessionGoal == null) {
+  $SessionGoalCopyWith<$Res>? get workoutGoal {
+    if (_value.workoutGoal == null) {
       return null;
     }
 
-    return $SessionGoalCopyWith<$Res>(_value.sessionGoal!, (value) {
-      return _then(_value.copyWith(sessionGoal: value));
+    return $SessionGoalCopyWith<$Res>(_value.workoutGoal!, (value) {
+      return _then(_value.copyWith(workoutGoal: value));
     });
   }
 }
@@ -306,12 +316,13 @@ abstract class _$WorkoutSettingsCopyWith<$Res>
   @override
   $Res call(
       {Unit unit,
-      SessionGoal? sessionGoal,
+      SessionGoal? workoutGoal,
+      Map<String, SessionGoal> challengeGoals,
       List<ReminderTimeslot> slotChoices,
-      List<Reminder> reminders});
+      Map<String, Reminder> reminders});
 
   @override
-  $SessionGoalCopyWith<$Res>? get sessionGoal;
+  $SessionGoalCopyWith<$Res>? get workoutGoal;
 }
 
 /// @nodoc
@@ -328,7 +339,8 @@ class __$WorkoutSettingsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? unit = freezed,
-    Object? sessionGoal = freezed,
+    Object? workoutGoal = freezed,
+    Object? challengeGoals = freezed,
     Object? slotChoices = freezed,
     Object? reminders = freezed,
   }) {
@@ -337,10 +349,14 @@ class __$WorkoutSettingsCopyWithImpl<$Res>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as Unit,
-      sessionGoal: sessionGoal == freezed
-          ? _value.sessionGoal
-          : sessionGoal // ignore: cast_nullable_to_non_nullable
+      workoutGoal: workoutGoal == freezed
+          ? _value.workoutGoal
+          : workoutGoal // ignore: cast_nullable_to_non_nullable
               as SessionGoal?,
+      challengeGoals: challengeGoals == freezed
+          ? _value.challengeGoals
+          : challengeGoals // ignore: cast_nullable_to_non_nullable
+              as Map<String, SessionGoal>,
       slotChoices: slotChoices == freezed
           ? _value.slotChoices
           : slotChoices // ignore: cast_nullable_to_non_nullable
@@ -348,7 +364,7 @@ class __$WorkoutSettingsCopyWithImpl<$Res>
       reminders: reminders == freezed
           ? _value.reminders
           : reminders // ignore: cast_nullable_to_non_nullable
-              as List<Reminder>,
+              as Map<String, Reminder>,
     ));
   }
 }
@@ -358,9 +374,10 @@ class __$WorkoutSettingsCopyWithImpl<$Res>
 class _$_WorkoutSettings extends _WorkoutSettings with DiagnosticableTreeMixin {
   const _$_WorkoutSettings(
       {required this.unit,
-      this.sessionGoal,
+      this.workoutGoal,
+      this.challengeGoals = const {},
       required this.slotChoices,
-      required this.reminders})
+      this.reminders = const {}})
       : super._();
 
   factory _$_WorkoutSettings.fromJson(Map<String, dynamic> json) =>
@@ -369,15 +386,19 @@ class _$_WorkoutSettings extends _WorkoutSettings with DiagnosticableTreeMixin {
   @override
   final Unit unit;
   @override
-  final SessionGoal? sessionGoal;
+  final SessionGoal? workoutGoal;
+  @JsonKey(defaultValue: const {})
+  @override
+  final Map<String, SessionGoal> challengeGoals;
   @override
   final List<ReminderTimeslot> slotChoices;
+  @JsonKey(defaultValue: const {})
   @override
-  final List<Reminder> reminders;
+  final Map<String, Reminder> reminders;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'WorkoutSettings(unit: $unit, sessionGoal: $sessionGoal, slotChoices: $slotChoices, reminders: $reminders)';
+    return 'WorkoutSettings(unit: $unit, workoutGoal: $workoutGoal, challengeGoals: $challengeGoals, slotChoices: $slotChoices, reminders: $reminders)';
   }
 
   @override
@@ -386,7 +407,8 @@ class _$_WorkoutSettings extends _WorkoutSettings with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'WorkoutSettings'))
       ..add(DiagnosticsProperty('unit', unit))
-      ..add(DiagnosticsProperty('sessionGoal', sessionGoal))
+      ..add(DiagnosticsProperty('workoutGoal', workoutGoal))
+      ..add(DiagnosticsProperty('challengeGoals', challengeGoals))
       ..add(DiagnosticsProperty('slotChoices', slotChoices))
       ..add(DiagnosticsProperty('reminders', reminders));
   }
@@ -397,9 +419,12 @@ class _$_WorkoutSettings extends _WorkoutSettings with DiagnosticableTreeMixin {
         (other is _WorkoutSettings &&
             (identical(other.unit, unit) ||
                 const DeepCollectionEquality().equals(other.unit, unit)) &&
-            (identical(other.sessionGoal, sessionGoal) ||
+            (identical(other.workoutGoal, workoutGoal) ||
                 const DeepCollectionEquality()
-                    .equals(other.sessionGoal, sessionGoal)) &&
+                    .equals(other.workoutGoal, workoutGoal)) &&
+            (identical(other.challengeGoals, challengeGoals) ||
+                const DeepCollectionEquality()
+                    .equals(other.challengeGoals, challengeGoals)) &&
             (identical(other.slotChoices, slotChoices) ||
                 const DeepCollectionEquality()
                     .equals(other.slotChoices, slotChoices)) &&
@@ -412,7 +437,8 @@ class _$_WorkoutSettings extends _WorkoutSettings with DiagnosticableTreeMixin {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(unit) ^
-      const DeepCollectionEquality().hash(sessionGoal) ^
+      const DeepCollectionEquality().hash(workoutGoal) ^
+      const DeepCollectionEquality().hash(challengeGoals) ^
       const DeepCollectionEquality().hash(slotChoices) ^
       const DeepCollectionEquality().hash(reminders);
 
@@ -430,9 +456,10 @@ class _$_WorkoutSettings extends _WorkoutSettings with DiagnosticableTreeMixin {
 abstract class _WorkoutSettings extends WorkoutSettings {
   const factory _WorkoutSettings(
       {required Unit unit,
-      SessionGoal? sessionGoal,
+      SessionGoal? workoutGoal,
+      Map<String, SessionGoal> challengeGoals,
       required List<ReminderTimeslot> slotChoices,
-      required List<Reminder> reminders}) = _$_WorkoutSettings;
+      Map<String, Reminder> reminders}) = _$_WorkoutSettings;
   const _WorkoutSettings._() : super._();
 
   factory _WorkoutSettings.fromJson(Map<String, dynamic> json) =
@@ -441,11 +468,14 @@ abstract class _WorkoutSettings extends WorkoutSettings {
   @override
   Unit get unit => throw _privateConstructorUsedError;
   @override
-  SessionGoal? get sessionGoal => throw _privateConstructorUsedError;
+  SessionGoal? get workoutGoal => throw _privateConstructorUsedError;
+  @override
+  Map<String, SessionGoal> get challengeGoals =>
+      throw _privateConstructorUsedError;
   @override
   List<ReminderTimeslot> get slotChoices => throw _privateConstructorUsedError;
   @override
-  List<Reminder> get reminders => throw _privateConstructorUsedError;
+  Map<String, Reminder> get reminders => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$WorkoutSettingsCopyWith<_WorkoutSettings> get copyWith =>

@@ -8,8 +8,8 @@ part 'workout_settings.g.dart';
 enum Timeframe {
   HoursPerDay,
   HoursPerWeek,
-  WorkoutsPerWeek,
-  WorkoutsPerTwoWeeks,
+  SessionsPerWeek,
+  SessionsPerTwoWeeks,
 }
 
 extension TimeframeExtension on Timeframe {
@@ -19,10 +19,10 @@ extension TimeframeExtension on Timeframe {
         return "Hours / Day";
       case Timeframe.HoursPerWeek:
         return "Hours / Week";
-      case Timeframe.WorkoutsPerWeek:
-        return "Workouts / Week";
-      case Timeframe.WorkoutsPerTwoWeeks:
-        return "Workouts / 2 Weeks";
+      case Timeframe.SessionsPerWeek:
+        return "Sessions / Week";
+      case Timeframe.SessionsPerTwoWeeks:
+        return "Sessions / 2 Weeks";
     }
   }
 
@@ -32,9 +32,9 @@ extension TimeframeExtension on Timeframe {
         return 24;
       case Timeframe.HoursPerWeek:
         return 7 * 24;
-      case Timeframe.WorkoutsPerWeek:
+      case Timeframe.SessionsPerWeek:
         return 2 * 7;
-      case Timeframe.WorkoutsPerTwoWeeks:
+      case Timeframe.SessionsPerTwoWeeks:
         return 2 * 2 * 7;
     }
   }
@@ -48,6 +48,11 @@ class SessionGoal with _$SessionGoal {
     required Timeframe timeframe,
     required int count,
   }) = _SessionGoal;
+
+  factory SessionGoal.empty() => SessionGoal(
+        timeframe: Timeframe.SessionsPerWeek,
+        count: 3,
+      );
 
   factory SessionGoal.fromJson(Map<String, dynamic> json) =>
       _$SessionGoalFromJson(json);
@@ -77,9 +82,10 @@ class WorkoutSettings with _$WorkoutSettings {
 
   const factory WorkoutSettings({
     required Unit unit,
-    SessionGoal? sessionGoal,
+    SessionGoal? workoutGoal,
+    @Default({}) Map<String, SessionGoal> challengeGoals,
     required List<ReminderTimeslot> slotChoices,
-    required List<Reminder> reminders,
+    @Default({}) Map<String, Reminder> reminders,
   }) = _WorkoutSettings;
 
   factory WorkoutSettings.empty() => const WorkoutSettings(
@@ -91,7 +97,6 @@ class WorkoutSettings with _$WorkoutSettings {
           ReminderTimeslot(hourOfDay: 19),
           ReminderTimeslot(hourOfDay: 21),
         ],
-        reminders: [],
       );
 
   factory WorkoutSettings.fromJson(Map<String, dynamic> json) =>

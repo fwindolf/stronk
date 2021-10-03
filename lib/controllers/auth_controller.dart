@@ -17,13 +17,16 @@ class AuthController extends StateNotifier<AsyncValue<User>> {
   AuthController(this._read) : super(AsyncValue.loading()) {
     _authStateChangesSubscription?.cancel();
     _authStateChangesSubscription =
-        _read(authRepositoryProvider).authStateChanges.listen((user) {
-      if (user == null) {
-        state = AsyncValue.loading();
-      } else {
-        state = AsyncValue.data(user);
-      }
-    });
+        _read(authRepositoryProvider).authStateChanges.listen(
+      (user) {
+        print("Auth state changed: $user");
+        if (user == null) {
+          state = AsyncValue.loading();
+        } else {
+          state = AsyncValue.data(user);
+        }
+      },
+    );
   }
 
   @override
@@ -35,9 +38,11 @@ class AuthController extends StateNotifier<AsyncValue<User>> {
   void appStarted() async {
     final user = _read(authRepositoryProvider).getCurrentUser();
     if (user == null) {
+      print("Signing in anonymously");
       await _read(authRepositoryProvider).signInAnonymously();
     }
   }
+
 
   // void createWithEmailAndPassword({required String email, required String password}) async {
   //   final user = _read(authRepositoryProvider).getCurrentUser();

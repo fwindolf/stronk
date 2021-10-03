@@ -47,30 +47,38 @@ K _$enumDecode<K, V>(
 const _$TimeframeEnumMap = {
   Timeframe.HoursPerDay: 'HoursPerDay',
   Timeframe.HoursPerWeek: 'HoursPerWeek',
-  Timeframe.WorkoutsPerWeek: 'WorkoutsPerWeek',
-  Timeframe.WorkoutsPerTwoWeeks: 'WorkoutsPerTwoWeeks',
+  Timeframe.SessionsPerWeek: 'SessionsPerWeek',
+  Timeframe.SessionsPerTwoWeeks: 'SessionsPerTwoWeeks',
 };
 
 _$_WorkoutSettings _$$_WorkoutSettingsFromJson(Map<String, dynamic> json) =>
     _$_WorkoutSettings(
       unit: _$enumDecode(_$UnitEnumMap, json['unit']),
-      sessionGoal: json['sessionGoal'] == null
+      workoutGoal: json['workoutGoal'] == null
           ? null
-          : SessionGoal.fromJson(json['sessionGoal'] as Map<String, dynamic>),
+          : SessionGoal.fromJson(json['workoutGoal'] as Map<String, dynamic>),
+      challengeGoals: (json['challengeGoals'] as Map<String, dynamic>?)?.map(
+            (k, e) =>
+                MapEntry(k, SessionGoal.fromJson(e as Map<String, dynamic>)),
+          ) ??
+          {},
       slotChoices: (json['slotChoices'] as List<dynamic>)
           .map((e) => ReminderTimeslot.fromJson(e as Map<String, dynamic>))
           .toList(),
-      reminders: (json['reminders'] as List<dynamic>)
-          .map((e) => Reminder.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      reminders: (json['reminders'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, Reminder.fromJson(e as Map<String, dynamic>)),
+          ) ??
+          {},
     );
 
 Map<String, dynamic> _$$_WorkoutSettingsToJson(_$_WorkoutSettings instance) =>
     <String, dynamic>{
       'unit': _$UnitEnumMap[instance.unit],
-      'sessionGoal': instance.sessionGoal?.toJson(),
+      'workoutGoal': instance.workoutGoal?.toJson(),
+      'challengeGoals':
+          instance.challengeGoals.map((k, e) => MapEntry(k, e.toJson())),
       'slotChoices': instance.slotChoices.map((e) => e.toJson()).toList(),
-      'reminders': instance.reminders.map((e) => e.toJson()).toList(),
+      'reminders': instance.reminders.map((k, e) => MapEntry(k, e.toJson())),
     };
 
 const _$UnitEnumMap = {

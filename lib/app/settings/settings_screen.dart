@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import 'package:stronk/app/drawer/default_drawer.dart';
+import 'package:stronk/app/settings/reminder_settings_widget.dart';
 import 'package:stronk/app/settings/user_settings_widget.dart';
 import 'package:stronk/app/settings/workout_settings_widget.dart';
 
@@ -37,6 +38,14 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const WorkoutSettingsWidget(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Text(
+                  "Reminders",
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+              ),
+              const ReminderSettingsWidget(),
             ],
           ),
         ),

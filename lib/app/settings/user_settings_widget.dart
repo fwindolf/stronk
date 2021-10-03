@@ -7,47 +7,16 @@ import 'package:stronk/models/settings/settings.dart';
 import 'package:stronk/models/settings/user_settings.dart';
 import 'package:stronk/app/settings/util.dart';
 
-class LanguageSettingsItem extends StatelessWidget {
-  final Language language;
-  final Function updateLanguage;
-
-  const LanguageSettingsItem({
-    required this.language,
-    required this.updateLanguage,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 4.0,
-          vertical: 12.0,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                "Language",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-              flex: 1,
-            ),
-            Flexible(
-              child: Text(
-                language.name,
-                style: TextStyle(fontSize: 18),
-              ),
-              flex: 2,
-            ),
-          ],
-        ),
-      ),
-      onTap: () async {
+class LanguageSettingsItem extends SettingsRowItem<Language>{
+  
+  LanguageSettingsItem({
+    required Language language,
+    required Function(Language) updateLanguage,
+  }) : super(
+    title: "Language",
+    data: language,
+    getValue: (language) => language.name,
+    changeValue: (BuildContext context) async {
         final _language = await EnumDialog.show<Language>(
           context,
           "Select Language",
@@ -60,48 +29,18 @@ class LanguageSettingsItem extends StatelessWidget {
           updateLanguage(_language);
         }
       },
-    );
-  }
+  );
 }
 
-class ThemeSettingsItem extends StatelessWidget {
-  final ThemeMode theme;
-  final Function updateTheme;
-
-  const ThemeSettingsItem({
-    required this.theme,
-    required this.updateTheme,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 4.0,
-          vertical: 12.0,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                "Theme",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              flex: 1,
-            ),
-            Flexible(
-              child: Text(
-                theme.name,
-                style: TextStyle(fontSize: 18),
-              ),
-              flex: 2,
-            ),
-          ],
-        ),
-      ),
-      onTap: () async {
+class ThemeSettingsItem extends SettingsRowItem<ThemeMode> {
+    ThemeSettingsItem({
+    required ThemeMode theme,
+    required Function(ThemeMode) updateTheme,
+  }) : super(
+    title: "Theme",
+    data: theme,
+    getValue: (theme) => theme.name,
+    changeValue: (BuildContext context) async {
         final _theme = await EnumDialog.show<ThemeMode>(
           context,
           "Select Theme",
@@ -115,8 +54,8 @@ class ThemeSettingsItem extends StatelessWidget {
         }
       },
     );
-  }
 }
+
 
 class UserSettingsWidget extends ConsumerWidget {
   const UserSettingsWidget();

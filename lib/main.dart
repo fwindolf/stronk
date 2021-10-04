@@ -2,6 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/app_theme.dart';
+import 'package:stronk/controllers/auth_controller.dart';
+
+import 'package:stronk/controllers/settings_controller.dart';
+import 'package:stronk/models/settings/settings.dart';
+import 'package:stronk/repositories/auth_repository.dart';
 
 import 'package:stronk/util/data.dart';
 
@@ -16,17 +21,21 @@ void main() async {
 class Stronk extends ConsumerWidget {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final datagen = ref.read(dataGeneratorProvider);
     datagen.generateMusclesFromFile();
 
+    final settings = ref.watch(authControllerProvider).maybeWhen(
+          data: (user) => ref.watch(settingsProvider(user)),
+          orElse: () => Settings.empty(),
+        );
+
     return MaterialApp(
       title: 'Stronk',
-      themeMode: ThemeMode.light,
+      themeMode: settings.userSettings.theme,
       theme: lightTheme,
       darkTheme: darkTheme,
-      initialRoute: AppRoutes.exerciseEdit,
-      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.startup,
       onGenerateRoute: (settings) => AppRouter.onGenerateRoute(settings),
     );
   }

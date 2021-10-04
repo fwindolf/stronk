@@ -32,6 +32,14 @@ class DefaultDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed(AppRoutes.exercises);
             },
           ),
+          Spacer(),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text("Settings"),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(AppRoutes.settings);
+            },
+          ),
         ],
       ),
     );

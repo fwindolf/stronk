@@ -6,7 +6,6 @@ class WorkoutOverviewWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 200,
       width: double.infinity,
       child: Card(
         elevation: 3,

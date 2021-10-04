@@ -10,6 +10,7 @@ import 'package:stronk/repositories/exception.dart';
 
 abstract class ChallengeRepositoryBase {
   Future<List<Challenge>> retrieve({required String userId});
+  Future<Challenge> get({required String userId, required String challengeId});
   Future<String> create({required String userId, required Challenge challenge});
   Future<void> update({required String userId, required Challenge challenge});
   Future<void> delete({required String userId, required String challengeId});
@@ -34,6 +35,18 @@ class ChallengeRepository implements ChallengeRepositoryBase {
       throw DataTransferException(message: "Failed to retrieve Challenges: ${e.message}");
     } catch (e) {
       throw DataTransferException(message: "Failed to parse Challenges: ${e.toString()}");
+    }
+  }
+
+  @override
+  Future<Challenge> get({required String userId, required String challengeId}) async {
+    try {
+      final doc = await _read(firebaseFirestoreProvider).challengeRef(userId).doc(challengeId).get();
+      return Challenge.fromDocument(doc);
+    }on FirebaseException catch (e) {
+      throw DataTransferException(message: "Failed to retrieve Challenge: ${e.message}");
+    } catch (e) {
+      throw DataTransferException(message: "Failed to parse Challenge: ${e.toString()}");
     }
   }
 

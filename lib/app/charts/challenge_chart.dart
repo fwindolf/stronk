@@ -220,7 +220,6 @@ class ChallengePainter extends CustomPainter {
     loadTicks.forEach((tick) {
       // Draw xtick
       final y = coord.atY(tick);
-      print("$tick: $y");
       canvas.drawLine(
         Offset(coord.yAx.x - 3, y),
         Offset(coord.yAx.x + 1, y),
@@ -383,20 +382,30 @@ class ChallengeChart extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
-      child: LayoutBuilder(
-        builder: (_, constraints) => Container(
-          width: constraints.widthConstraints().maxWidth,
-          height: constraints.heightConstraints().maxHeight,
-          child: CustomPaint(
-            painter: ChallengePainter(
-              dataColor: Colors.green.shade600, //Theme.of(context).colorScheme.primary,
-              baseColor: Colors.black,
-              challenges: data,
-              firstDate: firstDate,
-              lastDate: lastDate,
+      child: Column(
+        children: [
+          Text(
+            "Completed Challenges",
+            style: Theme.of(context).textTheme.headline5,
+          ),
+          Expanded(
+            child: LayoutBuilder(
+              builder: (_, constraints) => Container(
+                width: constraints.widthConstraints().maxWidth,
+                height: constraints.heightConstraints().maxHeight,
+                child: CustomPaint(
+                  painter: ChallengePainter(
+                    dataColor: Colors.green.shade600, //Theme.of(context).colorScheme.primary,
+                    baseColor: Colors.black,
+                    challenges: data,
+                    firstDate: firstDate,
+                    lastDate: lastDate,
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

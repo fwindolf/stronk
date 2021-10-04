@@ -8,31 +8,58 @@ class UserOverviewWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(authControllerProvider);
-
-    var name = user?.displayName;
-    if (name == null || name.isEmpty) name = "Anonymous User";
+    final userName = ref.watch(authControllerProvider).when(
+          data: (user) {
+            if (user.displayName == null || user.displayName!.isEmpty) {
+              return "Anonymous User";
+            }
+            return user.displayName!;
+          },
+          loading: () => "Loading User",
+          error: (error, _) => "Unknown User",
+        );
 
     return Card(
       elevation: 5,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
-        child: ListTile(
-          leading: CircleAvatar(
-            child: Icon(Icons.person),
-          ),
-          title: Text(name),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "X workouts",
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+              child: CircleAvatar(
+                minRadius: 20,
+                maxRadius: 30,
+                child: Icon(Icons.person),
               ),
-              Text(
-                "X challenges with x longest streak",
-              ),
-            ],
-          ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  userName,
+                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  "X workouts",
+                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                        fontSize: 16,
+                      ),
+                ),
+                Text(
+                  "X challenges with x longest streak",
+                  style: Theme.of(context).textTheme.headline5?.copyWith(
+                        fontSize: 16,
+                      ),
+                )
+              ],
+            )
+          ],
         ),
       ),
     );

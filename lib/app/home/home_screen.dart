@@ -35,17 +35,26 @@ class HomeScreen extends HookConsumerWidget {
         drawer: DefaultDrawer(),
         body: Column(
           children: <Widget>[
-            InkWell(
-              child: UserOverviewWidget(),
-              onTap: () => Navigator.of(context).pushNamed(AppRoutes.profile),
+            Flexible(
+              flex: 1,
+              child: InkWell(
+                child: UserOverviewWidget(),
+                onTap: () => Navigator.of(context).pushNamed(AppRoutes.profile),
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: WorkoutOverviewWidget(),
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: WorkoutOverviewWidget(),
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 2.0),
-              child: ChallengeOverviewWidget(),
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 2.0),
+                child: ChallengeOverviewWidget(),
+              ),
             ),
           ],
         ),

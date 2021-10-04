@@ -33,9 +33,9 @@ Map<String, dynamic> _$$_WorkoutToJson(_$_Workout instance) =>
       'name': instance.name,
       'description': instance.description,
       'creator': instance.creator,
-      'tags': instance.tags,
-      'warmup': instance.warmup,
-      'exercises': instance.exercises,
-      'cooldown': instance.cooldown,
+      'tags': instance.tags.map((e) => e.toJson()).toList(),
+      'warmup': instance.warmup?.map((e) => e.toJson()).toList(),
+      'exercises': instance.exercises.map((e) => e.toJson()).toList(),
+      'cooldown': instance.cooldown?.map((e) => e.toJson()).toList(),
       'isFavourite': instance.isFavourite,
     };

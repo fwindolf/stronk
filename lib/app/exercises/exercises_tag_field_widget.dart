@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/common_widgets/tag_widgets.dart';
-import 'package:stronk/app/exercises/exercise_validation.dart';
 import 'package:stronk/controllers/exercise_tag_controller.dart';
 import 'package:stronk/models/exercise/exercise_tag.dart';
 import 'package:stronk/repositories/exercise_tag_repository.dart';
@@ -24,13 +23,14 @@ class ExercisesTagField extends ConsumerWidget {
   void _createTag(ExerciseTag tag, WidgetRef ref) {
     print("Create tag ${tag.name}");
     // Create if not exists, add to created
-    final user = ref.read(authControllerProvider);
-    if (user != null) {
-      print("Creating tag on repo ${tag.name}");
-      ref.read(exerciseTagRepositoryProvider).create(userId: user.uid, tag: tag);
-      _activateTag(tag);
-      ref.read(exerciseTagListControllerProvider.notifier).retrieveItems();
-    }
+    ref.read(authControllerProvider).whenData(
+      (user) {
+        print("Creating tag on repo ${tag.name}");
+        ref.read(exerciseTagRepositoryProvider).create(userId: user.uid, tag: tag);
+        _activateTag(tag);
+        ref.read(exerciseTagListControllerProvider.notifier).retrieveItems();
+      },
+    );
   }
 
   void _activateTag(ExerciseTag tag) {
@@ -54,12 +54,11 @@ class ExercisesTagField extends ConsumerWidget {
     _deactivateTag(tag);
 
     // Delete if exists, add to deleted
-    final user = ref.read(authControllerProvider);
-    if (user != null) {
+    ref.read(authControllerProvider).whenData((user) {
       print("Deleting tag on repo ${tag.name}");
       ref.read(exerciseTagRepositoryProvider).delete(userId: user.uid, tagId: tag.id!);
       ref.read(exerciseTagListControllerProvider.notifier).retrieveItems();
-    }
+    });
   }
 
   Widget _buildContent(BuildContext context, WidgetRef ref, [List<ExerciseTag>? tags]) {

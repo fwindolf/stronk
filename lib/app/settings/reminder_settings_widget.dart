@@ -4,15 +4,13 @@ import 'package:stronk/app/settings/reminder_screen.dart';
 import 'package:stronk/app/settings/util.dart';
 import 'package:stronk/controllers/auth_controller.dart';
 import 'package:stronk/controllers/settings_controller.dart';
-import 'package:stronk/models/challenge/challenge.dart';
 import 'package:stronk/models/settings/reminder.dart';
 import 'package:stronk/models/settings/settings.dart';
 import 'package:stronk/models/settings/workout_settings.dart';
 
 class WorkoutReminderSettingsItem extends SettingsRowItem<Reminder> {
   static Widget _toWidget(Reminder reminder, SessionGoal? workoutGoal) {
-    return Container(
-        child: Text("${reminder.toString()} ${workoutGoal.toString()}"));
+    return Container(child: Text("${reminder.toString()} ${workoutGoal.toString()}"));
   }
 
   static void _showDialog(
@@ -47,8 +45,7 @@ class WorkoutReminderSettingsItem extends SettingsRowItem<Reminder> {
   }) : super(
           title: "Workouts Reminder ",
           data: workoutSettings.reminders["workout"] ?? Reminder.empty(),
-          getValue: (reminder) =>
-              _toWidget(reminder, workoutSettings.workoutGoal),
+          getValue: (reminder) => _toWidget(reminder, workoutSettings.workoutGoal),
           changeValue: (context) => _showDialog(
             context,
             workoutSettings,

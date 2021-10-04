@@ -13,7 +13,10 @@ class ExerciseItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(authControllerProvider);
+    final user = ref.read(authControllerProvider).maybeWhen(
+          data: (user) => user,
+          orElse: () => null,
+        );
     final exercise = ref.watch(exerciseItemProvider);
 
     return ListTile(

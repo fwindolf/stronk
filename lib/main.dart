@@ -6,7 +6,6 @@ import 'package:stronk/controllers/auth_controller.dart';
 
 import 'package:stronk/controllers/settings_controller.dart';
 import 'package:stronk/models/settings/settings.dart';
-import 'package:stronk/repositories/auth_repository.dart';
 
 import 'package:stronk/util/data.dart';
 

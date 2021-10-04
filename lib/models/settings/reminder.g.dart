@@ -8,11 +8,13 @@ part of 'reminder.dart';
 
 _$_RequiredTimeslot _$$_RequiredTimeslotFromJson(Map<String, dynamic> json) =>
     _$_RequiredTimeslot(
+      dayOfWeek: json['dayOfWeek'] as int?,
       hourOfDay: json['hourOfDay'] as int,
     );
 
 Map<String, dynamic> _$$_RequiredTimeslotToJson(_$_RequiredTimeslot instance) =>
     <String, dynamic>{
+      'dayOfWeek': instance.dayOfWeek,
       'hourOfDay': instance.hourOfDay,
     };
 

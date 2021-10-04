@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:stronk/routing/app_router.dart';
-import 'package:stronk/controllers/auth_controller.dart';
 
 import 'package:stronk/app/common_widgets/user_overview_widget.dart';
 import 'package:stronk/app/home/workout_overview_widget.dart';

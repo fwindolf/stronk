@@ -1,5 +1,4 @@
 import 'package:riverpod/riverpod.dart';
-import 'package:stronk/controllers/auth_controller.dart';
 import 'package:stronk/models/muscle/muscle.dart';
 
 import 'package:stronk/repositories/exception.dart';

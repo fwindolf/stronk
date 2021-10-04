@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:stronk/controllers/auth_controller.dart';
 
 import 'package:stronk/models/settings/settings.dart';
 

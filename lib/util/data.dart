@@ -1,10 +1,7 @@
-import 'dart:io';
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:stronk/controllers/auth_controller.dart';
 import 'package:stronk/models/muscle/muscle.dart';
 import 'package:stronk/repositories/exception.dart';
 import 'package:stronk/repositories/muscle_repository.dart';

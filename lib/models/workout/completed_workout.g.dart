@@ -24,8 +24,8 @@ Map<String, dynamic> _$$_CompletedWorkoutToJson(_$_CompletedWorkout instance) =>
     <String, dynamic>{
       'id': instance.id,
       'creator': instance.creator,
-      'workout': instance.workout,
+      'workout': instance.workout.toJson(),
       'startTime': instance.startTime.toIso8601String(),
       'finishTime': instance.finishTime?.toIso8601String(),
-      'exercises': instance.exercises,
+      'exercises': instance.exercises.map((e) => e.toJson()).toList(),
     };

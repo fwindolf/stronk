@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:stronk/app/common_widgets/enum_dropdown_field.dart';
 import 'package:stronk/app/exercises/exercise_type_field.dart';
 
 import 'package:stronk/app/exercises/exercises_tag_field_widget.dart';
@@ -10,17 +8,11 @@ import 'package:stronk/app/exercises/instruction_field.dart';
 import 'package:stronk/app/exercises/exercise_muscle_field.dart';
 
 import 'package:stronk/controllers/auth_controller.dart';
-import 'package:stronk/controllers/exercise_tag_controller.dart';
-import 'package:stronk/models/exercise/exercise_types.dart';
-import 'package:stronk/repositories/exercise_tag_repository.dart';
-import 'package:stronk/repositories/muscle_repository.dart';
 
 import 'package:stronk/util/validation.dart';
 import 'package:stronk/app/exercises/exercise_validation.dart';
 
 import 'package:stronk/models/exercise/exercise.dart';
-import 'package:stronk/models/exercise/exercise_tag.dart';
-import 'package:stronk/models/muscle/muscle.dart';
 
 import 'package:stronk/repositories/exercise_repository.dart';
 
@@ -114,7 +106,11 @@ class ExerciseEditScreen extends ConsumerWidget {
       return;
     }
 
-    final user = ref.read(authControllerProvider);
+    final user = ref.read(authControllerProvider).maybeWhen(
+          data: (user) => user,
+          orElse: () => null,
+        );
+
     if (user == null) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(

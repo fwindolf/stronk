@@ -65,7 +65,7 @@ class _EditableTagWidgetState extends State<EditableTagWidget> {
   void submit(BuildContext context) {
     print("Submit ${_controller.text}");
     if (_controller.text.isEmpty) return;
-    if (_controller.text.length < 4 || _controller.text.length > 20) {
+    if (_controller.text.length <= 2 || _controller.text.length > 20) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         behavior: SnackBarBehavior.floating,

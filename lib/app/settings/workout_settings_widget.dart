@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/common_widgets/dial_widgets.dart';
@@ -7,7 +5,6 @@ import 'package:stronk/app/settings/enum_dialog.dart';
 import 'package:stronk/app/settings/util.dart';
 import 'package:stronk/controllers/auth_controller.dart';
 import 'package:stronk/controllers/settings_controller.dart';
-import 'package:stronk/models/settings/reminder.dart';
 import 'package:stronk/models/settings/settings.dart';
 import 'package:stronk/models/settings/workout_settings.dart';
 
@@ -23,9 +20,7 @@ class UnitsItem extends SettingsRowItem<Unit> {
             final _unit = await EnumDialog.show<Unit>(
               context,
               "Select Units",
-              Unit.values
-                  .asMap()
-                  .map((_, value) => MapEntry(value, value.name)),
+              Unit.values.asMap().map((_, value) => MapEntry(value, value.name)),
               unit,
             );
             if (_unit != null) {

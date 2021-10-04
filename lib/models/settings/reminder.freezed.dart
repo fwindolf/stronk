@@ -21,8 +21,9 @@ ReminderTimeslot _$ReminderTimeslotFromJson(Map<String, dynamic> json) {
 class _$ReminderTimeslotTearOff {
   const _$ReminderTimeslotTearOff();
 
-  _RequiredTimeslot call({required int hourOfDay}) {
+  _RequiredTimeslot call({int? dayOfWeek, required int hourOfDay}) {
     return _RequiredTimeslot(
+      dayOfWeek: dayOfWeek,
       hourOfDay: hourOfDay,
     );
   }
@@ -37,6 +38,7 @@ const $ReminderTimeslot = _$ReminderTimeslotTearOff();
 
 /// @nodoc
 mixin _$ReminderTimeslot {
+  int? get dayOfWeek => throw _privateConstructorUsedError;
   int get hourOfDay => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +52,7 @@ abstract class $ReminderTimeslotCopyWith<$Res> {
   factory $ReminderTimeslotCopyWith(
           ReminderTimeslot value, $Res Function(ReminderTimeslot) then) =
       _$ReminderTimeslotCopyWithImpl<$Res>;
-  $Res call({int hourOfDay});
+  $Res call({int? dayOfWeek, int hourOfDay});
 }
 
 /// @nodoc
@@ -64,9 +66,14 @@ class _$ReminderTimeslotCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? dayOfWeek = freezed,
     Object? hourOfDay = freezed,
   }) {
     return _then(_value.copyWith(
+      dayOfWeek: dayOfWeek == freezed
+          ? _value.dayOfWeek
+          : dayOfWeek // ignore: cast_nullable_to_non_nullable
+              as int?,
       hourOfDay: hourOfDay == freezed
           ? _value.hourOfDay
           : hourOfDay // ignore: cast_nullable_to_non_nullable
@@ -82,7 +89,7 @@ abstract class _$RequiredTimeslotCopyWith<$Res>
           _RequiredTimeslot value, $Res Function(_RequiredTimeslot) then) =
       __$RequiredTimeslotCopyWithImpl<$Res>;
   @override
-  $Res call({int hourOfDay});
+  $Res call({int? dayOfWeek, int hourOfDay});
 }
 
 /// @nodoc
@@ -98,9 +105,14 @@ class __$RequiredTimeslotCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? dayOfWeek = freezed,
     Object? hourOfDay = freezed,
   }) {
     return _then(_RequiredTimeslot(
+      dayOfWeek: dayOfWeek == freezed
+          ? _value.dayOfWeek
+          : dayOfWeek // ignore: cast_nullable_to_non_nullable
+              as int?,
       hourOfDay: hourOfDay == freezed
           ? _value.hourOfDay
           : hourOfDay // ignore: cast_nullable_to_non_nullable
@@ -113,17 +125,20 @@ class __$RequiredTimeslotCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RequiredTimeslot extends _RequiredTimeslot
     with DiagnosticableTreeMixin {
-  const _$_RequiredTimeslot({required this.hourOfDay}) : super._();
+  const _$_RequiredTimeslot({this.dayOfWeek, required this.hourOfDay})
+      : super._();
 
   factory _$_RequiredTimeslot.fromJson(Map<String, dynamic> json) =>
       _$$_RequiredTimeslotFromJson(json);
 
   @override
+  final int? dayOfWeek;
+  @override
   final int hourOfDay;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ReminderTimeslot(hourOfDay: $hourOfDay)';
+    return 'ReminderTimeslot(dayOfWeek: $dayOfWeek, hourOfDay: $hourOfDay)';
   }
 
   @override
@@ -131,6 +146,7 @@ class _$_RequiredTimeslot extends _RequiredTimeslot
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ReminderTimeslot'))
+      ..add(DiagnosticsProperty('dayOfWeek', dayOfWeek))
       ..add(DiagnosticsProperty('hourOfDay', hourOfDay));
   }
 
@@ -138,6 +154,9 @@ class _$_RequiredTimeslot extends _RequiredTimeslot
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _RequiredTimeslot &&
+            (identical(other.dayOfWeek, dayOfWeek) ||
+                const DeepCollectionEquality()
+                    .equals(other.dayOfWeek, dayOfWeek)) &&
             (identical(other.hourOfDay, hourOfDay) ||
                 const DeepCollectionEquality()
                     .equals(other.hourOfDay, hourOfDay)));
@@ -145,7 +164,9 @@ class _$_RequiredTimeslot extends _RequiredTimeslot
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(hourOfDay);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(dayOfWeek) ^
+      const DeepCollectionEquality().hash(hourOfDay);
 
   @JsonKey(ignore: true)
   @override
@@ -159,13 +180,15 @@ class _$_RequiredTimeslot extends _RequiredTimeslot
 }
 
 abstract class _RequiredTimeslot extends ReminderTimeslot {
-  const factory _RequiredTimeslot({required int hourOfDay}) =
+  const factory _RequiredTimeslot({int? dayOfWeek, required int hourOfDay}) =
       _$_RequiredTimeslot;
   const _RequiredTimeslot._() : super._();
 
   factory _RequiredTimeslot.fromJson(Map<String, dynamic> json) =
       _$_RequiredTimeslot.fromJson;
 
+  @override
+  int? get dayOfWeek => throw _privateConstructorUsedError;
   @override
   int get hourOfDay => throw _privateConstructorUsedError;
   @override

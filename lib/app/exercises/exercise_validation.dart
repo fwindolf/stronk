@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stronk/models/exercise/exercise_configuration.dart';
-import 'package:stronk/models/exercise/exercise_types.dart';
 import 'package:stronk/util/validation.dart';
 
 import 'package:stronk/models/exercise/exercise_tag.dart';

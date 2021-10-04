@@ -18,8 +18,10 @@ final challengeListProvider = Provider<List<Challenge>>((ref) {
 
 final challengeListControllerProvider =
     StateNotifierProvider<ChallengeListController, AsyncValue<List<Challenge>>>((ref) {
-  final user = ref.watch(authControllerProvider);
-  return ChallengeListController(ref.read, user?.uid);
+  return ref.watch(authControllerProvider).maybeWhen(
+        data: (user) => ChallengeListController(ref.read, user.uid),
+        orElse: () => ChallengeListController(ref.read, null),
+      );
 });
 
 class ChallengeListController extends StateNotifier<AsyncValue<List<Challenge>>> {

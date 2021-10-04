@@ -24,7 +24,7 @@ Map<String, dynamic> _$$_ChallengeToJson(_$_Challenge instance) =>
       'name': instance.name,
       'description': instance.description,
       'creator': instance.creator,
-      'exercise': instance.exercise,
+      'exercise': instance.exercise.toJson(),
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate?.toIso8601String(),
     };

@@ -22,8 +22,8 @@ Map<String, dynamic> _$$_CompletedExerciseToJson(
     <String, dynamic>{
       'id': instance.id,
       'creator': instance.creator,
-      'source': instance.source,
+      'source': instance.source.toJson(),
       'name': instance.name,
-      'configuration': instance.configuration,
+      'configuration': instance.configuration.toJson(),
       'timestamp': instance.timestamp.toIso8601String(),
     };

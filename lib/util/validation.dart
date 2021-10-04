@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stronk/util/string_validation_extensions.dart';
 
 class ValidationItem<T> {

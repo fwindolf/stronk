@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:stronk/models/exercise/execution.dart';
-import 'package:stronk/models/exercise/repetition_execution.dart';
+import 'package:stronk/models/exercise/exercise.dart';
+import 'package:stronk/models/exercise/exercise_types.dart';
+import 'package:stronk/models/exercise/set.dart';
 import 'package:stronk/util/validation.dart';
 
 class ExerciseTypeConfigurationScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class ExerciseTypeConfigurationScreen extends StatelessWidget {
       body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
-            children: ExecutionType.values.map((type) {
+            children: ExerciseType.values.map((type) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: InkWell(
@@ -54,14 +55,15 @@ class ExerciseTypeConfigurationScreen extends StatelessWidget {
 }
 
 class SetRepetitionTypeField extends ConsumerWidget {
-  final SetRepetitionExecution execution;
+  final List<ExerciseSet> configuration;
 
-  const SetRepetitionTypeField(this.execution);
+  const SetRepetitionTypeField(this.configuration);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      child: Text("${execution.sets} X ${execution}"),
+      child:
+          Text("${configuration.length} X ${configuration[0].count} [${configuration[0].weight}]"),
     );
   }
 }
@@ -122,15 +124,19 @@ class InvalidTypeField extends StatelessWidget {
 }
 
 class ExerciseTypeConfigurationBuilder extends StatelessWidget {
-  final Execution? execution;
+  final ExerciseConfiguration? configuration;
 
-  const ExerciseTypeConfigurationBuilder(this.execution);
+  const ExerciseTypeConfigurationBuilder(this.configuration);
 
   @override
   Widget build(BuildContext context) {
-    switch (execution.runtimeType) {
-      case SetRepetitionExecution:
-        return SetRepetitionTypeField(execution as SetRepetitionExecution);
+    if (configuration == null) {
+      return InvalidTypeField();
+    }
+
+    switch (configuration!.type) {
+      case ExerciseType.SetRepetition:
+        return SetRepetitionTypeField(configuration!.sets);
       // case ExerciseType.ThreeToSeven:
       //   return ThreeToSevenTypeField(execution as ThreeToSevenConfiguration);
       // case ExerciseType.DoPause:
@@ -146,34 +152,22 @@ class ExerciseTypeConfigurationBuilder extends StatelessWidget {
 }
 
 class ExerciseTypeField extends ConsumerWidget {
-  final ValidationItem<Execution> state;
-  final Function(Execution?) updateState;
+  final ValidationItem<ExerciseConfiguration> state;
+  final Function(ExerciseConfiguration?) updateState;
 
   const ExerciseTypeField({
     required this.state,
     required this.updateState,
   });
 
-  void _updateType(ExecutionType type) {
+  void _updateType(ExerciseConfiguration configuration) {
     if (state.value != null) return;
-    // if (state.value!.type == type) return;
+    if (state.value!.type == configuration.type) return;
 
-    // if (state.value == null) {
-    // switch (type) {
-    //   case ExerciseType.SetRepetition:
-    //     return updateState(SetRepetitionConfiguration.empty() as BaseExerciseTypeConfiguration);
-    //   case ExerciseType.ThreeToSeven:
-    //     return updateState(ThreeToSevenConfiguration.empty() as BaseExerciseTypeConfiguration);
-    //   case ExerciseType.DoPause:
-    //     return updateState(DoPauseConfiguration.empty() as BaseExerciseTypeConfiguration);
-    //   case ExerciseType.Hold:
-    //     return updateState(HoldConfiguration.empty() as BaseExerciseTypeConfiguration);
-    //   case ExerciseType.Flow:
-    //     return updateState(FlowConfiguration.empty() as BaseExerciseTypeConfiguration);
-    // }
-    // } else {
-    //   return updateState(state.value!.to(type) as BaseExerciseTypeConfiguration);
-    // }
+    if (configuration.sets.isEmpty) {
+      print("From ${state.value!.sets} to ${configuration.type}");
+    }
+    updateState(configuration);
   }
 
   @override
@@ -189,8 +183,7 @@ class ExerciseTypeField extends ConsumerWidget {
         border: Border.all(
             color: Colors.grey.shade500, // set border color
             width: 1.0), // set border width
-        borderRadius:
-            BorderRadius.all(Radius.circular(5.0)), // set rounded corner radius
+        borderRadius: BorderRadius.all(Radius.circular(5.0)), // set rounded corner radius
       ),
       constraints: BoxConstraints(minHeight: 50),
       padding: const EdgeInsets.only(top: 5, bottom: 5.0, left: 7, right: 7),

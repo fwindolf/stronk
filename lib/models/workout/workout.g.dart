@@ -16,14 +16,16 @@ _$_Workout _$$_WorkoutFromJson(Map<String, dynamic> json) => _$_Workout(
               .toList() ??
           [],
       warmup: (json['warmup'] as List<dynamic>?)
-          ?.map((e) => Exercise.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Exercise.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       exercises: (json['exercises'] as List<dynamic>)
           .map((e) => Exercise.fromJson(e as Map<String, dynamic>))
           .toList(),
       cooldown: (json['cooldown'] as List<dynamic>?)
-          ?.map((e) => Exercise.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Exercise.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       isFavourite: json['isFavourite'] as bool? ?? false,
     );
 
@@ -34,8 +36,8 @@ Map<String, dynamic> _$$_WorkoutToJson(_$_Workout instance) =>
       'description': instance.description,
       'creator': instance.creator,
       'tags': instance.tags.map((e) => e.toJson()).toList(),
-      'warmup': instance.warmup?.map((e) => e.toJson()).toList(),
+      'warmup': instance.warmup.map((e) => e.toJson()).toList(),
       'exercises': instance.exercises.map((e) => e.toJson()).toList(),
-      'cooldown': instance.cooldown?.map((e) => e.toJson()).toList(),
+      'cooldown': instance.cooldown.map((e) => e.toJson()).toList(),
       'isFavourite': instance.isFavourite,
     };

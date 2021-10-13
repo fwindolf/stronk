@@ -26,15 +26,13 @@ class _$CompletedChallengeTearOff {
       required String creator,
       required Challenge challenge,
       required DateTime startTime,
-      required DateTime? finishTime,
-      required ExecutableExercise exercise}) {
+      required DateTime? finishTime}) {
     return _CompletedChallenge(
       id: id,
       creator: creator,
       challenge: challenge,
       startTime: startTime,
       finishTime: finishTime,
-      exercise: exercise,
     );
   }
 
@@ -53,7 +51,6 @@ mixin _$CompletedChallenge {
   Challenge get challenge => throw _privateConstructorUsedError;
   DateTime get startTime => throw _privateConstructorUsedError;
   DateTime? get finishTime => throw _privateConstructorUsedError;
-  ExecutableExercise get exercise => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,11 +68,9 @@ abstract class $CompletedChallengeCopyWith<$Res> {
       String creator,
       Challenge challenge,
       DateTime startTime,
-      DateTime? finishTime,
-      ExecutableExercise exercise});
+      DateTime? finishTime});
 
   $ChallengeCopyWith<$Res> get challenge;
-  $ExecutableExerciseCopyWith<$Res> get exercise;
 }
 
 /// @nodoc
@@ -94,7 +89,6 @@ class _$CompletedChallengeCopyWithImpl<$Res>
     Object? challenge = freezed,
     Object? startTime = freezed,
     Object? finishTime = freezed,
-    Object? exercise = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -117,10 +111,6 @@ class _$CompletedChallengeCopyWithImpl<$Res>
           ? _value.finishTime
           : finishTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      exercise: exercise == freezed
-          ? _value.exercise
-          : exercise // ignore: cast_nullable_to_non_nullable
-              as ExecutableExercise,
     ));
   }
 
@@ -128,13 +118,6 @@ class _$CompletedChallengeCopyWithImpl<$Res>
   $ChallengeCopyWith<$Res> get challenge {
     return $ChallengeCopyWith<$Res>(_value.challenge, (value) {
       return _then(_value.copyWith(challenge: value));
-    });
-  }
-
-  @override
-  $ExecutableExerciseCopyWith<$Res> get exercise {
-    return $ExecutableExerciseCopyWith<$Res>(_value.exercise, (value) {
-      return _then(_value.copyWith(exercise: value));
     });
   }
 }
@@ -151,13 +134,10 @@ abstract class _$CompletedChallengeCopyWith<$Res>
       String creator,
       Challenge challenge,
       DateTime startTime,
-      DateTime? finishTime,
-      ExecutableExercise exercise});
+      DateTime? finishTime});
 
   @override
   $ChallengeCopyWith<$Res> get challenge;
-  @override
-  $ExecutableExerciseCopyWith<$Res> get exercise;
 }
 
 /// @nodoc
@@ -178,7 +158,6 @@ class __$CompletedChallengeCopyWithImpl<$Res>
     Object? challenge = freezed,
     Object? startTime = freezed,
     Object? finishTime = freezed,
-    Object? exercise = freezed,
   }) {
     return _then(_CompletedChallenge(
       id: id == freezed
@@ -201,10 +180,6 @@ class __$CompletedChallengeCopyWithImpl<$Res>
           ? _value.finishTime
           : finishTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      exercise: exercise == freezed
-          ? _value.exercise
-          : exercise // ignore: cast_nullable_to_non_nullable
-              as ExecutableExercise,
     ));
   }
 }
@@ -217,8 +192,7 @@ class _$_CompletedChallenge extends _CompletedChallenge {
       required this.creator,
       required this.challenge,
       required this.startTime,
-      required this.finishTime,
-      required this.exercise})
+      required this.finishTime})
       : super._();
 
   factory _$_CompletedChallenge.fromJson(Map<String, dynamic> json) =>
@@ -234,12 +208,10 @@ class _$_CompletedChallenge extends _CompletedChallenge {
   final DateTime startTime;
   @override
   final DateTime? finishTime;
-  @override
-  final ExecutableExercise exercise;
 
   @override
   String toString() {
-    return 'CompletedChallenge(id: $id, creator: $creator, challenge: $challenge, startTime: $startTime, finishTime: $finishTime, exercise: $exercise)';
+    return 'CompletedChallenge(id: $id, creator: $creator, challenge: $challenge, startTime: $startTime, finishTime: $finishTime)';
   }
 
   @override
@@ -259,10 +231,7 @@ class _$_CompletedChallenge extends _CompletedChallenge {
                     .equals(other.startTime, startTime)) &&
             (identical(other.finishTime, finishTime) ||
                 const DeepCollectionEquality()
-                    .equals(other.finishTime, finishTime)) &&
-            (identical(other.exercise, exercise) ||
-                const DeepCollectionEquality()
-                    .equals(other.exercise, exercise)));
+                    .equals(other.finishTime, finishTime)));
   }
 
   @override
@@ -272,8 +241,7 @@ class _$_CompletedChallenge extends _CompletedChallenge {
       const DeepCollectionEquality().hash(creator) ^
       const DeepCollectionEquality().hash(challenge) ^
       const DeepCollectionEquality().hash(startTime) ^
-      const DeepCollectionEquality().hash(finishTime) ^
-      const DeepCollectionEquality().hash(exercise);
+      const DeepCollectionEquality().hash(finishTime);
 
   @JsonKey(ignore: true)
   @override
@@ -292,8 +260,7 @@ abstract class _CompletedChallenge extends CompletedChallenge {
       required String creator,
       required Challenge challenge,
       required DateTime startTime,
-      required DateTime? finishTime,
-      required ExecutableExercise exercise}) = _$_CompletedChallenge;
+      required DateTime? finishTime}) = _$_CompletedChallenge;
   const _CompletedChallenge._() : super._();
 
   factory _CompletedChallenge.fromJson(Map<String, dynamic> json) =
@@ -309,8 +276,6 @@ abstract class _CompletedChallenge extends CompletedChallenge {
   DateTime get startTime => throw _privateConstructorUsedError;
   @override
   DateTime? get finishTime => throw _privateConstructorUsedError;
-  @override
-  ExecutableExercise get exercise => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CompletedChallengeCopyWith<_CompletedChallenge> get copyWith =>

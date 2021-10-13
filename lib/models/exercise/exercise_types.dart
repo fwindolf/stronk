@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stronk/models/exercise/set.dart';
 
 enum ExerciseType {
   SetRepetition,
@@ -74,6 +75,49 @@ extension ExerciseTypeDescription on ExerciseType {
         return "Do the exercise's movement a given number of times";
       default:
         return "Undefined type";
+    }
+  }
+}
+
+extension ExerciseSetTypes on ExerciseSet {
+  static List<ExerciseSet> forType({
+    required ExerciseType type,
+    double? weight,
+  }) {
+    switch (type) {
+      case ExerciseType.SetRepetition:
+        return List.generate(
+            3,
+            (index) => ExerciseSet(
+                  count: 12,
+                  pauseSeconds: 90,
+                  weight: weight,
+                ));
+      case ExerciseType.ThreeToSeven:
+        return List.generate(
+            5,
+            (index) => ExerciseSet(
+                  count: index + 3,
+                  pauseSeconds: 15,
+                  weight: weight,
+                ));
+      case ExerciseType.DoPause:
+        return [
+          ExerciseSet(count: 15, pauseSeconds: 20, weight: weight),
+          ExerciseSet(count: 8, pauseSeconds: 20, weight: weight),
+          ExerciseSet(count: 4, pauseSeconds: 20, weight: weight),
+          ExerciseSet(count: 3, pauseSeconds: 20, weight: weight),
+        ];
+      case ExerciseType.Hold:
+        return [
+          ExerciseSet(count: 60, pauseSeconds: 30, weight: weight),
+        ];
+      case ExerciseType.Flow:
+        return [
+          ExerciseSet(count: 1, pauseSeconds: 20, weight: weight),
+        ];
+      default:
+        return [];
     }
   }
 }

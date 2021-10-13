@@ -23,16 +23,22 @@ class _$CompletedExerciseTearOff {
 
   _CompletedExercise call(
       {String? id,
+      required String exerciseId,
+      required String exerciseName,
       required String creator,
-      required Exercise exercise,
-      required Execution execution,
-      required DateTime timestamp}) {
+      required ExerciseType type,
+      required List<ExerciseSet> sets,
+      required DateTime timeStart,
+      required DateTime? timeFinish}) {
     return _CompletedExercise(
       id: id,
+      exerciseId: exerciseId,
+      exerciseName: exerciseName,
       creator: creator,
-      exercise: exercise,
-      execution: execution,
-      timestamp: timestamp,
+      type: type,
+      sets: sets,
+      timeStart: timeStart,
+      timeFinish: timeFinish,
     );
   }
 
@@ -47,10 +53,13 @@ const $CompletedExercise = _$CompletedExerciseTearOff();
 /// @nodoc
 mixin _$CompletedExercise {
   String? get id => throw _privateConstructorUsedError;
+  String get exerciseId => throw _privateConstructorUsedError;
+  String get exerciseName => throw _privateConstructorUsedError;
   String get creator => throw _privateConstructorUsedError;
-  Exercise get exercise => throw _privateConstructorUsedError;
-  Execution get execution => throw _privateConstructorUsedError;
-  DateTime get timestamp => throw _privateConstructorUsedError;
+  ExerciseType get type => throw _privateConstructorUsedError;
+  List<ExerciseSet> get sets => throw _privateConstructorUsedError;
+  DateTime get timeStart => throw _privateConstructorUsedError;
+  DateTime? get timeFinish => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,10 +74,13 @@ abstract class $CompletedExerciseCopyWith<$Res> {
       _$CompletedExerciseCopyWithImpl<$Res>;
   $Res call(
       {String? id,
+      String exerciseId,
+      String exerciseName,
       String creator,
-      Exercise exercise,
-      Execution execution,
-      DateTime timestamp});
+      ExerciseType type,
+      List<ExerciseSet> sets,
+      DateTime timeStart,
+      DateTime? timeFinish});
 }
 
 /// @nodoc
@@ -83,32 +95,47 @@ class _$CompletedExerciseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? exerciseId = freezed,
+    Object? exerciseName = freezed,
     Object? creator = freezed,
-    Object? exercise = freezed,
-    Object? execution = freezed,
-    Object? timestamp = freezed,
+    Object? type = freezed,
+    Object? sets = freezed,
+    Object? timeStart = freezed,
+    Object? timeFinish = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      exerciseId: exerciseId == freezed
+          ? _value.exerciseId
+          : exerciseId // ignore: cast_nullable_to_non_nullable
+              as String,
+      exerciseName: exerciseName == freezed
+          ? _value.exerciseName
+          : exerciseName // ignore: cast_nullable_to_non_nullable
+              as String,
       creator: creator == freezed
           ? _value.creator
           : creator // ignore: cast_nullable_to_non_nullable
               as String,
-      exercise: exercise == freezed
-          ? _value.exercise
-          : exercise // ignore: cast_nullable_to_non_nullable
-              as Exercise,
-      execution: execution == freezed
-          ? _value.execution
-          : execution // ignore: cast_nullable_to_non_nullable
-              as Execution,
-      timestamp: timestamp == freezed
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ExerciseType,
+      sets: sets == freezed
+          ? _value.sets
+          : sets // ignore: cast_nullable_to_non_nullable
+              as List<ExerciseSet>,
+      timeStart: timeStart == freezed
+          ? _value.timeStart
+          : timeStart // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      timeFinish: timeFinish == freezed
+          ? _value.timeFinish
+          : timeFinish // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -122,10 +149,13 @@ abstract class _$CompletedExerciseCopyWith<$Res>
   @override
   $Res call(
       {String? id,
+      String exerciseId,
+      String exerciseName,
       String creator,
-      Exercise exercise,
-      Execution execution,
-      DateTime timestamp});
+      ExerciseType type,
+      List<ExerciseSet> sets,
+      DateTime timeStart,
+      DateTime? timeFinish});
 }
 
 /// @nodoc
@@ -142,46 +172,63 @@ class __$CompletedExerciseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? exerciseId = freezed,
+    Object? exerciseName = freezed,
     Object? creator = freezed,
-    Object? exercise = freezed,
-    Object? execution = freezed,
-    Object? timestamp = freezed,
+    Object? type = freezed,
+    Object? sets = freezed,
+    Object? timeStart = freezed,
+    Object? timeFinish = freezed,
   }) {
     return _then(_CompletedExercise(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      exerciseId: exerciseId == freezed
+          ? _value.exerciseId
+          : exerciseId // ignore: cast_nullable_to_non_nullable
+              as String,
+      exerciseName: exerciseName == freezed
+          ? _value.exerciseName
+          : exerciseName // ignore: cast_nullable_to_non_nullable
+              as String,
       creator: creator == freezed
           ? _value.creator
           : creator // ignore: cast_nullable_to_non_nullable
               as String,
-      exercise: exercise == freezed
-          ? _value.exercise
-          : exercise // ignore: cast_nullable_to_non_nullable
-              as Exercise,
-      execution: execution == freezed
-          ? _value.execution
-          : execution // ignore: cast_nullable_to_non_nullable
-              as Execution,
-      timestamp: timestamp == freezed
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ExerciseType,
+      sets: sets == freezed
+          ? _value.sets
+          : sets // ignore: cast_nullable_to_non_nullable
+              as List<ExerciseSet>,
+      timeStart: timeStart == freezed
+          ? _value.timeStart
+          : timeStart // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      timeFinish: timeFinish == freezed
+          ? _value.timeFinish
+          : timeFinish // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-@Implements(Exercise)
 class _$_CompletedExercise extends _CompletedExercise {
   const _$_CompletedExercise(
       {this.id,
+      required this.exerciseId,
+      required this.exerciseName,
       required this.creator,
-      required this.exercise,
-      required this.execution,
-      required this.timestamp})
+      required this.type,
+      required this.sets,
+      required this.timeStart,
+      required this.timeFinish})
       : super._();
 
   factory _$_CompletedExercise.fromJson(Map<String, dynamic> json) =>
@@ -190,17 +237,23 @@ class _$_CompletedExercise extends _CompletedExercise {
   @override
   final String? id;
   @override
+  final String exerciseId;
+  @override
+  final String exerciseName;
+  @override
   final String creator;
   @override
-  final Exercise exercise;
+  final ExerciseType type;
   @override
-  final Execution execution;
+  final List<ExerciseSet> sets;
   @override
-  final DateTime timestamp;
+  final DateTime timeStart;
+  @override
+  final DateTime? timeFinish;
 
   @override
   String toString() {
-    return 'CompletedExercise(id: $id, creator: $creator, exercise: $exercise, execution: $execution, timestamp: $timestamp)';
+    return 'CompletedExercise(id: $id, exerciseId: $exerciseId, exerciseName: $exerciseName, creator: $creator, type: $type, sets: $sets, timeStart: $timeStart, timeFinish: $timeFinish)';
   }
 
   @override
@@ -209,28 +262,38 @@ class _$_CompletedExercise extends _CompletedExercise {
         (other is _CompletedExercise &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.exerciseId, exerciseId) ||
+                const DeepCollectionEquality()
+                    .equals(other.exerciseId, exerciseId)) &&
+            (identical(other.exerciseName, exerciseName) ||
+                const DeepCollectionEquality()
+                    .equals(other.exerciseName, exerciseName)) &&
             (identical(other.creator, creator) ||
                 const DeepCollectionEquality()
                     .equals(other.creator, creator)) &&
-            (identical(other.exercise, exercise) ||
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.sets, sets) ||
+                const DeepCollectionEquality().equals(other.sets, sets)) &&
+            (identical(other.timeStart, timeStart) ||
                 const DeepCollectionEquality()
-                    .equals(other.exercise, exercise)) &&
-            (identical(other.execution, execution) ||
+                    .equals(other.timeStart, timeStart)) &&
+            (identical(other.timeFinish, timeFinish) ||
                 const DeepCollectionEquality()
-                    .equals(other.execution, execution)) &&
-            (identical(other.timestamp, timestamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.timestamp, timestamp)));
+                    .equals(other.timeFinish, timeFinish)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(exerciseId) ^
+      const DeepCollectionEquality().hash(exerciseName) ^
       const DeepCollectionEquality().hash(creator) ^
-      const DeepCollectionEquality().hash(exercise) ^
-      const DeepCollectionEquality().hash(execution) ^
-      const DeepCollectionEquality().hash(timestamp);
+      const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(sets) ^
+      const DeepCollectionEquality().hash(timeStart) ^
+      const DeepCollectionEquality().hash(timeFinish);
 
   @JsonKey(ignore: true)
   @override
@@ -243,14 +306,16 @@ class _$_CompletedExercise extends _CompletedExercise {
   }
 }
 
-abstract class _CompletedExercise extends CompletedExercise
-    implements Exercise {
+abstract class _CompletedExercise extends CompletedExercise {
   const factory _CompletedExercise(
       {String? id,
+      required String exerciseId,
+      required String exerciseName,
       required String creator,
-      required Exercise exercise,
-      required Execution execution,
-      required DateTime timestamp}) = _$_CompletedExercise;
+      required ExerciseType type,
+      required List<ExerciseSet> sets,
+      required DateTime timeStart,
+      required DateTime? timeFinish}) = _$_CompletedExercise;
   const _CompletedExercise._() : super._();
 
   factory _CompletedExercise.fromJson(Map<String, dynamic> json) =
@@ -259,13 +324,19 @@ abstract class _CompletedExercise extends CompletedExercise
   @override
   String? get id => throw _privateConstructorUsedError;
   @override
+  String get exerciseId => throw _privateConstructorUsedError;
+  @override
+  String get exerciseName => throw _privateConstructorUsedError;
+  @override
   String get creator => throw _privateConstructorUsedError;
   @override
-  Exercise get exercise => throw _privateConstructorUsedError;
+  ExerciseType get type => throw _privateConstructorUsedError;
   @override
-  Execution get execution => throw _privateConstructorUsedError;
+  List<ExerciseSet> get sets => throw _privateConstructorUsedError;
   @override
-  DateTime get timestamp => throw _privateConstructorUsedError;
+  DateTime get timeStart => throw _privateConstructorUsedError;
+  @override
+  DateTime? get timeFinish => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CompletedExerciseCopyWith<_CompletedExercise> get copyWith =>

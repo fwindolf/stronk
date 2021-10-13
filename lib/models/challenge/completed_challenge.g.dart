@@ -16,8 +16,6 @@ _$_CompletedChallenge _$$_CompletedChallengeFromJson(
       finishTime: json['finishTime'] == null
           ? null
           : DateTime.parse(json['finishTime'] as String),
-      exercise:
-          ExecutableExercise.fromJson(json['exercise'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_CompletedChallengeToJson(
@@ -28,5 +26,4 @@ Map<String, dynamic> _$$_CompletedChallengeToJson(
       'challenge': instance.challenge.toJson(),
       'startTime': instance.startTime.toIso8601String(),
       'finishTime': instance.finishTime?.toIso8601String(),
-      'exercise': instance.exercise.toJson(),
     };

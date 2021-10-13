@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stronk/models/challenge/challenge.dart';
-import 'package:stronk/models/exercise/exercise.dart';
 
 part 'completed_challenge.freezed.dart';
 part 'completed_challenge.g.dart';
@@ -15,7 +14,6 @@ class CompletedChallenge with _$CompletedChallenge {
     required Challenge challenge,
     required DateTime startTime,
     required DateTime? finishTime,
-    required ExecutableExercise exercise,
   }) = _CompletedChallenge;
 
   factory CompletedChallenge.fromChallenge(String userId, Challenge challenge) =>
@@ -24,7 +22,6 @@ class CompletedChallenge with _$CompletedChallenge {
         challenge: challenge,
         startTime: DateTime.now(),
         finishTime: null,
-        exercise: challenge.exercise,
       );
 
   factory CompletedChallenge.fromJson(Map<String, dynamic> json) =>

@@ -13,55 +13,58 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Set _$SetFromJson(Map<String, dynamic> json) {
-  return _Set.fromJson(json);
+ExerciseSet _$ExerciseSetFromJson(Map<String, dynamic> json) {
+  return _ExerciseSet.fromJson(json);
 }
 
 /// @nodoc
-class _$SetTearOff {
-  const _$SetTearOff();
+class _$ExerciseSetTearOff {
+  const _$ExerciseSetTearOff();
 
-  _Set call({required int count, required int pauseSeconds, double? weight}) {
-    return _Set(
+  _ExerciseSet call(
+      {required int count, required int pauseSeconds, double? weight}) {
+    return _ExerciseSet(
       count: count,
       pauseSeconds: pauseSeconds,
       weight: weight,
     );
   }
 
-  Set fromJson(Map<String, Object> json) {
-    return Set.fromJson(json);
+  ExerciseSet fromJson(Map<String, Object> json) {
+    return ExerciseSet.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Set = _$SetTearOff();
+const $ExerciseSet = _$ExerciseSetTearOff();
 
 /// @nodoc
-mixin _$Set {
+mixin _$ExerciseSet {
   int get count => throw _privateConstructorUsedError;
   int get pauseSeconds => throw _privateConstructorUsedError;
   double? get weight => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SetCopyWith<Set> get copyWith => throw _privateConstructorUsedError;
+  $ExerciseSetCopyWith<ExerciseSet> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SetCopyWith<$Res> {
-  factory $SetCopyWith(Set value, $Res Function(Set) then) =
-      _$SetCopyWithImpl<$Res>;
+abstract class $ExerciseSetCopyWith<$Res> {
+  factory $ExerciseSetCopyWith(
+          ExerciseSet value, $Res Function(ExerciseSet) then) =
+      _$ExerciseSetCopyWithImpl<$Res>;
   $Res call({int count, int pauseSeconds, double? weight});
 }
 
 /// @nodoc
-class _$SetCopyWithImpl<$Res> implements $SetCopyWith<$Res> {
-  _$SetCopyWithImpl(this._value, this._then);
+class _$ExerciseSetCopyWithImpl<$Res> implements $ExerciseSetCopyWith<$Res> {
+  _$ExerciseSetCopyWithImpl(this._value, this._then);
 
-  final Set _value;
+  final ExerciseSet _value;
   // ignore: unused_field
-  final $Res Function(Set) _then;
+  final $Res Function(ExerciseSet) _then;
 
   @override
   $Res call({
@@ -87,21 +90,24 @@ class _$SetCopyWithImpl<$Res> implements $SetCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SetCopyWith<$Res> implements $SetCopyWith<$Res> {
-  factory _$SetCopyWith(_Set value, $Res Function(_Set) then) =
-      __$SetCopyWithImpl<$Res>;
+abstract class _$ExerciseSetCopyWith<$Res>
+    implements $ExerciseSetCopyWith<$Res> {
+  factory _$ExerciseSetCopyWith(
+          _ExerciseSet value, $Res Function(_ExerciseSet) then) =
+      __$ExerciseSetCopyWithImpl<$Res>;
   @override
   $Res call({int count, int pauseSeconds, double? weight});
 }
 
 /// @nodoc
-class __$SetCopyWithImpl<$Res> extends _$SetCopyWithImpl<$Res>
-    implements _$SetCopyWith<$Res> {
-  __$SetCopyWithImpl(_Set _value, $Res Function(_Set) _then)
-      : super(_value, (v) => _then(v as _Set));
+class __$ExerciseSetCopyWithImpl<$Res> extends _$ExerciseSetCopyWithImpl<$Res>
+    implements _$ExerciseSetCopyWith<$Res> {
+  __$ExerciseSetCopyWithImpl(
+      _ExerciseSet _value, $Res Function(_ExerciseSet) _then)
+      : super(_value, (v) => _then(v as _ExerciseSet));
 
   @override
-  _Set get _value => super._value as _Set;
+  _ExerciseSet get _value => super._value as _ExerciseSet;
 
   @override
   $Res call({
@@ -109,7 +115,7 @@ class __$SetCopyWithImpl<$Res> extends _$SetCopyWithImpl<$Res>
     Object? pauseSeconds = freezed,
     Object? weight = freezed,
   }) {
-    return _then(_Set(
+    return _then(_ExerciseSet(
       count: count == freezed
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -128,11 +134,13 @@ class __$SetCopyWithImpl<$Res> extends _$SetCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Set extends _Set {
-  const _$_Set({required this.count, required this.pauseSeconds, this.weight})
+class _$_ExerciseSet extends _ExerciseSet {
+  const _$_ExerciseSet(
+      {required this.count, required this.pauseSeconds, this.weight})
       : super._();
 
-  factory _$_Set.fromJson(Map<String, dynamic> json) => _$$_SetFromJson(json);
+  factory _$_ExerciseSet.fromJson(Map<String, dynamic> json) =>
+      _$$_ExerciseSetFromJson(json);
 
   @override
   final int count;
@@ -143,13 +151,13 @@ class _$_Set extends _Set {
 
   @override
   String toString() {
-    return 'Set(count: $count, pauseSeconds: $pauseSeconds, weight: $weight)';
+    return 'ExerciseSet(count: $count, pauseSeconds: $pauseSeconds, weight: $weight)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Set &&
+        (other is _ExerciseSet &&
             (identical(other.count, count) ||
                 const DeepCollectionEquality().equals(other.count, count)) &&
             (identical(other.pauseSeconds, pauseSeconds) ||
@@ -168,21 +176,24 @@ class _$_Set extends _Set {
 
   @JsonKey(ignore: true)
   @override
-  _$SetCopyWith<_Set> get copyWith =>
-      __$SetCopyWithImpl<_Set>(this, _$identity);
+  _$ExerciseSetCopyWith<_ExerciseSet> get copyWith =>
+      __$ExerciseSetCopyWithImpl<_ExerciseSet>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SetToJson(this);
+    return _$$_ExerciseSetToJson(this);
   }
 }
 
-abstract class _Set extends Set {
-  const factory _Set(
-      {required int count, required int pauseSeconds, double? weight}) = _$_Set;
-  const _Set._() : super._();
+abstract class _ExerciseSet extends ExerciseSet {
+  const factory _ExerciseSet(
+      {required int count,
+      required int pauseSeconds,
+      double? weight}) = _$_ExerciseSet;
+  const _ExerciseSet._() : super._();
 
-  factory _Set.fromJson(Map<String, dynamic> json) = _$_Set.fromJson;
+  factory _ExerciseSet.fromJson(Map<String, dynamic> json) =
+      _$_ExerciseSet.fromJson;
 
   @override
   int get count => throw _privateConstructorUsedError;
@@ -192,5 +203,6 @@ abstract class _Set extends Set {
   double? get weight => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SetCopyWith<_Set> get copyWith => throw _privateConstructorUsedError;
+  _$ExerciseSetCopyWith<_ExerciseSet> get copyWith =>
+      throw _privateConstructorUsedError;
 }

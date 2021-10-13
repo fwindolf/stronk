@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:stronk/models/exercise/exercise.dart';
-import 'package:stronk/models/muscle/muscle.dart';
-import 'package:stronk/models/exercise/instruction.dart';
-import 'package:stronk/models/exercise/exercise_tag.dart';
-
-import 'execution.dart';
+import 'package:stronk/models/exercise/exercise_types.dart';
+import 'package:stronk/models/exercise/set.dart';
 
 part 'completed_exercise.freezed.dart';
 part 'completed_exercise.g.dart';
@@ -15,25 +11,35 @@ part 'completed_exercise.g.dart';
 class CompletedExercise with _$CompletedExercise {
   const CompletedExercise._();
 
-  @Implements(Exercise)
   const factory CompletedExercise({
     String? id,
+    required String exerciseId,
+    required String exerciseName,
     required String creator,
-    required Exercise exercise,
-    required Execution execution,
-    required DateTime timestamp,
+    required ExerciseType type,
+    required List<ExerciseSet> sets,
+    required DateTime timeStart,
+    required DateTime? timeFinish,
   }) = _CompletedExercise;
+
+  factory CompletedExercise.fromExercise({
+    required Exercise exercise,
+    String? creator,
+    required DateTime start,
+    DateTime? finish,
+  }) =>
+      CompletedExercise(
+        exerciseId: exercise.id,
+        exerciseName: exercise.name,
+        creator: creator ?? exercise.creator!,
+        type: exercise.configuration.type,
+        sets: exercise.configuration.sets,
+        timeStart: start,
+        timeFinish: finish,
+      );
 
   factory CompletedExercise.fromJson(Map<String, dynamic> json) =>
       _$CompletedExerciseFromJson(json);
-
-  factory CompletedExercise.fromExercise(ExecutableExercise source) =>
-      CompletedExercise(
-        creator: source.creator,
-        exercise: source.exercise,
-        execution: source.execution,
-        timestamp: DateTime.now(),
-      );
 
   factory CompletedExercise.fromDocument(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
@@ -41,16 +47,4 @@ class CompletedExercise with _$CompletedExercise {
   }
 
   Map<String, dynamic> toDocument() => toJson()..remove('id');
-
-  bool belongsTo(User? user) => (user == null) ? false : creator == user.uid;
-
-  @override
-  String? get id => id ?? exercise.id;
-  String get name => exercise.name;
-  String get description => exercise.description;
-  bool get isFavourite => exercise.isFavourite;
-  List<ExerciseTag> get tags => exercise.tags;
-  List<Muscle> get muscles => exercise.muscles;
-  List<Instruction> get instructions => exercise.instructions;
-  double get load => exercise.load;
 }

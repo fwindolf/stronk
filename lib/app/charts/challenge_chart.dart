@@ -362,7 +362,7 @@ class ChallengeChart extends ConsumerWidget {
       challengesPerDate[name] = Map.from(challengesPerDate[name] ?? {})
         ..putIfAbsent(
           startOfDay,
-          () => challenge.exercise.execution.totalLoad,
+          () => challenge.challenge.totalLoad,
         );
     });
 

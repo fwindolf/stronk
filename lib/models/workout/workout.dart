@@ -17,17 +17,15 @@ class Workout with _$Workout {
     required String description,
     required String? creator,
     @Default(<WorkoutTag>[]) List<WorkoutTag> tags,
-    List<Exercise>? warmup,
+    @Default([]) List<Exercise> warmup,
     required List<Exercise> exercises,
-    List<Exercise>? cooldown,
+    @Default([]) List<Exercise> cooldown,
     @Default(false) bool isFavourite,
   }) = _Workout;
 
-  factory Workout.empty() =>
-      const Workout(name: '', description: '', creator: null, exercises: []);
+  factory Workout.empty() => const Workout(name: '', description: '', creator: null, exercises: []);
 
-  factory Workout.fromJson(Map<String, dynamic> json) =>
-      _$WorkoutFromJson(json);
+  factory Workout.fromJson(Map<String, dynamic> json) => _$WorkoutFromJson(json);
 
   factory Workout.fromDocument(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;

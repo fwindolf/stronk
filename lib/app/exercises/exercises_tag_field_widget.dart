@@ -16,10 +16,6 @@ class ExercisesTagField extends ConsumerWidget {
 
   ExercisesTagField({required this.state, required this.updateState});
 
-  bool _contains(List<ExerciseTag> tags, ExerciseTag tag) {
-    return tags.where((el) => tag.name == el.name).isNotEmpty;
-  }
-
   void _createTag(ExerciseTag tag, WidgetRef ref) {
     print("Create tag ${tag.name}");
     // Create if not exists, add to created

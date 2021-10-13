@@ -5,19 +5,21 @@ part 'set.freezed.dart';
 part 'set.g.dart';
 
 @freezed
-class Set with _$Set {
-  const Set._();
+class ExerciseSet with _$ExerciseSet {
+  const ExerciseSet._();
 
-  const factory Set({
+  const factory ExerciseSet({
     required int count,
     required int pauseSeconds,
     double? weight,
-  }) = _Set;
+  }) = _ExerciseSet;
 
-  factory Set.fromJson(Map<String, dynamic> json) => _$SetFromJson(json);
+  factory ExerciseSet.empty() => ExerciseSet(count: 12, pauseSeconds: 90);
 
-  factory Set.fromDocument(DocumentSnapshot doc) =>
-      Set.fromJson(doc.data()! as Map<String, dynamic>);
+  factory ExerciseSet.fromJson(Map<String, dynamic> json) => _$ExerciseSetFromJson(json);
+
+  factory ExerciseSet.fromDocument(DocumentSnapshot doc) =>
+      ExerciseSet.fromJson(doc.data()! as Map<String, dynamic>);
 
   Map<String, dynamic> toDocument() => toJson();
 }

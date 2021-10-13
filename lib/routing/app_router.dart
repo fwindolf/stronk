@@ -67,7 +67,7 @@ class AppRouter {
           fullscreenDialog: true,
         );
       case AppRoutes.exerciseEdit:
-        final exercise = args as BaseExercise?;
+        final exercise = args as Exercise?;
         return MaterialPageRoute(
           builder: (_) => ExerciseEditScreen(
             editedExercise: exercise,

@@ -27,19 +27,15 @@ class ExerciseRepository implements ExerciseRepositoryBase {
   @override
   Future<List<Exercise>> retrieve({required String userId}) async {
     try {
-      final snap_user =
-          await _read(firebaseFirestoreProvider).exerciseRef(userId).get();
-      final snap_presets =
-          await _read(firebaseFirestoreProvider).exercisePresetsRef().get();
+      final snap_user = await _read(firebaseFirestoreProvider).exerciseRef(userId).get();
+      final snap_presets = await _read(firebaseFirestoreProvider).exercisePresetsRef().get();
       final combined_docs = snap_user.docs + snap_presets.docs;
 
       return combined_docs.map((doc) => Exercise.fromDocument(doc)).toList();
     } on FirebaseException catch (e) {
-      throw DataTransferException(
-          message: "Failed to retrieve Excercises: ${e.message}");
+      throw DataTransferException(message: "Failed to retrieve Excercises: ${e.message}");
     } catch (e) {
-      throw DataTransferException(
-          message: "Failed to parse Excercises: ${e.toString()}");
+      throw DataTransferException(message: "Failed to parse Excercises: ${e.toString()}");
     }
   }
 
@@ -49,21 +45,13 @@ class ExerciseRepository implements ExerciseRepositoryBase {
     required Exercise exercise,
   }) async {
     try {
-      if (exercise.id == null) {
-        final docRef = await _read(firebaseFirestoreProvider)
-            .exerciseRef(userId)
-            .add(exercise.toDocument());
-        return docRef.id;
-      } else {
-        await _read(firebaseFirestoreProvider)
-            .exerciseRef(userId)
-            .doc(exercise.id)
-            .set(exercise.toDocument());
-        return exercise.id!;
-      }
+      await _read(firebaseFirestoreProvider)
+          .exerciseRef(userId)
+          .doc(exercise.id)
+          .set(exercise.toDocument());
+      return exercise.id;
     } on FirebaseException catch (e) {
-      throw DataTransferException(
-          message: "Failed to create Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to create Excercise: ${e.message}");
     }
   }
 
@@ -78,8 +66,7 @@ class ExerciseRepository implements ExerciseRepositoryBase {
           .doc(exercise.id)
           .update(exercise.toDocument());
     } on FirebaseException catch (e) {
-      throw DataTransferException(
-          message: "Failed to update Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to update Excercise: ${e.message}");
     }
   }
 
@@ -89,13 +76,9 @@ class ExerciseRepository implements ExerciseRepositoryBase {
     required String exerciseId,
   }) async {
     try {
-      await _read(firebaseFirestoreProvider)
-          .exerciseRef(userId)
-          .doc(exerciseId)
-          .delete();
+      await _read(firebaseFirestoreProvider).exerciseRef(userId).doc(exerciseId).delete();
     } on FirebaseException catch (e) {
-      throw DataTransferException(
-          message: "Failed to delete Excercise: ${e.message}");
+      throw DataTransferException(message: "Failed to delete Excercise: ${e.message}");
     }
   }
 }

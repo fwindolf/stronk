@@ -1,79 +1,125 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quiver/iterables.dart';
+import 'package:stronk/models/exercise/exercise_types.dart';
 import 'package:stronk/models/exercise/instruction.dart';
-import 'package:stronk/models/exercise/execution.dart';
 import 'package:stronk/models/exercise/exercise_tag.dart';
-import 'package:stronk/models/freezed.dart';
+import 'package:stronk/models/exercise/set.dart';
 import 'package:stronk/models/muscle/muscle.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'equipment.dart';
-
 part 'exercise.freezed.dart';
 part 'exercise.g.dart';
 
-enum ExerciseType {
-  Repetition,
-  Hold,
+enum Equipment {
+  Band,
+  Dumbbells,
+  Barbells,
+  Bodyweight,
+  None,
 }
 
-abstract class Exercise extends FreezedClass {
-  String? get id;
-  String get name;
-  String get description;
-  String? get creator;
-  bool get isFavourite;
-  List<ExerciseTag> get tags;
-  List<Muscle> get muscles;
-  List<Instruction> get instructions;
+enum BandMode {
+  Loop,
+  Double,
+}
 
-  Execution? get execution;
-
-  double get load;
-
-  bool belongsTo(User? user);
-
-  factory Exercise.fromJson(Map<String, dynamic> json) =>
-      throw UnimplementedError();
-  factory Exercise.fromDocument(DocumentSnapshot doc) =>
-      throw UnimplementedError();
+enum SideMode {
+  None,
+  Single,
+  Both,
+  Alternating,
 }
 
 @freezed
-class BaseExercise with _$BaseExercise {
-  const BaseExercise._();
+class ExerciseConfiguration with _$ExerciseConfiguration {
+  const ExerciseConfiguration._();
 
-  @Implements(Exercise)
-  const factory BaseExercise({
-    String? id,
+  const factory ExerciseConfiguration({
+    required ExerciseType type,
+    required List<ExerciseSet> sets,
+  }) = _ExerciseConfiguration;
+
+  factory ExerciseConfiguration.empty() => ExerciseConfiguration(
+        type: ExerciseType.SetRepetition,
+        sets: [
+          ExerciseSet.empty(),
+          ExerciseSet.empty(),
+          ExerciseSet.empty(),
+        ],
+      );
+
+  factory ExerciseConfiguration.fromString(String source) {
+    var type;
+    switch (source.replaceAll(" ", "").toLowerCase()) {
+      case "setrepetition":
+        type = ExerciseType.SetRepetition;
+        break;
+      case "threetoseven":
+        type = ExerciseType.ThreeToSeven;
+        break;
+      case "dopause":
+        type = ExerciseType.DoPause;
+        break;
+      case "hold":
+        type = ExerciseType.Hold;
+        break;
+      case "flow":
+        type = ExerciseType.Flow;
+        break;
+      default:
+        type = ExerciseType.SetRepetition;
+    }
+
+    return ExerciseConfiguration(type: type, sets: ExerciseSetTypes.forType(type: type));
+  }
+
+  factory ExerciseConfiguration.fromJson(Map<String, dynamic> json) =>
+      _$ExerciseConfigurationFromJson(json);
+}
+
+@freezed
+class Exercise with _$Exercise {
+  const Exercise._();
+
+  const factory Exercise({
+    required String id,
     required String name,
     required String description,
     required String? creator,
+    required ExerciseConfiguration configuration,
+    required Equipment equipment,
+    BandMode? bandMode,
+    required SideMode sideMode,
     @Default([]) List<ExerciseTag> tags,
     @Default([]) List<Muscle> muscles,
-    @Default([]) List<Instruction> instructions,
+    required List<Instruction> instructions,
     @Default(false) bool isFavourite,
-  }) = _BaseExercise;
+  }) = _Exercise;
 
-  factory BaseExercise.empty({
+  factory Exercise.empty({
+    required String id,
     String? userId,
   }) =>
-      BaseExercise(
+      Exercise(
+        id: id,
         creator: userId,
         name: "New Exercise",
         description: "",
+        configuration: ExerciseConfiguration.empty(),
+        equipment: Equipment.None,
+        sideMode: SideMode.Both,
         muscles: [],
         tags: [],
         instructions: [],
       );
 
-  factory BaseExercise.fromJson(Map<String, dynamic> json) =>
-      _$BaseExerciseFromJson(json);
+  factory Exercise.fromJson(Map<String, dynamic> json) => _$ExerciseFromJson(json);
 
-  factory BaseExercise.fromDocument(DocumentSnapshot doc) {
+  factory Exercise.fromDocument(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-    return BaseExercise.fromJson(data).copyWith(id: doc.id);
+    return Exercise.fromJson(data).copyWith(id: doc.id);
   }
 
   Map<String, dynamic> toDocument() => toJson()..remove('id');
@@ -83,45 +129,22 @@ class BaseExercise with _$BaseExercise {
     return creator == user.uid;
   }
 
-  Execution? get execution => null;
+  List<int> get repetitions => configuration.sets.map((ExerciseSet set) => set.count).toList();
 
-  double get load => execution?.totalLoad ?? 0.0;
-}
+  List<double?> get weights => configuration.sets.map((ExerciseSet set) => set.weight).toList();
 
-@freezed
-class ExecutableExercise with _$ExecutableExercise {
-  const ExecutableExercise._();
+  List<int> get pauseSeconds =>
+      configuration.sets.map((ExerciseSet set) => set.pauseSeconds).toList();
 
-  @Implements(Exercise)
-  const factory ExecutableExercise({
-    String? id,
-    required Exercise exercise,
-    required String creator,
-    required Execution execution,
-    Equipment? equipment,
-  }) = _ExecutableExercise;
+  int get totalRepetitions => configuration.sets.fold(0, (prev, el) => prev + el.count);
 
-  factory ExecutableExercise.fromJson(Map<String, dynamic> json) =>
-      _$ExecutableExerciseFromJson(json);
+  int get totalCount => totalRepetitions;
 
-  factory ExecutableExercise.fromDocument(DocumentSnapshot doc) {
-    final data = doc.data()! as Map<String, dynamic>;
-    return ExecutableExercise.fromJson(data);
-  }
+  double? get totalWeight =>
+      configuration.sets.where((ExerciseSet set) => set.weight != null).isEmpty
+          ? null
+          : configuration.sets.fold(0.0, (prev, el) => prev! + (el.weight ?? 0.0));
 
-  Map<String, dynamic> toDocument() => toJson();
-
-  bool belongsTo(User? user) => user == null ? false : creator == user.uid;
-
-  @override
-  String? get id => id ?? exercise.id;
-  String get name => exercise.name;
-  String get description => exercise.description;
-  bool get isFavourite => exercise.isFavourite;
-  List<ExerciseTag> get tags => exercise.tags;
-  List<Muscle> get muscles => exercise.muscles;
-  List<Instruction> get instructions =>
-      equipment?.instructions ?? exercise.instructions;
-
-  double get load => execution.totalLoad;
+  double get totalLoad =>
+      zip([repetitions, weights]).fold(0.0, (val, el) => val + el[0]! * (el[1] ?? 1.0));
 }

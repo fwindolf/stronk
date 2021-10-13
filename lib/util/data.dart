@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:stronk/models/exercise/equipment.dart';
-import 'package:stronk/models/exercise/execution.dart';
 import 'package:stronk/models/exercise/exercise.dart';
 import 'package:stronk/models/muscle/muscle.dart';
 import 'package:stronk/repositories/exception.dart';
@@ -71,31 +69,39 @@ class DataGenerator {
     final muscles = await _musclesRepository.retrieve();
 
     data.forEach((element) {
-      try {
-        // Get the muscles from the provided short name
-        element["muscles"] = List.from(element["muscles"])
-            .where((el) => muscles.map((m) => m.short).contains(el))
-            .map((el) => muscles.firstWhere((muscle) => el == muscle.short).toJson())
-            .toList();
+      // Alter the data to be according to serialization
+      element["muscles"] = List.from(element["muscles"])
+          .where((el) => muscles.map((m) => m.short).contains(el))
+          .map(
+            (el) => muscles.firstWhere((muscle) => el == muscle.short).toJson(),
+          )
+          .toList();
+      element["sideMode"] = element["side"];
+      element["creator"] = "preset";
 
-        Map.from(element["equipment"]).forEach((equipment, instructions) {
-          final exercise = ExecutableExercise(
-            exercise: BaseExercise.fromJson(element) as Exercise,
-            creator: "preset",
-            execution: Execution.create(element["type"], element),
-            equipment: Equipment.create(equipment, instructions),
-          );
+      Map<String, dynamic>.from(element["equipment"]).forEach((equipment, equipment_element) {
+        element["id"] = "${element["id"]}_${equipment.toLowerCase()}";
+        element["equipment"] = equipment;
+        element["instructions"] = List.from(equipment_element["instructions"])
+            .map(
+              (el) => {"text": el},
+            )
+            .toList();
+        element["configuration"] = ExerciseConfiguration.fromString(element["type"]).toJson();
+
+        try {
+          final exercise = Exercise.fromJson(element);
 
           final existingExercise = exercises.where((el) => el.id == exercise.id);
           if (existingExercise.isEmpty) {
-            _exerciseRepository.create(userId: "preset", exercise: exercise as Exercise);
+            _exerciseRepository.create(userId: "preset", exercise: exercise);
           }
-        });
-      } on DataTransferException catch (e) {
-        print("Could not create Exercise: $e");
-      } on Exception catch (e) {
-        print("Could not deserialize Exercise: $e");
-      }
+        } on DataTransferException catch (e) {
+          print("Could not create Exercise: $e");
+        } on Exception catch (e) {
+          print("Could not deserialize Exercise: $e");
+        }
+      });
     });
   }
 }

@@ -23,12 +23,14 @@ class _$MuscleTearOff {
 
   _Muscle call(
       {String? id,
+      required String short,
       required String name,
       MuscleRegion? region,
       MuscleSide? side,
       String? imagePath}) {
     return _Muscle(
       id: id,
+      short: short,
       name: name,
       region: region,
       side: side,
@@ -47,6 +49,7 @@ const $Muscle = _$MuscleTearOff();
 /// @nodoc
 mixin _$Muscle {
   String? get id => throw _privateConstructorUsedError;
+  String get short => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   MuscleRegion? get region => throw _privateConstructorUsedError;
   MuscleSide? get side => throw _privateConstructorUsedError;
@@ -63,6 +66,7 @@ abstract class $MuscleCopyWith<$Res> {
       _$MuscleCopyWithImpl<$Res>;
   $Res call(
       {String? id,
+      String short,
       String name,
       MuscleRegion? region,
       MuscleSide? side,
@@ -80,6 +84,7 @@ class _$MuscleCopyWithImpl<$Res> implements $MuscleCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? short = freezed,
     Object? name = freezed,
     Object? region = freezed,
     Object? side = freezed,
@@ -90,6 +95,10 @@ class _$MuscleCopyWithImpl<$Res> implements $MuscleCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      short: short == freezed
+          ? _value.short
+          : short // ignore: cast_nullable_to_non_nullable
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -117,6 +126,7 @@ abstract class _$MuscleCopyWith<$Res> implements $MuscleCopyWith<$Res> {
   @override
   $Res call(
       {String? id,
+      String short,
       String name,
       MuscleRegion? region,
       MuscleSide? side,
@@ -135,6 +145,7 @@ class __$MuscleCopyWithImpl<$Res> extends _$MuscleCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? short = freezed,
     Object? name = freezed,
     Object? region = freezed,
     Object? side = freezed,
@@ -145,6 +156,10 @@ class __$MuscleCopyWithImpl<$Res> extends _$MuscleCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      short: short == freezed
+          ? _value.short
+          : short // ignore: cast_nullable_to_non_nullable
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -169,7 +184,12 @@ class __$MuscleCopyWithImpl<$Res> extends _$MuscleCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
   const _$_Muscle(
-      {this.id, required this.name, this.region, this.side, this.imagePath})
+      {this.id,
+      required this.short,
+      required this.name,
+      this.region,
+      this.side,
+      this.imagePath})
       : super._();
 
   factory _$_Muscle.fromJson(Map<String, dynamic> json) =>
@@ -177,6 +197,8 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
 
   @override
   final String? id;
+  @override
+  final String short;
   @override
   final String name;
   @override
@@ -188,7 +210,7 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Muscle(id: $id, name: $name, region: $region, side: $side, imagePath: $imagePath)';
+    return 'Muscle(id: $id, short: $short, name: $name, region: $region, side: $side, imagePath: $imagePath)';
   }
 
   @override
@@ -197,6 +219,7 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'Muscle'))
       ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('short', short))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('region', region))
       ..add(DiagnosticsProperty('side', side))
@@ -209,6 +232,8 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
         (other is _Muscle &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.short, short) ||
+                const DeepCollectionEquality().equals(other.short, short)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.region, region) ||
@@ -224,6 +249,7 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(short) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(region) ^
       const DeepCollectionEquality().hash(side) ^
@@ -243,6 +269,7 @@ class _$_Muscle extends _Muscle with DiagnosticableTreeMixin {
 abstract class _Muscle extends Muscle {
   const factory _Muscle(
       {String? id,
+      required String short,
       required String name,
       MuscleRegion? region,
       MuscleSide? side,
@@ -253,6 +280,8 @@ abstract class _Muscle extends Muscle {
 
   @override
   String? get id => throw _privateConstructorUsedError;
+  @override
+  String get short => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override

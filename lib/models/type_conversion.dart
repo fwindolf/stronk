@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:stronk/models/exercise/exercise_configuration.dart';
 
 class ConversionHelper {
   final int sets;
@@ -76,77 +75,77 @@ class Converter {
   }
 }
 
-extension SetRepetitionConversion on SetRepetitionConfiguration {
-  List<ConversionHelper> conversionCandidates(double weight) {
-    return Converter.candidates(
-      sets: [1, 6],
-      repetitions: [8, 15],
-      weight: weight,
-      factor: SetRepetitionConfiguration.loadFactor,
-    );
-  }
+// extension SetRepetitionConversion on SetRepetitionConfiguration {
+//   List<ConversionHelper> conversionCandidates(double weight) {
+//     return Converter.candidates(
+//       sets: [1, 6],
+//       repetitions: [8, 15],
+//       weight: weight,
+//       factor: SetRepetitionConfiguration.loadFactor,
+//     );
+//   }
 
-  static SetRepetitionConfiguration fromOther(BaseExerciseTypeConfiguration config) {
-    ConversionHelper best = Converter.best(
-      DoPauseConversion.conversionCandidates(config.weight),
-      config.loadEquivalent,
-    );
+//   static SetRepetitionConfiguration fromOther(BaseExerciseTypeConfiguration config) {
+//     ConversionHelper best = Converter.best(
+//       DoPauseConversion.conversionCandidates(config.weight),
+//       config.loadEquivalent,
+//     );
 
-    return SetRepetitionConfiguration(
-      sets: best.sets,
-      repetitions: best.repetitions,
-      pauseSeconds: 120,
-      weightKg: config.weight,
-    );
-  }
-}
+//     return SetRepetitionConfiguration(
+//       sets: best.sets,
+//       repetitions: best.repetitions,
+//       pauseSeconds: 120,
+//       weightKg: config.weight,
+//     );
+//   }
+// }
 
-extension ThreeToSevenConversion on ThreeToSevenConfiguration {
-  static List<ConversionHelper> conversionCandidates(double weight) {
-    return Converter.candidates(
-      sets: [1, 2],
-      repetitions: [20, 25, 30, 35],
-      weight: weight,
-      factor: ThreeToSevenConfiguration.loadFactor,
-    );
-  }
+// extension ThreeToSevenConversion on ThreeToSevenConfiguration {
+//   static List<ConversionHelper> conversionCandidates(double weight) {
+//     return Converter.candidates(
+//       sets: [1, 2],
+//       repetitions: [20, 25, 30, 35],
+//       weight: weight,
+//       factor: ThreeToSevenConfiguration.loadFactor,
+//     );
+//   }
 
-  static ThreeToSevenConfiguration fromOther(BaseExerciseTypeConfiguration config) {
-    ConversionHelper best = Converter.best(
-      ThreeToSevenConversion.conversionCandidates(config.weight),
-      config.loadEquivalent,
-    );
+//   static ThreeToSevenConfiguration fromOther(BaseExerciseTypeConfiguration config) {
+//     ConversionHelper best = Converter.best(
+//       ThreeToSevenConversion.conversionCandidates(config.weight),
+//       config.loadEquivalent,
+//     );
 
-    return ThreeToSevenConfiguration(
-      minRepetitions: (best.repetitions - 10) / 5 as int,
-      maxRepetitions: (best.repetitions - 10) / 5 + 4 as int,
-      pauseSeconds: 15,
-      weightKg: config.weight,
-      sets: best.sets,
-    );
-  }
-}
+//     return ThreeToSevenConfiguration(
+//       minRepetitions: (best.repetitions - 10) / 5 as int,
+//       maxRepetitions: (best.repetitions - 10) / 5 + 4 as int,
+//       pauseSeconds: 15,
+//       weightKg: config.weight,
+//       sets: best.sets,
+//     );
+//   }
+// }
 
-extension DoPauseConversion on DoPauseConfiguration {
-  static List<ConversionHelper> conversionCandidates(double weight) {
-    return Converter.candidates(
-      sets: [1, 1],
-      repetitions: [1, 40],
-      weight: weight,
-      factor: DoPauseConfiguration.loadFactor,
-    );
-  }
+// extension DoPauseConversion on DoPauseConfiguration {
+//   static List<ConversionHelper> conversionCandidates(double weight) {
+//     return Converter.candidates(
+//       sets: [1, 1],
+//       repetitions: [1, 40],
+//       weight: weight,
+//       factor: DoPauseConfiguration.loadFactor,
+//     );
+//   }
 
-  static DoPauseConfiguration fromOther(BaseExerciseTypeConfiguration config) {
-    ConversionHelper best = Converter.best(
-      DoPauseConversion.conversionCandidates(config.weight),
-      config.loadEquivalent,
-    );
+//   static DoPauseConfiguration fromOther(BaseExerciseTypeConfiguration config) {
+//     ConversionHelper best = Converter.best(
+//       DoPauseConversion.conversionCandidates(config.weight),
+//       config.loadEquivalent,
+//     );
 
-    return DoPauseConfiguration(
-      repetitions: best.repetitions,
-      pauseSeconds: 20,
-      weightKg: config.weight,
-    );
-  }
-}
+//     return DoPauseConfiguration(
+//       repetitions: best.repetitions,
+//       pauseSeconds: 20,
+//       weightKg: config.weight,
+//     );
+//   }
+// }

@@ -133,7 +133,7 @@ class __$ExerciseTagCopyWithImpl<$Res> extends _$ExerciseTagCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ExerciseTag extends _ExerciseTag with DiagnosticableTreeMixin {
+class _$_ExerciseTag extends _ExerciseTag {
   const _$_ExerciseTag({this.id, required this.name, this.active = false})
       : super._();
 
@@ -149,18 +149,8 @@ class _$_ExerciseTag extends _ExerciseTag with DiagnosticableTreeMixin {
   final bool active;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ExerciseTag(id: $id, name: $name, active: $active)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ExerciseTag'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('active', active));
   }
 
   @override

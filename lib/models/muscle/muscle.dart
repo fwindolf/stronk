@@ -69,13 +69,14 @@ class Muscle with _$Muscle {
 
   const factory Muscle({
     String? id,
+    required String short,
     required String name,
     MuscleRegion? region,
     MuscleSide? side,
     String? imagePath,
   }) = _Muscle;
 
-  factory Muscle.empty() => const Muscle(name: '');
+  factory Muscle.empty() => const Muscle(short: '', name: '');
 
   factory Muscle.fromJson(Map<String, dynamic> json) => _$MuscleFromJson(json);
 

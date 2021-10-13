@@ -10,10 +10,8 @@ _$_CompletedExercise _$$_CompletedExerciseFromJson(Map<String, dynamic> json) =>
     _$_CompletedExercise(
       id: json['id'] as String?,
       creator: json['creator'] as String,
-      source: Exercise.fromJson(json['source'] as Map<String, dynamic>),
-      name: json['name'] as String,
-      configuration: BaseExerciseTypeConfiguration.fromJson(
-          json['configuration'] as Map<String, dynamic>),
+      exercise: Exercise.fromJson(json['exercise'] as Map<String, dynamic>),
+      execution: Execution.fromJson(json['execution'] as Map<String, dynamic>),
       timestamp: DateTime.parse(json['timestamp'] as String),
     );
 
@@ -22,8 +20,7 @@ Map<String, dynamic> _$$_CompletedExerciseToJson(
     <String, dynamic>{
       'id': instance.id,
       'creator': instance.creator,
-      'source': instance.source.toJson(),
-      'name': instance.name,
-      'configuration': instance.configuration.toJson(),
+      'exercise': instance.exercise.toJson(),
+      'execution': instance.execution.toJson(),
       'timestamp': instance.timestamp.toIso8601String(),
     };

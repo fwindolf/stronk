@@ -271,7 +271,7 @@ class ChallengePainter extends CustomPainter {
           linePaint = linePaint..strokeWidth = 2.0;
         } else {
           linePaint = linePaint
-            ..strokeWidth = 1.0
+            ..strokeWidth = 1.5
             ..color = Colors.grey;
         }
         canvas.drawLine(
@@ -315,7 +315,7 @@ class ChallengePainter extends CustomPainter {
 
     final dataPaint = Paint()
       ..style = PaintingStyle.fill
-      ..strokeWidth = 4.0
+      ..strokeWidth = 5.0
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
       ..color = dataColor;
@@ -328,7 +328,7 @@ class ChallengePainter extends CustomPainter {
     );
 
     _drawXAxis(canvas, coord, challenges.keys.toList(), basePaint);
-    _drawYAxis(canvas, coord, challenges.values.toList(), basePaint);
+    // _drawYAxis(canvas, coord, challenges.values.toList(), basePaint);
     _drawData(canvas, coord, challenges, dataPaint);
   }
 
@@ -362,7 +362,7 @@ class ChallengeChart extends ConsumerWidget {
       challengesPerDate[name] = Map.from(challengesPerDate[name] ?? {})
         ..putIfAbsent(
           startOfDay,
-          () => challenge.exercise.configuration.loadEquivalent,
+          () => challenge.exercise.execution.totalLoad,
         );
     });
 
@@ -372,6 +372,7 @@ class ChallengeChart extends ConsumerWidget {
         100 * (0.6 + v * 0.4),
       );
     });
+    data.removeWhere((key, value) => key.isBefore(startOfChart.subtract(Duration(days: 3))));
 
     final firstDate = DateTime(
       today.month > monthsShown ? today.year : today.year - 1,
@@ -395,8 +396,8 @@ class ChallengeChart extends ConsumerWidget {
                 height: constraints.heightConstraints().maxHeight,
                 child: CustomPaint(
                   painter: ChallengePainter(
-                    dataColor: Colors.green.shade600, //Theme.of(context).colorScheme.primary,
-                    baseColor: Colors.black,
+                    dataColor: Theme.of(context).colorScheme.primary,
+                    baseColor: Theme.of(context).colorScheme.onPrimary,
                     challenges: data,
                     firstDate: firstDate,
                     lastDate: lastDate,

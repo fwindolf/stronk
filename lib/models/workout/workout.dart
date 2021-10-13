@@ -23,9 +23,11 @@ class Workout with _$Workout {
     @Default(false) bool isFavourite,
   }) = _Workout;
 
-  factory Workout.empty() => const Workout(name: '', description: '', creator: null, exercises: []);
+  factory Workout.empty() =>
+      const Workout(name: '', description: '', creator: null, exercises: []);
 
-  factory Workout.fromJson(Map<String, dynamic> json) => _$WorkoutFromJson(json);
+  factory Workout.fromJson(Map<String, dynamic> json) =>
+      _$WorkoutFromJson(json);
 
   factory Workout.fromDocument(DocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;

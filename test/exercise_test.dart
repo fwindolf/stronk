@@ -7,9 +7,9 @@ import 'package:stronk/models/exercise/exercise.dart';
 void main() {
   group('Exercise', () {
     test("can_be_deserialized_and_serialized", () {
-      final exercise = Exercise.empty();
+      final exercise = BaseExercise.empty();
 
-      expect(exercise, Exercise.fromJson(exercise.toJson()));
+      expect(exercise, BaseExercise.fromJson(exercise.toJson()));
     });
 
     test("can_create_new_exercise", () {

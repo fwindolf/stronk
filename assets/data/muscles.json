@@ -1,89 +1,90 @@
 [
     {
+        "short": "Delts",
         "name": "Anterior deltoid",
         "imagePath": "assets/images/anterior_deltoid.svg",
         "region": "Shoulder",
         "side": "Front"
     },
     {
+        "short": "Biceps",
         "name": "Biceps brachii",
         "imagePath": "assets/images/biceps_brachii.svg",
         "region": "Arms",
         "side": "Front"
     },
     {
+        "short": "Hamstrings",
         "name": "Biceps femoris",
         "imagePath": "assets/images/biceps_femoris.svg",
         "region": "Legs",
         "side": "Back"
     },
     {
-        "name": "Brachialis",
-        "imagePath": "assets/images/brachialis.svg",
-        "region": "Arms",
-        "side": "Front"
-    },
-    {
+        "short": "Calves",
         "name": "Gastrocnemius",
         "imagePath": "assets/images/gastrocnemius.svg",
         "region": "Legs",
         "side": "Back"
     },
     {
+        "short" : "Glutes",
         "name": "Gluteus maximus",
         "imagePath": "assets/images/gluteus_maximus.svg",
         "region": "Glutes",
         "side": "Back"
     },
     {
+        "short": "Lat",
         "name": "Latissimus dorsi",
         "imagePath": "assets/images/latissimus_dorsi.svg",
         "region": "Back",
         "side": "Back"
     },
     {
+        "short" : "Side Abs",
         "name": "Obliquus externus abdominis",
         "imagePath": "assets/images/obliquus_externus_abdominis.svg",
         "region": "Abs",
         "side": "Front"
     },
     {
+        "short" : "Chest",
         "name": "Pectoralis major",
         "imagePath": "assets/images/pectoralis_major.svg",
         "region": "Chest",
         "side": "Front"
     },
     {
+        "short": "Quads",
         "name": "Quadriceps femoris",
         "imagePath": "assets/images/quadriceps_femoris.svg",
         "region": "Legs",
         "side": "Front"
     },
     {
+        "short": "Abs",
         "name": "Rectus abdominis",
         "imagePath": "assets/images/rectus_abdominis.svg",
         "region": "Abs",
         "side": "Front"
     },
     {
+        "short": "Side Chest",
         "name": "Serratus anterior",
         "imagePath": "assets/images/serratus_anterior.svg",
         "region": "Chest",
         "side": "Front"
     },
     {
-        "name": "Soleus",
-        "imagePath": "assets/images/soleus.svg",
-        "region": "Legs",
-        "side": "Back"
-    },
-    {
+        "short": "Traps",
         "name": "Trapezius",
         "imagePath": "assets/images/trapezius.svg",
         "region": "Shoulder",
         "side": "Back"
     },
     {
+        "short": "Triceps",
         "name": "Triceps brachii",
         "imagePath": "assets/images/triceps_brachii.svg",
         "region": "Arms",

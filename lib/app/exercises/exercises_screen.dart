@@ -20,8 +20,11 @@ class ExerciseSourceFilterWidget extends HookConsumerWidget {
       onSelected: (ExerciseFilter selected) =>
           ref.read(exerciseSourceFilterProvider).state = selected,
       itemBuilder: (_) => [
-        const PopupMenuItem(child: Text("Only User Exercises"), value: ExerciseFilter.onlyUser),
-        const PopupMenuItem(child: Text("Only Preset Exercises"), value: ExerciseFilter.onlyPreset),
+        const PopupMenuItem(
+            child: Text("Only User Exercises"), value: ExerciseFilter.onlyUser),
+        const PopupMenuItem(
+            child: Text("Only Preset Exercises"),
+            value: ExerciseFilter.onlyPreset),
         const PopupMenuItem(child: Text("Show All"), value: ExerciseFilter.all),
       ],
     );
@@ -122,7 +125,8 @@ class ExerciseScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => Navigator.of(context).pushNamed(AppRoutes.exerciseEdit),
+        onPressed: () =>
+            Navigator.of(context).pushNamed(AppRoutes.exerciseEdit),
       ),
     );
   }

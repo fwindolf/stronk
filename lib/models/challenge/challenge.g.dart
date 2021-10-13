@@ -11,7 +11,8 @@ _$_Challenge _$$_ChallengeFromJson(Map<String, dynamic> json) => _$_Challenge(
       name: json['name'] as String,
       description: json['description'] as String?,
       creator: json['creator'] as String?,
-      exercise: Exercise.fromJson(json['exercise'] as Map<String, dynamic>),
+      exercise:
+          ExecutableExercise.fromJson(json['exercise'] as Map<String, dynamic>),
       startDate: DateTime.parse(json['startDate'] as String),
       endDate: json['endDate'] == null
           ? null

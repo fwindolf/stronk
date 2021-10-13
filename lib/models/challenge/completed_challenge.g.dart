@@ -17,7 +17,7 @@ _$_CompletedChallenge _$$_CompletedChallengeFromJson(
           ? null
           : DateTime.parse(json['finishTime'] as String),
       exercise:
-          CompletedExercise.fromJson(json['exercise'] as Map<String, dynamic>),
+          ExecutableExercise.fromJson(json['exercise'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_CompletedChallengeToJson(

@@ -30,7 +30,11 @@ class UserOverviewWidget extends ConsumerWidget {
               child: CircleAvatar(
                 minRadius: 20,
                 maxRadius: 30,
-                child: Icon(Icons.person),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Icon(
+                  Icons.person,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
             ),
             Column(
@@ -42,9 +46,14 @@ class UserOverviewWidget extends ConsumerWidget {
                   style: Theme.of(context).textTheme.headline5?.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                 ),
-                SizedBox(height: 10.0),
+                Expanded(
+                  child: Container(
+                    constraints: BoxConstraints(maxHeight: 10.0),
+                  ),
+                ),
                 Text(
                   "X workouts",
                   style: Theme.of(context).textTheme.headline5?.copyWith(

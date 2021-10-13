@@ -24,16 +24,14 @@ class _$CompletedExerciseTearOff {
   _CompletedExercise call(
       {String? id,
       required String creator,
-      required Exercise source,
-      required String name,
-      required BaseExerciseTypeConfiguration configuration,
+      required Exercise exercise,
+      required Execution execution,
       required DateTime timestamp}) {
     return _CompletedExercise(
       id: id,
       creator: creator,
-      source: source,
-      name: name,
-      configuration: configuration,
+      exercise: exercise,
+      execution: execution,
       timestamp: timestamp,
     );
   }
@@ -50,10 +48,8 @@ const $CompletedExercise = _$CompletedExerciseTearOff();
 mixin _$CompletedExercise {
   String? get id => throw _privateConstructorUsedError;
   String get creator => throw _privateConstructorUsedError;
-  Exercise get source => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  BaseExerciseTypeConfiguration get configuration =>
-      throw _privateConstructorUsedError;
+  Exercise get exercise => throw _privateConstructorUsedError;
+  Execution get execution => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -70,12 +66,9 @@ abstract class $CompletedExerciseCopyWith<$Res> {
   $Res call(
       {String? id,
       String creator,
-      Exercise source,
-      String name,
-      BaseExerciseTypeConfiguration configuration,
+      Exercise exercise,
+      Execution execution,
       DateTime timestamp});
-
-  $ExerciseCopyWith<$Res> get source;
 }
 
 /// @nodoc
@@ -91,9 +84,8 @@ class _$CompletedExerciseCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? creator = freezed,
-    Object? source = freezed,
-    Object? name = freezed,
-    Object? configuration = freezed,
+    Object? exercise = freezed,
+    Object? execution = freezed,
     Object? timestamp = freezed,
   }) {
     return _then(_value.copyWith(
@@ -105,30 +97,19 @@ class _$CompletedExerciseCopyWithImpl<$Res>
           ? _value.creator
           : creator // ignore: cast_nullable_to_non_nullable
               as String,
-      source: source == freezed
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
+      exercise: exercise == freezed
+          ? _value.exercise
+          : exercise // ignore: cast_nullable_to_non_nullable
               as Exercise,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      configuration: configuration == freezed
-          ? _value.configuration
-          : configuration // ignore: cast_nullable_to_non_nullable
-              as BaseExerciseTypeConfiguration,
+      execution: execution == freezed
+          ? _value.execution
+          : execution // ignore: cast_nullable_to_non_nullable
+              as Execution,
       timestamp: timestamp == freezed
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
-  }
-
-  @override
-  $ExerciseCopyWith<$Res> get source {
-    return $ExerciseCopyWith<$Res>(_value.source, (value) {
-      return _then(_value.copyWith(source: value));
-    });
   }
 }
 
@@ -142,13 +123,9 @@ abstract class _$CompletedExerciseCopyWith<$Res>
   $Res call(
       {String? id,
       String creator,
-      Exercise source,
-      String name,
-      BaseExerciseTypeConfiguration configuration,
+      Exercise exercise,
+      Execution execution,
       DateTime timestamp});
-
-  @override
-  $ExerciseCopyWith<$Res> get source;
 }
 
 /// @nodoc
@@ -166,9 +143,8 @@ class __$CompletedExerciseCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? creator = freezed,
-    Object? source = freezed,
-    Object? name = freezed,
-    Object? configuration = freezed,
+    Object? exercise = freezed,
+    Object? execution = freezed,
     Object? timestamp = freezed,
   }) {
     return _then(_CompletedExercise(
@@ -180,18 +156,14 @@ class __$CompletedExerciseCopyWithImpl<$Res>
           ? _value.creator
           : creator // ignore: cast_nullable_to_non_nullable
               as String,
-      source: source == freezed
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
+      exercise: exercise == freezed
+          ? _value.exercise
+          : exercise // ignore: cast_nullable_to_non_nullable
               as Exercise,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      configuration: configuration == freezed
-          ? _value.configuration
-          : configuration // ignore: cast_nullable_to_non_nullable
-              as BaseExerciseTypeConfiguration,
+      execution: execution == freezed
+          ? _value.execution
+          : execution // ignore: cast_nullable_to_non_nullable
+              as Execution,
       timestamp: timestamp == freezed
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -202,13 +174,13 @@ class __$CompletedExerciseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@Implements(Exercise)
 class _$_CompletedExercise extends _CompletedExercise {
   const _$_CompletedExercise(
       {this.id,
       required this.creator,
-      required this.source,
-      required this.name,
-      required this.configuration,
+      required this.exercise,
+      required this.execution,
       required this.timestamp})
       : super._();
 
@@ -220,17 +192,15 @@ class _$_CompletedExercise extends _CompletedExercise {
   @override
   final String creator;
   @override
-  final Exercise source;
+  final Exercise exercise;
   @override
-  final String name;
-  @override
-  final BaseExerciseTypeConfiguration configuration;
+  final Execution execution;
   @override
   final DateTime timestamp;
 
   @override
   String toString() {
-    return 'CompletedExercise(id: $id, creator: $creator, source: $source, name: $name, configuration: $configuration, timestamp: $timestamp)';
+    return 'CompletedExercise(id: $id, creator: $creator, exercise: $exercise, execution: $execution, timestamp: $timestamp)';
   }
 
   @override
@@ -242,13 +212,12 @@ class _$_CompletedExercise extends _CompletedExercise {
             (identical(other.creator, creator) ||
                 const DeepCollectionEquality()
                     .equals(other.creator, creator)) &&
-            (identical(other.source, source) ||
-                const DeepCollectionEquality().equals(other.source, source)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.configuration, configuration) ||
+            (identical(other.exercise, exercise) ||
                 const DeepCollectionEquality()
-                    .equals(other.configuration, configuration)) &&
+                    .equals(other.exercise, exercise)) &&
+            (identical(other.execution, execution) ||
+                const DeepCollectionEquality()
+                    .equals(other.execution, execution)) &&
             (identical(other.timestamp, timestamp) ||
                 const DeepCollectionEquality()
                     .equals(other.timestamp, timestamp)));
@@ -259,9 +228,8 @@ class _$_CompletedExercise extends _CompletedExercise {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(creator) ^
-      const DeepCollectionEquality().hash(source) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(configuration) ^
+      const DeepCollectionEquality().hash(exercise) ^
+      const DeepCollectionEquality().hash(execution) ^
       const DeepCollectionEquality().hash(timestamp);
 
   @JsonKey(ignore: true)
@@ -275,13 +243,13 @@ class _$_CompletedExercise extends _CompletedExercise {
   }
 }
 
-abstract class _CompletedExercise extends CompletedExercise {
+abstract class _CompletedExercise extends CompletedExercise
+    implements Exercise {
   const factory _CompletedExercise(
       {String? id,
       required String creator,
-      required Exercise source,
-      required String name,
-      required BaseExerciseTypeConfiguration configuration,
+      required Exercise exercise,
+      required Execution execution,
       required DateTime timestamp}) = _$_CompletedExercise;
   const _CompletedExercise._() : super._();
 
@@ -293,12 +261,9 @@ abstract class _CompletedExercise extends CompletedExercise {
   @override
   String get creator => throw _privateConstructorUsedError;
   @override
-  Exercise get source => throw _privateConstructorUsedError;
+  Exercise get exercise => throw _privateConstructorUsedError;
   @override
-  String get name => throw _privateConstructorUsedError;
-  @override
-  BaseExerciseTypeConfiguration get configuration =>
-      throw _privateConstructorUsedError;
+  Execution get execution => throw _privateConstructorUsedError;
   @override
   DateTime get timestamp => throw _privateConstructorUsedError;
   @override

@@ -8,6 +8,7 @@ part of 'muscle.dart';
 
 _$_Muscle _$$_MuscleFromJson(Map<String, dynamic> json) => _$_Muscle(
       id: json['id'] as String?,
+      short: json['short'] as String,
       name: json['name'] as String,
       region: _$enumDecodeNullable(_$MuscleRegionEnumMap, json['region']),
       side: _$enumDecodeNullable(_$MuscleSideEnumMap, json['side']),
@@ -16,6 +17,7 @@ _$_Muscle _$$_MuscleFromJson(Map<String, dynamic> json) => _$_Muscle(
 
 Map<String, dynamic> _$$_MuscleToJson(_$_Muscle instance) => <String, dynamic>{
       'id': instance.id,
+      'short': instance.short,
       'name': instance.name,
       'region': _$MuscleRegionEnumMap[instance.region],
       'side': _$MuscleSideEnumMap[instance.side],

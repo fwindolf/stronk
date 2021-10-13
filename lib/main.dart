@@ -23,6 +23,7 @@ class Stronk extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final datagen = ref.read(dataGeneratorProvider);
     datagen.generateMusclesFromFile();
+    datagen.generateExercisesFromFile();
 
     final settings = ref.watch(authControllerProvider).maybeWhen(
           data: (user) => ref.watch(settingsProvider(user)),
@@ -32,8 +33,8 @@ class Stronk extends ConsumerWidget {
     return MaterialApp(
       title: 'Stronk',
       themeMode: settings.userSettings.theme,
-      theme: lightTheme,
-      darkTheme: darkTheme,
+      theme: AppColorScheme.lightTheme,
+      darkTheme: AppColorScheme.darkTheme,
       initialRoute: AppRoutes.startup,
       onGenerateRoute: (settings) => AppRouter.onGenerateRoute(settings),
     );

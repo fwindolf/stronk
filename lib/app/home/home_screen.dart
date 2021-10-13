@@ -43,16 +43,22 @@ class HomeScreen extends HookConsumerWidget {
             ),
             Expanded(
               flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: WorkoutOverviewWidget(),
+              child: InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: WorkoutOverviewWidget(),
+                ),
+                onTap: () => Navigator.of(context).pushNamed(AppRoutes.workoutHistory),
               ),
             ),
             Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 2.0),
-                child: ChallengeOverviewWidget(),
+              flex: 2,
+              child: InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 2.0),
+                  child: ChallengeOverviewWidget(),
+                ),
+                onTap: () => Navigator.of(context).pushNamed(AppRoutes.challenges),
               ),
             ),
           ],

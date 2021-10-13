@@ -15,7 +15,7 @@ class Challenge with _$Challenge {
     required String name,
     required String? description,
     required String? creator,
-    required Exercise exercise,
+    required ExecutableExercise exercise,
     required DateTime startDate,
     required DateTime? endDate,
   }) = _Challenge;

@@ -67,7 +67,8 @@ class ExerciseDescriptionFormField extends StatelessWidget {
   final ValidationItem state;
   final Function updateState;
 
-  const ExerciseDescriptionFormField({required this.state, required this.updateState});
+  const ExerciseDescriptionFormField(
+      {required this.state, required this.updateState});
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +89,9 @@ class ExerciseDescriptionFormField extends StatelessWidget {
 }
 
 class ExerciseEditScreen extends ConsumerWidget {
-  final Exercise? editedExercise;
-  ExerciseEditScreen({Key? key, required this.editedExercise}) : super(key: key);
+  final BaseExercise? editedExercise;
+  ExerciseEditScreen({Key? key, required this.editedExercise})
+      : super(key: key);
 
   final _form = GlobalKey<FormState>();
 
@@ -100,7 +102,8 @@ class ExerciseEditScreen extends ConsumerWidget {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Error in the form, could not edit or create an Exercise"),
+          content:
+              Text("Error in the form, could not edit or create an Exercise"),
         ),
       );
       return;
@@ -127,14 +130,14 @@ class ExerciseEditScreen extends ConsumerWidget {
       // Exercise is null -> create new
       ref.read(exerciseRepositoryProvider).create(
             userId: user.uid,
-            exercise: Exercise.empty(),
+            exercise: BaseExercise.empty() as Exercise,
           );
     } else {
       // Exercise exists
       ref.read(exerciseRepositoryProvider).update(
             userId: user.uid,
             // TODO
-            exercise: editedExercise!.copyWith(),
+            exercise: editedExercise!.copyWith() as Exercise,
           );
     }
 
@@ -149,7 +152,7 @@ class ExerciseEditScreen extends ConsumerWidget {
       validator.updateDescription(editedExercise!.description);
       validator.updateTags(editedExercise!.tags);
       validator.updateMuscles(editedExercise!.muscles);
-      validator.updateType(editedExercise!.configuration);
+      validator.updateType(editedExercise!.execution);
       validator.updateInstructions(editedExercise!.instructions);
     }
 
@@ -179,50 +182,66 @@ class ExerciseEditScreen extends ConsumerWidget {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 5, right: 5),
+                  padding: const EdgeInsets.only(
+                      top: 10.0, bottom: 10.0, left: 5, right: 5),
                   child: ExerciseDescriptionFormField(
                     state: ref.watch(exerciseValidationProvider).description,
-                    updateState: ref.read(exerciseValidationProvider.notifier).updateDescription,
+                    updateState: ref
+                        .read(exerciseValidationProvider.notifier)
+                        .updateDescription,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0, left: 5, right: 5),
+                  padding:
+                      const EdgeInsets.only(bottom: 10.0, left: 5, right: 5),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       border: Border.all(
                           color: Colors.grey.shade500, // set border color
                           width: 1.0), // set border width
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(5.0)), // set rounded corner radius
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(5.0)), // set rounded corner radius
                     ),
                     constraints: BoxConstraints(minHeight: 40),
-                    padding: const EdgeInsets.only(top: 5, bottom: 5.0, left: 7, right: 7),
+                    padding: const EdgeInsets.only(
+                        top: 5, bottom: 5.0, left: 7, right: 7),
                     child: ExercisesTagField(
                       state: ref.watch(exerciseValidationProvider).tags,
-                      updateState: ref.read(exerciseValidationProvider.notifier).updateTags,
+                      updateState: ref
+                          .read(exerciseValidationProvider.notifier)
+                          .updateTags,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0, left: 5, right: 5),
+                  padding:
+                      const EdgeInsets.only(bottom: 10.0, left: 5, right: 5),
                   child: MuscleField(
                     state: ref.watch(exerciseValidationProvider).muscles,
-                    updateState: ref.read(exerciseValidationProvider.notifier).updateMuscles,
+                    updateState: ref
+                        .read(exerciseValidationProvider.notifier)
+                        .updateMuscles,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
+                  padding:
+                      const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
                   child: ExerciseTypeField(
                     state: ref.watch(exerciseValidationProvider).type,
-                    updateState: ref.read(exerciseValidationProvider.notifier).updateType,
+                    updateState: ref
+                        .read(exerciseValidationProvider.notifier)
+                        .updateType,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
+                  padding:
+                      const EdgeInsets.only(bottom: 15.0, left: 5, right: 5),
                   child: InstructionField(
                     state: ref.watch(exerciseValidationProvider).instructions,
-                    updateState: ref.read(exerciseValidationProvider.notifier).updateInstructions,
+                    updateState: ref
+                        .read(exerciseValidationProvider.notifier)
+                        .updateInstructions,
                   ),
                 ),
                 // NumberedListField(

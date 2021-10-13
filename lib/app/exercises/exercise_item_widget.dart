@@ -6,7 +6,8 @@ import 'package:stronk/controllers/auth_controller.dart';
 
 import 'package:stronk/routing/app_router.dart';
 
-final exerciseItemProvider = Provider<Exercise>((_) => throw UnimplementedError());
+final exerciseItemProvider =
+    Provider<BaseExercise>((_) => throw UnimplementedError());
 
 class ExerciseItem extends ConsumerWidget {
   const ExerciseItem();

@@ -102,7 +102,7 @@ class MuscleSelectionItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: ListTile(
-        title: Text(muscle.name),
+        title: Text("${muscle.short} (${muscle.name})"),
         subtitle: Text("${muscle.region?.description} / ${muscle.side?.description}"),
         leading: FittedBox(
           fit: BoxFit.cover,

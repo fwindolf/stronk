@@ -14,8 +14,7 @@ class WorkoutCountBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final barElements =
-        List.generate(targetCount, (index) => index).map((index) {
+    final barElements = List.generate(targetCount, (index) => index).map((index) {
       var radius = null;
       if (index == 0) {
         radius = BorderRadius.only(
@@ -30,7 +29,7 @@ class WorkoutCountBar extends StatelessWidget {
       }
 
       var color = Colors.grey.withOpacity(0.2);
-      if (completedCount > index) {
+      if (completedCount <= index) {
         color = Theme.of(context).colorScheme.primary;
       }
 
@@ -70,8 +69,7 @@ class WorkoutCountChart extends ConsumerWidget {
       days: today.weekday + 7 * (weeksShown - 1),
     ));
 
-    final applicableWorkouts =
-        workouts.where((workout) => workout.startTime.isAfter(earliest));
+    final applicableWorkouts = workouts.where((workout) => workout.startTime.isAfter(earliest));
 
     // Weeks start with 0 until Thursday, with 1 on/after Thursday
     final startOfYear = DateTime(earliest.year, 1, 1);
@@ -100,8 +98,7 @@ class WorkoutCountChart extends ConsumerWidget {
               : earliestWeekNumber + index; // 52 or 53 as there is no week 0
         } else {
           // Week is within the next year
-          week = nextFirstWeekNumber +
-              (startOfWeek.difference(startOfNextYear).inDays / 7).ceil();
+          week = nextFirstWeekNumber + (startOfWeek.difference(startOfNextYear).inDays / 7).ceil();
         }
       }
 

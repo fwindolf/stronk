@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:stronk/models/exercise/exercise_configuration.dart';
+import 'package:stronk/models/exercise/execution.dart';
 import 'package:stronk/util/validation.dart';
 
 import 'package:stronk/models/exercise/exercise_tag.dart';
@@ -16,7 +16,7 @@ class ExerciseValidationItems {
   final ValidationItem<String> description;
   final ValidationItem<List<ExerciseTag>> tags;
   final ValidationItem<List<Muscle>> muscles;
-  final ValidationItem<BaseExerciseTypeConfiguration> type;
+  final ValidationItem<Execution> type;
   final ValidationItem<List<Instruction>> instructions;
 
   ExerciseValidationItems({
@@ -24,7 +24,7 @@ class ExerciseValidationItems {
     this.description = const ValidationItem<String>(null, null),
     this.tags = const ValidationItem<List<ExerciseTag>>(null, null),
     this.muscles = const ValidationItem<List<Muscle>>(null, null),
-    this.type = const ValidationItem<BaseExerciseTypeConfiguration>(null, null),
+    this.type = const ValidationItem<Execution>(null, null),
     this.instructions = const ValidationItem<List<Instruction>>(null, null),
   });
 
@@ -80,7 +80,7 @@ class Validator {
   );
   final tagValidator = ListValidator<ExerciseTag>(maxItems: 4, maxError: "Can't add more tags");
   final musclesValidator = ListValidator<Muscle>(minItems: 1, minError: "Need at least one muscle");
-  final typeValidator = AlwaysValidValidator<BaseExerciseTypeConfiguration>();
+  final typeValidator = AlwaysValidValidator<Execution>();
   final instructionsValidator = InstructionsValidator();
 }
 
@@ -90,7 +90,7 @@ class ExerciseValidationNotifier extends StateNotifier<ExerciseValidationItems> 
     String? description,
     List<ExerciseTag>? tags,
     List<Muscle>? muscles,
-    BaseExerciseTypeConfiguration? type,
+    Execution? type,
     List<Instruction>? instructions,
   }) : super(
           ExerciseValidationItems(
@@ -98,7 +98,7 @@ class ExerciseValidationNotifier extends StateNotifier<ExerciseValidationItems> 
             description: ValidationItem<String>(description, null),
             tags: ValidationItem<List<ExerciseTag>>(tags, null),
             muscles: ValidationItem<List<Muscle>>(muscles, null),
-            type: ValidationItem<BaseExerciseTypeConfiguration>(type, null),
+            type: ValidationItem<Execution>(type, null),
             instructions: ValidationItem<List<Instruction>>(instructions, null),
           ),
         );
@@ -153,12 +153,12 @@ class ExerciseValidationNotifier extends StateNotifier<ExerciseValidationItems> 
     }
   }
 
-  void updateType(BaseExerciseTypeConfiguration? value) {
+  void updateType(Execution? value) {
     if (typeValidator.isValid(value)) {
-      state = state.copyWith(type: ValidationItem<BaseExerciseTypeConfiguration>(value, null));
+      state = state.copyWith(type: ValidationItem<Execution>(value, null));
     } else {
       final error = typeValidator.errorText(value);
-      state = state.copyWith(type: ValidationItem<BaseExerciseTypeConfiguration>(null, error));
+      state = state.copyWith(type: ValidationItem<Execution>(null, error));
     }
   }
 

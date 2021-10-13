@@ -39,8 +39,13 @@ class MuscleRepository implements MuscleRepositoryBase {
   @override
   Future<String> create({required Muscle muscle}) async {
     try {
-      final docRef = await _read(firebaseFirestoreProvider).muscleRef().add(muscle.toDocument());
-      return docRef.id;
+      if (muscle.id == null) {
+        final docRef = await _read(firebaseFirestoreProvider).muscleRef().add(muscle.toDocument());
+        return docRef.id;
+      } else {
+        await _read(firebaseFirestoreProvider).muscleRef().doc(muscle.id).set(muscle.toDocument());
+        return muscle.id!;
+      }
     } on FirebaseException catch (e) {
       throw DataTransferException(message: "Failed to create Muscle: ${e.message}");
     }
@@ -50,6 +55,7 @@ class MuscleRepository implements MuscleRepositoryBase {
   Future<void> update({required Muscle muscle}) async {
     try {
       await _read(firebaseFirestoreProvider).muscleRef().doc(muscle.id).update(muscle.toDocument());
+      print("Created Muscle ${muscle.toString()} with id ${muscle.id}");
     } on FirebaseException catch (e) {
       throw DataTransferException(message: "Failed to update Muscle: ${e.message}");
     }

@@ -1,0 +1,396 @@
+[
+    {
+        "id": "chest_press",
+        "name": "Chest Press",
+        "description": "Lying bench press exercise",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "chest"
+            }
+        ],
+        "muscles": [
+            "Triceps",
+            "Delts",
+            "Chest"
+        ],
+        "equipment": {
+            "dumbbells": {
+                "instructions": [
+                    "Lay on bench or floor, pinch shoulder blades together to create an arch upper back, bring dumbbells next to chest",
+                    "Push dumbbells up until they almost touch by squeezing biceps together, keep elbows slightly tucked",
+                    "Descent the weights until dumbbells almost touch the chest"
+                ]
+            }
+        }
+    },
+    {
+        "id": "bent_over_row",
+        "name": "Bent over Row",
+        "description": "Standing row bent over at roughly 45 degree angle",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "back"
+            }
+        ],
+        "muscles": [
+            "Lat",
+            "Traps",
+            "Biceps"
+        ],
+        "equipment": {
+            "dumbbells": {
+                "instructions": [
+                    "Bend over with your back in a 45 degree angle",
+                    "Lift dumbbells into hips until elbow is behind the back with elbows angled out 45 degrees from body. Twist thumbs outwards to increase load in the rear delts",
+                    "Lower the dumbbells until the arms are straight"
+                ]
+            },
+            "band": {
+                "instructions": [
+                    "Step over band double bandedly and bend over with your back in a 45 degree angle",
+                    "Stretch band until elbow is behind the back with elbows angled out 45 degrees from body. Twist thumbs outwards to increase load in the rear delts",
+                    "Release tension until the arms are straight"
+                ],
+                "banded": "double"
+            }
+        }
+    },
+    {
+        "id": "shoulder_press",
+        "name": "Shoulder Press",
+        "description": "Standing shoulder press",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "shoulders"
+            }
+        ],
+        "muscles": [
+            "Traps"
+        ],
+        "equipment": {
+            "dumbbells": {
+                "instructions": [
+                    "Stand with feet shoulder width apart, raise dumbells towards earsh with elbows tucked forward",
+                    "Extend arms to full stretch into straight line of arms, head and hips, contracting abs and glutes",
+                    "Slowly lower the dumbbells until back at starting position"
+                ]
+            },
+            "band": {
+                "instructions": [
+                    "Stand with feet shoulder width apart, pull band to chin height with elbows tucked forward",
+                    "Extend arms to full stretch into straight line of arms, head and hips, contracting abs and glutes",
+                    "Bring band back to starting position while maintaining a strong core"
+                ],
+                "banded": "single"
+            }
+        }
+    },
+    {
+        "id": "reverse_crunch",
+        "name": "Reverse Crunch",
+        "description": "Lying crunch that brings the legs above the head",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "core"
+            }
+        ],
+        "muscles": [
+            "Abs"
+        ],
+        "equipment": {
+            "bodyweight": {
+                "instructions": [
+                    "Lie on bench and grab bench behind head for support, with the forearms against the sides of the head",
+                    "Flex hips and knees to 90 degree angle and lift pelvis off the bench to bring knees towards chest without momentum",
+                    "After pause at top position, slowly lower feet to start position"
+                ]
+            }
+        }
+    },
+    {
+        "id": "goblet_squat",
+        "name": "Goblet Squat",
+        "description": "Weighted squat with pause at lower position",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "legs"
+            },
+            {
+                "name": "squat"
+            }
+        ],
+        "muscles": [
+            "Quads",
+            "Glutes"
+        ],
+        "equipment": {
+            "dumbbells": {
+                "instructions": [
+                    "Hold Dumbbell underhand before chest, stand with feet a bit wider than shoulders",
+                    "Engage core and squat down by pushing hips backwards until thighs are parallel to the ground, then pause for 2 seconds with core and legs engaged",
+                    "Push back up from quads and glutes until legs are straight"
+                ]
+            },
+            "band": {
+                "instructions": [
+                    "Step through band such that it rests on the shoulders, stand with feet a bit wider than shoulders",
+                    "Engage core and squat down by pushing hips backwards until thighs are parallel to the ground, then pause for 2 seconds with core and legs engaged",
+                    "Push back up from quads and glutes until legs are straight"
+                ],
+                "banded": "single"
+            },
+            "bodyweight": {
+                "instructions": [
+                    "Stand with feet a bit wider than shoulders",
+                    "Engage core and squat down by pushing hips backwards until thighs are parallel to the ground, then pause for 2 seconds with core and legs engaged",
+                    "Push back up from quads and glutes until legs are straight"
+                ]
+            }
+        }
+    },
+    {
+        "id": "deadlift",
+        "name": "Deadlift",
+        "description": "Deadlift that targets the full body",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "deadlift"
+            },
+            {
+                "name": "body"
+            }
+        ],
+        "muscles": [
+            "Traps",
+            "Lat",
+            "Glutes"
+        ],
+        "equipment": {
+            "band": {
+                "instructions": [
+                    "Step over band and hold ends besides calfs, stand with feet at shoulder width with knees bent and straight back and butt pushed out",
+                    "Engage core and straighten the knees with straight back, while feeling tension in hamstrings",
+                    "Revert to starting position by bending hips, go only as far until the back starts to round"
+                ],
+                "banded": "double"
+            },
+            "dumbbell": {
+                "instructions": [
+                    "Stand with feet at shoulder width with dumbbells in each hand, engage core",
+                    "Bend at hips and push the butt out with a straight back, feeling tension in the hamstring. Go as low as possible without arching the back",
+                    "Push back up by driving hips forward until knees are straight, while feeling tension in hamstrings"
+                ]
+            }
+        }
+    },
+    {
+        "id": "calf_raise",
+        "name": "Calf Raise",
+        "description": "Exercise targeting the calfs",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "calf"
+            }
+        ],
+        "muscles": [
+            "Calves"
+        ],
+        "sided": true,
+        "equipment": {
+            "dumbbell": {
+                "instructions": [
+                    "Stand on raised object with one foot, hold dumbbell in the hand of the same side",
+                    "Use the calves to lift straight up as high as possible, with a short pause at the top position",
+                    "Lower heel slowly with a short pause at the bottom position"
+                ]
+            },
+            "bodyweight": {
+                "instructions": [
+                    "Stand on raised object with one foot, hold object (if possible) in the hand of the same side",
+                    "Use the calves to lift straight up as high as possible, with a short pause at the top position",
+                    "Lower heel slowly with a short pause at the bottom position"
+                ]
+            }
+        }
+    },
+    {
+        "id": "crunch",
+        "name": "Crunch",
+        "description": "Standard crunches",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "crunch"
+            },
+            {
+                "name": "abs"
+            }
+        ],
+        "muscles": [
+            "Abs"
+        ],
+        "equipment": {
+            "dumbbell": {
+                "instructions": [
+                    "Lay on the back with knees bent 90 degrees, holding dumbbells straight up before your chest",
+                    "Engage abs and push chest towards belly button, while keeping dumbbells straight to the ceiling",
+                    "Slowly lower back down to starting position, making sure the back is still flat on the ground"
+                ]
+            },
+            "bodyweight": {
+                "instructions": [
+                    "Lay on the back with knees bent 90 degrees, placing the arms behind the back",
+                    "Engage abs and push chest towards belly button",
+                    "Slowly lower back down to starting position, making sure the back is still flat on the ground"
+                ]
+            }
+        }
+    },
+    {
+        "id": "reverse_lunges",
+        "name": "Reverse Lunges",
+        "description": "Step back into lunge position",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "lunge"
+            },
+            {
+                "name": "legs"
+            }
+        ],
+        "muscles": [
+            "Quads",
+            "Calves",
+            "Glutes"
+        ],
+        "sided": true,
+        "equipment": {
+            "dumbbell": {
+                "instructions": [
+                    "Stand straight with dumbbells in each hand",
+                    "Take a step back, until the back foots knee almost touches the ground in a 90 degree angle. Keep the chest up during the movement",
+                    "Step back into the starting position by engaging the front foots quads"
+                ]
+            },
+            "bodyweight": {
+                "instructions": [
+                    "Stand straight with legs next to each other",
+                    "Take a step back, until the back foots knee almost touches the ground in a 90 degree angle. Keep the chest up during the movement",
+                    "Step back into the starting position by engaging the front foots quads"
+                ]
+            }
+        }
+    },
+    {
+        "id": "pushup",
+        "name": "Pushup",
+        "description": "Standard Pushup",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "pushup"
+            },
+            {
+                "name": "body"
+            }
+        ],
+        "muscles": [
+            "Chest",
+            "Triceps"
+        ],
+        "equipment": {
+            "bodyweight": {
+                "instructions": [
+                    "Get into a plank position with the hands placed under your shoulders, tuck the shoulders back",
+                    "With the elbows 30-45 degrees from the body, descend until the chest almost touches the ground",
+                    "Push into the floor until you return to the starting position"
+                ]
+            },
+            "band": {
+                "instructions": [
+                    "Get into a plank position with the band over your back in each hands, place them under your shoulders and tuck the shoulders back",
+                    "With the elbows 30-45 degrees from the body, descend until the chest almost touches the ground",
+                    "Push into the floor until you return to the starting position"
+                ],
+                "banded": "double"
+            }
+        }
+    },
+    {
+        "id": "bent_over_face_pulls",
+        "name": "Bent Over Face Pulls",
+        "description": "Face pulls with bent over body",
+        "creator": null,
+        "type": "set_repetition",
+        "tags": [
+            {
+                "name": "back"
+            }
+        ],
+        "muscles": [
+            "Delts",
+            "Lat",
+            "Traps"
+        ],
+        "equipment": {
+            "dumbbell": {
+                "instructions": [
+                    "Bent over at a 45 degree angle with dumbbells in each hand with arms hanging slightly bent from the chest",
+                    "Raise arms towards the face while twisting the thumbs up until you reach a 'W' position and quickly pause",
+                    "Slowly bring the dumbbells back into starting position, keeping a straight back through the movement"
+                ]
+            },
+            "band": {
+                "instructions": [
+                    "Bent over at a 45 degree angle with the band under your feet and in each hand",
+                    "Raise arms towards the face while twisting the thumbs up until you reach a 'W' position and quickly pause",
+                    "Slowly bring the arms back into starting position, keeping a straight back through the movement"
+                ],
+                "banded": "single"
+            }
+        }
+    },
+    {
+        "id": "plank",
+        "name": "Plank",
+        "description": "Standard plank exercise",
+        "creator": null,
+        "type": "hold",
+        "tags": [
+            {
+                "name": "core"
+            }
+        ],
+        "muscles": [
+            "Abs",
+            "Lat",
+            "Glutes"
+        ],
+        "equipment": {
+            "bodyweight": {
+                "instructions": [
+                    "Get into a plank position on your forearms with the hands flat on the floor, elbows under the shoulder",
+                    "Hold the position with glutes squeezed and the hips, chest and neck in a straight line parallel to the floor"
+                ]
+            }
+        }
+    }
+]

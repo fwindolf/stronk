@@ -27,7 +27,7 @@ class _$CompletedChallengeTearOff {
       required Challenge challenge,
       required DateTime startTime,
       required DateTime? finishTime,
-      required CompletedExercise exercise}) {
+      required ExecutableExercise exercise}) {
     return _CompletedChallenge(
       id: id,
       creator: creator,
@@ -53,7 +53,7 @@ mixin _$CompletedChallenge {
   Challenge get challenge => throw _privateConstructorUsedError;
   DateTime get startTime => throw _privateConstructorUsedError;
   DateTime? get finishTime => throw _privateConstructorUsedError;
-  CompletedExercise get exercise => throw _privateConstructorUsedError;
+  ExecutableExercise get exercise => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,10 +72,10 @@ abstract class $CompletedChallengeCopyWith<$Res> {
       Challenge challenge,
       DateTime startTime,
       DateTime? finishTime,
-      CompletedExercise exercise});
+      ExecutableExercise exercise});
 
   $ChallengeCopyWith<$Res> get challenge;
-  $CompletedExerciseCopyWith<$Res> get exercise;
+  $ExecutableExerciseCopyWith<$Res> get exercise;
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class _$CompletedChallengeCopyWithImpl<$Res>
       exercise: exercise == freezed
           ? _value.exercise
           : exercise // ignore: cast_nullable_to_non_nullable
-              as CompletedExercise,
+              as ExecutableExercise,
     ));
   }
 
@@ -132,8 +132,8 @@ class _$CompletedChallengeCopyWithImpl<$Res>
   }
 
   @override
-  $CompletedExerciseCopyWith<$Res> get exercise {
-    return $CompletedExerciseCopyWith<$Res>(_value.exercise, (value) {
+  $ExecutableExerciseCopyWith<$Res> get exercise {
+    return $ExecutableExerciseCopyWith<$Res>(_value.exercise, (value) {
       return _then(_value.copyWith(exercise: value));
     });
   }
@@ -152,12 +152,12 @@ abstract class _$CompletedChallengeCopyWith<$Res>
       Challenge challenge,
       DateTime startTime,
       DateTime? finishTime,
-      CompletedExercise exercise});
+      ExecutableExercise exercise});
 
   @override
   $ChallengeCopyWith<$Res> get challenge;
   @override
-  $CompletedExerciseCopyWith<$Res> get exercise;
+  $ExecutableExerciseCopyWith<$Res> get exercise;
 }
 
 /// @nodoc
@@ -204,7 +204,7 @@ class __$CompletedChallengeCopyWithImpl<$Res>
       exercise: exercise == freezed
           ? _value.exercise
           : exercise // ignore: cast_nullable_to_non_nullable
-              as CompletedExercise,
+              as ExecutableExercise,
     ));
   }
 }
@@ -235,7 +235,7 @@ class _$_CompletedChallenge extends _CompletedChallenge {
   @override
   final DateTime? finishTime;
   @override
-  final CompletedExercise exercise;
+  final ExecutableExercise exercise;
 
   @override
   String toString() {
@@ -293,7 +293,7 @@ abstract class _CompletedChallenge extends CompletedChallenge {
       required Challenge challenge,
       required DateTime startTime,
       required DateTime? finishTime,
-      required CompletedExercise exercise}) = _$_CompletedChallenge;
+      required ExecutableExercise exercise}) = _$_CompletedChallenge;
   const _CompletedChallenge._() : super._();
 
   factory _CompletedChallenge.fromJson(Map<String, dynamic> json) =
@@ -310,7 +310,7 @@ abstract class _CompletedChallenge extends CompletedChallenge {
   @override
   DateTime? get finishTime => throw _privateConstructorUsedError;
   @override
-  CompletedExercise get exercise => throw _privateConstructorUsedError;
+  ExecutableExercise get exercise => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CompletedChallengeCopyWith<_CompletedChallenge> get copyWith =>

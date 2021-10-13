@@ -26,7 +26,7 @@ class _$ChallengeTearOff {
       required String name,
       required String? description,
       required String? creator,
-      required Exercise exercise,
+      required ExecutableExercise exercise,
       required DateTime startDate,
       required DateTime? endDate}) {
     return _Challenge(
@@ -54,7 +54,7 @@ mixin _$Challenge {
   String get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get creator => throw _privateConstructorUsedError;
-  Exercise get exercise => throw _privateConstructorUsedError;
+  ExecutableExercise get exercise => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
 
@@ -73,11 +73,11 @@ abstract class $ChallengeCopyWith<$Res> {
       String name,
       String? description,
       String? creator,
-      Exercise exercise,
+      ExecutableExercise exercise,
       DateTime startDate,
       DateTime? endDate});
 
-  $ExerciseCopyWith<$Res> get exercise;
+  $ExecutableExerciseCopyWith<$Res> get exercise;
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class _$ChallengeCopyWithImpl<$Res> implements $ChallengeCopyWith<$Res> {
       exercise: exercise == freezed
           ? _value.exercise
           : exercise // ignore: cast_nullable_to_non_nullable
-              as Exercise,
+              as ExecutableExercise,
       startDate: startDate == freezed
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -131,8 +131,8 @@ class _$ChallengeCopyWithImpl<$Res> implements $ChallengeCopyWith<$Res> {
   }
 
   @override
-  $ExerciseCopyWith<$Res> get exercise {
-    return $ExerciseCopyWith<$Res>(_value.exercise, (value) {
+  $ExecutableExerciseCopyWith<$Res> get exercise {
+    return $ExecutableExerciseCopyWith<$Res>(_value.exercise, (value) {
       return _then(_value.copyWith(exercise: value));
     });
   }
@@ -149,12 +149,12 @@ abstract class _$ChallengeCopyWith<$Res> implements $ChallengeCopyWith<$Res> {
       String name,
       String? description,
       String? creator,
-      Exercise exercise,
+      ExecutableExercise exercise,
       DateTime startDate,
       DateTime? endDate});
 
   @override
-  $ExerciseCopyWith<$Res> get exercise;
+  $ExecutableExerciseCopyWith<$Res> get exercise;
 }
 
 /// @nodoc
@@ -196,7 +196,7 @@ class __$ChallengeCopyWithImpl<$Res> extends _$ChallengeCopyWithImpl<$Res>
       exercise: exercise == freezed
           ? _value.exercise
           : exercise // ignore: cast_nullable_to_non_nullable
-              as Exercise,
+              as ExecutableExercise,
       startDate: startDate == freezed
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -234,7 +234,7 @@ class _$_Challenge extends _Challenge with DiagnosticableTreeMixin {
   @override
   final String? creator;
   @override
-  final Exercise exercise;
+  final ExecutableExercise exercise;
   @override
   final DateTime startDate;
   @override
@@ -311,7 +311,7 @@ abstract class _Challenge extends Challenge {
       required String name,
       required String? description,
       required String? creator,
-      required Exercise exercise,
+      required ExecutableExercise exercise,
       required DateTime startDate,
       required DateTime? endDate}) = _$_Challenge;
   const _Challenge._() : super._();
@@ -328,7 +328,7 @@ abstract class _Challenge extends Challenge {
   @override
   String? get creator => throw _privateConstructorUsedError;
   @override
-  Exercise get exercise => throw _privateConstructorUsedError;
+  ExecutableExercise get exercise => throw _privateConstructorUsedError;
   @override
   DateTime get startDate => throw _privateConstructorUsedError;
   @override

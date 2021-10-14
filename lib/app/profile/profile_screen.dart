@@ -25,6 +25,7 @@ class ProfileScreen extends StatelessWidget {
       ),
       drawer: DefaultDrawer(),
       body: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           UserOverviewWidget(),
           Expanded(

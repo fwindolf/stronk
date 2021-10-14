@@ -22,7 +22,7 @@ class UserOverviewWidget extends ConsumerWidget {
     return Card(
       elevation: 5,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0),
+        padding: const EdgeInsets.symmetric(vertical: 14.0),
         child: Row(
           children: [
             Padding(
@@ -37,36 +37,48 @@ class UserOverviewWidget extends ConsumerWidget {
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  userName,
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                ),
-                Expanded(
-                  child: Container(
-                    constraints: BoxConstraints(maxHeight: 10.0),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: Text(
+                      userName,
+                      style: Theme.of(context).textTheme.headline5?.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                    ),
+                    flex: 1,
                   ),
-                ),
-                Text(
-                  "X workouts",
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
-                        fontSize: 16,
-                      ),
-                ),
-                Text(
-                  "X challenges with x longest streak",
-                  style: Theme.of(context).textTheme.headline5?.copyWith(
-                        fontSize: 16,
-                      ),
-                )
-              ],
+                  Flexible(
+                    child: Container(
+                      constraints: BoxConstraints(maxHeight: 10.0),
+                    ),
+                    flex: 1,
+                  ),
+                  Flexible(
+                    child: Text(
+                      "X workouts",
+                      style: Theme.of(context).textTheme.headline5?.copyWith(
+                            fontSize: 16,
+                          ),
+                    ),
+                    flex: 1,
+                  ),
+                  Flexible(
+                    child: Text(
+                      "X challenges with x longest streak",
+                      style: Theme.of(context).textTheme.headline5?.copyWith(
+                            fontSize: 16,
+                          ),
+                    ),
+                    flex: 1,
+                  )
+                ],
+              ),
             )
           ],
         ),

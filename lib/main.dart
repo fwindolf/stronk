@@ -21,21 +21,25 @@ class Stronk extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final datagen = ref.read(dataGeneratorProvider);
-    datagen.generateMusclesFromFile();
-    datagen.generateExercisesFromFile();
+    // final datagen = ref.read(dataGeneratorProvider);
+    // datagen.generateMusclesFromFile();
+    // datagen.generateExercisesFromFile();
 
-    final settings = ref.watch(authControllerProvider).maybeWhen(
-          data: (user) => ref.watch(settingsProvider(user)),
-          orElse: () => Settings.empty(),
+    // Get/generate settings
+    final user = ref.watch(authControllerProvider).maybeWhen(
+          data: (user) => user,
+          orElse: () => null,
         );
+
+    final settings = user == null ? Settings.empty() : ref.watch(settingsProvider(user));
+    final route = user == null ? AppRoutes.startup : AppRoutes.home;
 
     return MaterialApp(
       title: 'Stronk',
       themeMode: settings.userSettings.theme,
       theme: AppColorScheme.lightTheme,
       darkTheme: AppColorScheme.darkTheme,
-      initialRoute: AppRoutes.startup,
+      initialRoute: route,
       onGenerateRoute: (settings) => AppRouter.onGenerateRoute(settings),
     );
   }

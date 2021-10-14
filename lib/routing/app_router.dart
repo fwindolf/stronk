@@ -12,7 +12,7 @@ import 'package:stronk/app/exercises/exercises_edit_screen.dart';
 
 class AppRoutes {
   static const home = '/';
-  static const startup = '/starup';
+  static const startup = '/startup';
   static const profile = '/profile';
   static const login = '/login';
   static const settings = '/settings';
@@ -37,12 +37,14 @@ class AppRouter {
 
     switch (settings.name) {
       case AppRoutes.startup:
+        print("Startup");
         return MaterialPageRoute(
           builder: (_) => StartupScreen(),
           settings: settings,
           fullscreenDialog: true,
         );
       case AppRoutes.home:
+        print("Home");
         return MaterialPageRoute<dynamic>(
           builder: (_) => HomeScreen(),
           settings: settings,

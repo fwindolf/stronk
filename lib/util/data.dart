@@ -65,7 +65,7 @@ class DataGenerator {
 
     exercisesGenerated = true;
 
-    final exercises = await _exerciseRepository.retrieve(userId: "preset");
+    final exercises = await _exerciseRepository.retrieve();
     final muscles = await _musclesRepository.retrieve();
 
     data.forEach((element) {
@@ -78,9 +78,10 @@ class DataGenerator {
           .toList();
       element["sideMode"] = element["side"];
       element["creator"] = "preset";
+      element["original_id"] = element["id"];
 
       Map<String, dynamic>.from(element["equipment"]).forEach((equipment, equipment_element) {
-        element["id"] = "${element["id"]}_${equipment.toLowerCase()}";
+        element["id"] = "${element["original_id"]}_${equipment.toLowerCase()}";
         element["equipment"] = equipment;
         element["instructions"] = List.from(equipment_element["instructions"])
             .map(

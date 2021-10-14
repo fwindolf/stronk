@@ -25,13 +25,16 @@ class ExerciseRepository implements ExerciseRepositoryBase {
   const ExerciseRepository(this._read);
 
   @override
-  Future<List<Exercise>> retrieve({required String userId}) async {
+  Future<List<Exercise>> retrieve({String? userId}) async {
     try {
-      final snap_user = await _read(firebaseFirestoreProvider).exerciseRef(userId).get();
       final snap_presets = await _read(firebaseFirestoreProvider).exercisePresetsRef().get();
-      final combined_docs = snap_user.docs + snap_presets.docs;
+      final docs = snap_presets.docs;
 
-      return combined_docs.map((doc) => Exercise.fromDocument(doc)).toList();
+      if (userId != null) {
+        final snap_user = await _read(firebaseFirestoreProvider).exerciseRef(userId).get();
+        docs.addAll(snap_user.docs);
+      }
+      return docs.map((doc) => Exercise.fromDocument(doc)).toList();
     } on FirebaseException catch (e) {
       throw DataTransferException(message: "Failed to retrieve Excercises: ${e.message}");
     } catch (e) {

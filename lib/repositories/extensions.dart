@@ -6,7 +6,7 @@ extension FirebaseFirestoreX on FirebaseFirestore {
   }
 
   CollectionReference exercisePresetsRef() {
-    return collection('preset_exercises');
+    return collection('exercises').doc("preset").collection('user_exercises');
   }
 
   CollectionReference exerciseTagRef(String userId) {
@@ -28,5 +28,4 @@ extension FirebaseFirestoreX on FirebaseFirestore {
   CollectionReference settingsRef(String userId) {
     return collection('settings').doc(userId).collection('settings');
   }
-
 }

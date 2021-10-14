@@ -20,6 +20,12 @@ enum Equipment {
   None,
 }
 
+extension EquipmentName on Equipment {
+  String get name {
+    return this.toString().split(".")[1];
+  }
+}
+
 enum BandMode {
   Loop,
   Double,
@@ -122,7 +128,7 @@ class Exercise with _$Exercise {
     return Exercise.fromJson(data).copyWith(id: doc.id);
   }
 
-  Map<String, dynamic> toDocument() => toJson()..remove('id');
+  Map<String, dynamic> toDocument() => toJson();
 
   bool belongsTo(User? user) {
     if (creator == null || user == null) return false;

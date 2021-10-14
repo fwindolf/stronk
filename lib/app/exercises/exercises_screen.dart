@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/exercises/exercise_item_widget.dart';
+import 'package:stronk/app/exercises/exercise_region_widget.dart';
 
 import 'package:stronk/controllers/exercise_controller.dart';
 import 'package:stronk/models/exercise/exercise.dart';
@@ -20,11 +21,8 @@ class ExerciseSourceFilterWidget extends HookConsumerWidget {
       onSelected: (ExerciseFilter selected) =>
           ref.read(exerciseSourceFilterProvider).state = selected,
       itemBuilder: (_) => [
-        const PopupMenuItem(
-            child: Text("Only User Exercises"), value: ExerciseFilter.onlyUser),
-        const PopupMenuItem(
-            child: Text("Only Preset Exercises"),
-            value: ExerciseFilter.onlyPreset),
+        const PopupMenuItem(child: Text("Only User Exercises"), value: ExerciseFilter.onlyUser),
+        const PopupMenuItem(child: Text("Only Preset Exercises"), value: ExerciseFilter.onlyPreset),
         const PopupMenuItem(child: Text("Show All"), value: ExerciseFilter.all),
       ],
     );
@@ -36,29 +34,42 @@ class ExercisesList extends ConsumerWidget {
 
   Widget _buildContent(List<Exercise> exercises, WidgetRef ref) {
     final exercisesByRegion = <MuscleRegion, List<Exercise>>{};
+
     exercises.forEach((exercise) {
       exercise.muscles.forEach((muscle) {
         if (muscle.region == null) return;
 
-        if (exercisesByRegion.containsKey(muscle.region)) {
+        if (!exercisesByRegion.containsKey(muscle.region)) {
+          exercisesByRegion[muscle.region!] = [];
+        }
+
+        if (!exercisesByRegion[muscle.region]!.contains(exercise)) {
           exercisesByRegion[muscle.region!]!.add(exercise);
-        } else {
-          exercisesByRegion[muscle.region!] = [exercise];
         }
       });
     });
-    if (exercisesByRegion.isNotEmpty) {
+
+    final orderedRegions =
+        MuscleRegion.values.where((region) => exercisesByRegion.keys.contains(region)).toList();
+
+    if (exercisesByRegion.isEmpty) {
+      return _buildEmpty(ref);
+    } else {
       return ListView.builder(
         itemBuilder: (ctx, index) {
+          final region = orderedRegions.elementAt(index);
+          final regionExercises = exercisesByRegion[region] ?? [];
+
           return ProviderScope(
-            child: const ExerciseItem(),
-            overrides: [],
+            overrides: [
+              muscleRegionProvider.overrideWithValue(region),
+              muscleRegionExercisesProvider.overrideWithValue(regionExercises),
+            ],
+            child: const ExerciseRegionItem(),
           );
         },
         itemCount: exercisesByRegion.length,
       );
-    } else {
-      return _buildEmpty(ref);
     }
   }
 
@@ -73,7 +84,7 @@ class ExercisesList extends ConsumerWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: Material(
         elevation: 1,
         child: ListTile(
@@ -118,15 +129,20 @@ class ExerciseScreen extends StatelessWidget {
         ],
       ),
       drawer: DefaultDrawer(),
-      body: Column(
-        children: <Widget>[
-          const ExercisesList(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 4.0),
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              child: ExercisesList(),
+              flex: 2,
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () =>
-            Navigator.of(context).pushNamed(AppRoutes.exerciseEdit),
+        onPressed: () => Navigator.of(context).pushNamed(AppRoutes.exerciseEdit),
       ),
     );
   }

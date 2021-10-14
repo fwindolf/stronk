@@ -9,7 +9,7 @@ class Instruction with _$Instruction {
   const Instruction._();
 
   const factory Instruction({
-    String? id,
+    // TODO: Add image, ..
     required String text,
   }) = _Instruction;
 
@@ -17,5 +17,5 @@ class Instruction with _$Instruction {
 
   factory Instruction.fromJson(Map<String, dynamic> json) => _$InstructionFromJson(json);
 
-  Map<String, dynamic> toDocument() => toJson()..remove('id');
+  Map<String, dynamic> toDocument() => toJson();
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/models/settings/reminder.dart';
@@ -17,8 +16,7 @@ String hourToTime(int hour) {
     return "${hour % 12} ${hour <= 12 ? 'am' : 'pm'}";
 }
 
-bool containsHour(slots, slot) =>
-    slots.map((s) => s.hourOfDay).contains(slot.hourOfDay);
+bool containsHour(slots, slot) => slots.map((s) => s.hourOfDay).contains(slot.hourOfDay);
 bool containsHourAndDay(slots, slot) => slots.contains(slot);
 
 void updateSlots(

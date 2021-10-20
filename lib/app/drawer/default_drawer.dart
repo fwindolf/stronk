@@ -26,6 +26,13 @@ class DefaultDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: const ImageIcon(AssetImage('assets/icons/medal.png')),
+            title: const Text("Challenges"),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(AppRoutes.challenges);
+            },
+          ),
+          ListTile(
             leading: const ImageIcon(AssetImage('assets/icons/exercises.png')),
             title: const Text("Exercises"),
             onTap: () {

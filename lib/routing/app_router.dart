@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:stronk/app/challenges/challenges_edit_screen.dart';
+import 'package:stronk/app/challenges/challenges_screen.dart';
 import 'package:stronk/app/login/login_screen.dart';
 import 'package:stronk/app/login/startup_screen.dart';
 import 'package:stronk/app/settings/settings_screen.dart';
+import 'package:stronk/models/challenge/challenge.dart';
 
 import 'package:stronk/models/exercise/exercise.dart';
 
@@ -26,6 +29,7 @@ class AppRoutes {
   static const workoutEdit = '/workout-edit';
   static const workoutHistory = '/workout-history';
   static const challenges = '/challenges';
+  static const challengeEdit = '/challenge-edit';
   static const trackSelection = '/track-selection';
   static const trackWorkout = '/track-workout';
   static const trackChallenge = '/track-challenge';
@@ -93,6 +97,22 @@ class AppRouter {
           settings: settings,
           fullscreenDialog: true,
         );
+      case AppRoutes.challenges:
+        return MaterialPageRoute(
+          builder: (_) => ChallengesScreen(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      case AppRoutes.challengeEdit:
+        final challenge = args as Challenge?;
+        return MaterialPageRoute(
+          builder: (_) => ChallengeEditScreen(
+            editedChallenge: challenge,
+          ),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+
       default:
         // TODO: Throw
         return null;

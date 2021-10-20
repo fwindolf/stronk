@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stronk/app/exercises/exercise_item_widget.dart';
-import 'package:stronk/util/tuple.dart';
 import 'package:stronk/models/exercise/exercise.dart';
 import 'package:stronk/models/muscle/muscle.dart';
 

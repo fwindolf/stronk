@@ -72,11 +72,13 @@ class InstructionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 3.0),
       decoration: BoxDecoration(
         border: Border.all(
-            color: Colors.grey.shade500, // set border color
-            width: 1.0), // set border width
-        borderRadius: BorderRadius.all(Radius.circular(5.0)), // set rounded corner radius
+          color: Colors.grey.shade500,
+          width: 1.0,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -96,9 +98,15 @@ class InstructionItem extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Text(instruction.text),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 15.0),
+                child: Text(
+                  instruction.text,
+                  maxLines: 4,
+                  overflow: TextOverflow.fade,
+                ),
+              ),
             ),
             IconButton(
               icon: Icon(Icons.delete_outline),

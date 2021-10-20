@@ -67,7 +67,10 @@ class ExerciseDescriptionFormField extends StatelessWidget {
   final ValidationItem state;
   final Function updateState;
 
-  const ExerciseDescriptionFormField({required this.state, required this.updateState});
+  const ExerciseDescriptionFormField({
+    required this.state,
+    required this.updateState,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -142,16 +145,6 @@ class ExerciseEditScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final validator = ref.read(exerciseValidationProvider.notifier);
-    if (editedExercise != null) {
-      validator.updateName(editedExercise!.name);
-      validator.updateDescription(editedExercise!.description);
-      validator.updateTags(editedExercise!.tags);
-      validator.updateMuscles(editedExercise!.muscles);
-      validator.updateType(editedExercise!.configuration);
-      validator.updateInstructions(editedExercise!.instructions);
-    }
-
     return Scaffold(
       appBar: AppBar(
         // title: Text(editedExercise != null ? editedExercise!.name : "Exercise Name"),
